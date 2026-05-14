@@ -1,0 +1,3409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="description"
+    content="Vaibhavam Photography – Luxury wedding photography in Hyderabad. Cinematic, emotional, timeless wedding stories.">
+  <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/1042/1042339.png">
+  <title>Vaibhavam Photography | Luxury Wedding Photographers Hyderabad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Poppins:wght@300;400;500;600&family=Great+Vibes&family=Dancing+Script:wght@700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    :root {
+      --bg: #F8F5F1;
+      --maroon: #7B1E2B;
+      --maroon-d: #5A1220;
+      --beige: #E9DED3;
+      --text: #2D1F1A;
+      --gray: #6B625D;
+      --white: #fff;
+      --ff-serif: 'Cormorant Garamond', serif;
+      --ff-sans: 'Poppins', sans-serif;
+    }
+
+    html,
+    body {
+      max-width: 100%;
+      overflow-x: hidden;
+      position: relative;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--ff-sans);
+      background: #1a1a1a;
+      color: var(--text);
+    }
+
+    .page-wrapper {
+      background-color: var(--bg);
+      width: 100%;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit
+    }
+
+    .serif {
+      font-family: var(--ff-serif)
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 20px
+    }
+
+    .tag {
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--maroon);
+      display: block;
+      margin-bottom: 10px
+    }
+
+    .h2 {
+      font-family: var(--ff-serif);
+      font-size: clamp(2rem, 5.5vw, 3.2rem);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--text)
+    }
+
+    .sub {
+      font-size: .95rem;
+      color: var(--gray);
+      line-height: 1.7;
+      max-width: 500px
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: 50px;
+      font-size: .85rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s ease
+    }
+
+    .btn-m {
+      background: var(--maroon);
+      color: #fff
+    }
+
+    .btn-m:hover {
+      background: var(--maroon-d);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(123, 30, 43, 0.2)
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* ── NAVBAR ── */
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: rgba(248, 245, 241, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(123, 30, 43, 0.05);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    nav.scrolled {
+      background: rgba(248, 245, 241, 0.95);
+      padding: 8px 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Desktop Pill Style */
+    @media (min-width: 1024px) {
+      @media (min-width: 1024px) {
+        nav {
+          top: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: calc(100% - 60px);
+          max-width: 1200px;
+          border-radius: 100px;
+          border: 1px solid rgba(255, 255, 255, 0.5);
+          padding: 15px 40px;
+        }
+
+        nav.scrolled {
+          top: 0;
+          width: 100%;
+          max-width: 100%;
+          border-radius: 0;
+          padding: 12px 60px;
+          border-color: rgba(123, 30, 43, 0.05);
+        }
+      }
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-shrink: 0;
+    }
+
+    .nav-logo img {
+      height: 120px;
+      width: auto;
+      object-fit: contain;
+      margin: -40px 0;
+      transition: transform 0.3s ease;
+      filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
+    }
+
+    .nav-logo img:hover {
+      transform: scale(1.02);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 35px;
+      list-style: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+      color: var(--maroon);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-shrink: 0;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 2px;
+      background: var(--maroon);
+      border-radius: 2px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 100px 15px 80px;
+      text-align: center;
+      background: radial-gradient(circle at 10% 20%, #E9DED3 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(117, 20, 33, 0.322) 0%, transparent 40%),
+        linear-gradient(180deg, #F8F5F1 0%, #E9DED3 100%);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .hero-bg-logo {
+      position: absolute;
+      top: 40%;
+      left: 0;
+      width: 200%;
+      display: flex;
+      font-family: var(--ff-serif);
+      font-size: clamp(8rem, 25vw, 22rem);
+      font-weight: 700;
+      color: rgba(128, 30, 43, 0.327);
+      white-space: nowrap;
+      z-index: 0;
+      pointer-events: none;
+      letter-spacing: 50px;
+      text-transform: uppercase;
+      mix-blend-mode: multiply;
+      animation: heroMarquee 35s linear infinite;
+      will-change: transform;
+    }
+
+    @keyframes heroMarquee {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-bg-logo {
+        animation-duration: 20s;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .hero {
+        padding: 160px 20px 140px;
+      }
+    }
+
+    .hero-title {
+      font-family: var(--ff-serif);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      color: var(--text);
+      max-width: 900px;
+      margin: 0 auto 20px;
+      line-height: 1.1;
+      font-weight: 600;
+    }
+
+    .hero-title span {
+      position: relative;
+      display: inline-block;
+    }
+
+    .hero-title span::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 20" preserveAspectRatio="none"><path d="M5,15 Q250,5 495,15" stroke="%232D1F1A" stroke-width="3" fill="none" stroke-linecap="round"/></svg>');
+      background-size: 100% 100%;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--gray);
+      max-width: 600px;
+      margin: 0 auto 50px;
+      line-height: 1.6;
+    }
+
+    .image-strip-container {
+      width: 100%;
+      overflow: hidden;
+      padding: 40px 0;
+      perspective: 1000px;
+    }
+
+    .image-strip {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .strip-card {
+      width: 150px;
+      height: 220px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .strip-card img {
+      transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .strip-card:hover {
+      transform: scale(1.1) translateY(-10px) !important;
+      z-index: 20;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+    }
+
+    .strip-card:hover img {
+      transform: scale(1.2);
+    }
+
+    .strip-card:nth-child(1) {
+      transform: rotate(-15deg) translateY(40px);
+    }
+
+    .strip-card:nth-child(2) {
+      transform: rotate(-10deg) translateY(20px);
+    }
+
+    .strip-card:nth-child(3) {
+      transform: rotate(-5deg) translateY(10px);
+    }
+
+    .strip-card:nth-child(4) {
+      transform: rotate(0deg) translateY(0px) scale(1.1);
+      z-index: 10;
+    }
+
+    .strip-card:nth-child(5) {
+      transform: rotate(5deg) translateY(10px);
+    }
+
+    .strip-card:nth-child(6) {
+      transform: rotate(10deg) translateY(20px);
+    }
+
+    .strip-card:nth-child(7) {
+      transform: rotate(15deg) translateY(40px);
+    }
+
+    .hero-cta-bottom {
+      margin-top: 60px;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      transform: translateY(-100%);
+      transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+
+    .mobile-menu.active {
+      transform: translateY(0);
+    }
+
+    .mobile-menu a {
+      font-family: var(--ff-serif);
+      font-size: 2rem;
+      font-weight: 600;
+    }
+
+    .close-menu {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      font-size: 1.5rem;
+    }
+
+    @media (max-width: 1024px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .strip-card {
+        width: 100px;
+        height: 150px;
+      }
+    }
+
+    /* ── SECTION 02: GALLERY SHOWCASE (INFINITE CURVE) ── */
+    .gallery-showcase {
+      padding: 100px 0 80px;
+      background-color: #F8F5F1;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .gallery-header {
+      text-align: center;
+      margin-bottom: 60px;
+      padding: 0 20px;
+    }
+
+    .infinite-gallery-container {
+      width: 100%;
+      position: relative;
+      display: flex;
+      perspective: 1500px;
+    }
+
+    .infinite-gallery-track {
+      display: flex;
+      gap: 30px;
+      animation: galleryMarquee 40s linear infinite;
+      padding: 40px 0;
+      width: max-content;
+    }
+
+    .gallery-pill {
+      flex: 0 0 220px;
+      height: 380px;
+      border-radius: 110px;
+      overflow: hidden;
+      position: relative;
+      background: #eee;
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
+      transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    /* 3D Elevation Curve (Repeating every 5 cards) */
+    .gallery-pill:nth-child(5n+1) { transform: translateY(-40px) rotate(-10deg); }
+    .gallery-pill:nth-child(5n+2) { transform: translateY(-10px) rotate(-5deg); }
+    .gallery-pill:nth-child(5n+3) { transform: translateY(20px) rotate(0deg); }
+    .gallery-pill:nth-child(5n+4) { transform: translateY(-10px) rotate(5deg); }
+    .gallery-pill:nth-child(5n+5) { transform: translateY(-40px) rotate(10deg); }
+
+    .gallery-pill img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+
+    .gallery-pill:hover {
+      transform: translateY(0) rotate(0) scale(1.1) !important;
+      z-index: 10;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.25);
+    }
+
+    .gallery-pill:hover img {
+      transform: scale(1.1);
+    }
+
+    .pill-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.6) 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 30px 20px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .gallery-pill:hover .pill-overlay { opacity: 1; }
+
+    @keyframes galleryMarquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    @media (max-width: 768px) {
+      .gallery-pill { flex: 0 0 160px; height: 280px; border-radius: 80px; }
+      .infinite-gallery-track { gap: 15px; animation-duration: 25s; }
+    }
+
+    /* ── SECTION 03: ABOUT BRAND ── */
+    .about-brand {
+      padding: 100px 0 80px;
+      background-color: var(--white);
+      position: relative;
+    }
+
+    .about-brand::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+      opacity: 0.02;
+      pointer-events: none;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 50px;
+    }
+
+    .about-image-container {
+      position: relative;
+      width: 100%;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08);
+      height: 500px;
+    }
+
+    .about-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1s ease;
+    }
+
+    .trust-badge {
+      position: absolute;
+      bottom: 25px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      padding: 14px 24px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      z-index: 2;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .trust-badge span {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text);
+    }
+
+    .about-content-inner {
+      padding: 0 5px;
+    }
+
+    .about-content-inner .tag {
+      color: var(--maroon);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .about-content-inner h2 {
+      font-family: var(--ff-serif);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      line-height: 1.1;
+      margin-bottom: 30px;
+      color: var(--text);
+    }
+
+    .about-content-inner p {
+      color: var(--gray);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 25px;
+      max-width: 550px;
+    }
+
+    /* Stats Cards */
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin: 40px 0;
+    }
+
+    .stat-card {
+      background: var(--bg);
+      padding: 30px 20px;
+      border-radius: 24px;
+      text-align: center;
+      border: 1px solid rgba(0, 0, 0, 0.03);
+      transition: all 0.4s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .stat-card h3 {
+      color: var(--maroon);
+      font-family: var(--ff-serif);
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+    }
+
+    .stat-card p {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 0;
+      color: var(--gray);
+      line-height: 1.3;
+      font-weight: 600;
+    }
+
+    /* Signature Area */
+    .signature-area {
+      margin-top: 40px;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      padding-top: 30px;
+    }
+
+    .signature-text {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3.5rem;
+      color: var(--maroon);
+      margin-bottom: 5px;
+      font-weight: 700;
+    }
+
+    .founder-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--maroon);
+      font-weight: 500;
+    }
+
+    @media (min-width: 1024px) {
+      .about-grid {
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: 80px;
+      }
+
+      .about-image-container img {
+        height: 650px;
+      }
+
+      .about-content-inner {
+        padding: 0;
+      }
+    }
+
+    /* ── SECTION 04: SERVICES SHOWCASE (MOTION ALBUM) ── */
+    .services-showcase {
+      padding: 60px 0 80px;
+      background-color: var(--bg);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .services-intro {
+      text-align: center;
+      margin-bottom: 50px;
+      padding: 0 15px;
+    }
+
+    .services-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      padding: 0 10px;
+      z-index: 2;
+      width: 100%;
+    }
+
+    /* Book / Album Container */
+    .service-book-container {
+      perspective: 2000px;
+      width: 100%;
+      height: 320px;
+      margin: 0 auto;
+    }
+
+    .book {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(0.15, 0.88, 0.3, 1);
+      cursor: pointer;
+    }
+
+    .cover {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #1a1a1a;
+      border-radius: 12px;
+      z-index: 2;
+      transform-origin: left;
+      transition: all 0.7s cubic-bezier(0.15, 0.88, 0.3, 1);
+      overflow: hidden;
+      box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cover-img {
+      width: 100%;
+      height: 60%;
+      overflow: hidden;
+    }
+
+    .cover-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1s ease;
+    }
+
+    .cover-title {
+      padding: 10px;
+      background: #1a1a1a;
+      color: #fff;
+      text-align: center;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+    }
+
+    .cover-title h3 {
+      font-family: var(--ff-serif);
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+    }
+
+    .cover-title .icon {
+      color: var(--maroon);
+      font-size: 0.8rem;
+    }
+
+    /* Inside Page */
+    .book-page {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 96%;
+      height: 98%;
+      background: #fff;
+      border-radius: 10px;
+      padding: 15px 10px;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow: inset 5px 0 20px rgba(0, 0, 0, 0.1);
+      margin: 1% 2%;
+    }
+
+    .book-page h3 {
+      font-family: var(--ff-serif);
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 8px;
+      border-bottom: 1px solid var(--beige);
+      padding-bottom: 4px;
+    }
+
+    .book-page p {
+      font-size: 0.65rem;
+      line-height: 1.4;
+      color: var(--gray);
+      margin-bottom: 10px;
+    }
+
+    .book-cta {
+      margin-top: auto;
+      color: var(--maroon);
+      font-weight: 600;
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Hover Animation */
+    .service-book-container:hover .cover {
+      transform: rotateY(-110deg);
+      box-shadow: -10px 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (min-width: 1024px) {
+      .services-showcase {
+        padding: 100px 0;
+      }
+
+      .services-list {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 60px;
+        padding: 0 40px;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      .service-book-container {
+        height: 480px;
+      }
+
+      .cover-title h3 {
+        font-size: 1.4rem;
+      }
+
+      .cover-title .icon {
+        font-size: 1.1rem;
+      }
+
+      .book-page h3 {
+        font-size: 1.8rem;
+      }
+
+      .book-page p {
+        font-size: 0.95rem;
+      }
+
+      .book-page {
+        padding: 40px 30px;
+      }
+
+      .book-cta {
+        font-size: 0.85rem;
+      }
+    }
+
+    /* ── SECTION 05: FEATURED STORY ── */
+    .featured-story {
+      padding: 100px 0 80px;
+      background-color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .featured-intro {
+      text-align: center;
+      margin-bottom: 50px;
+      padding: 0 20px;
+    }
+
+    .featured-intro h2 {
+      font-family: var(--ff-serif);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      color: var(--text);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .featured-layout {
+      position: relative;
+      padding: 0 15px;
+    }
+
+    .featured-hero-img {
+      width: 100%;
+      height: 550px;
+      border-radius: 36px;
+      overflow: hidden;
+      margin-bottom: 25px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    .featured-hero-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.05);
+      transition: transform 1.5s ease;
+    }
+
+    .featured-hero-img::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, 0.4) 100%);
+    }
+
+    .supporting-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .support-img {
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+    }
+
+    .support-img.one {
+      height: 280px;
+    }
+
+    .support-img.two {
+      height: 220px;
+      margin-top: 30px;
+    }
+
+    /* Floating Story Card */
+    .story-card {
+      position: relative;
+      margin: -100px 20px 40px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 28px;
+      padding: 35px 30px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(123, 30, 43, 0.1);
+      z-index: 5;
+    }
+
+    .story-card::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      right: 15px;
+      bottom: 15px;
+      border: 1px solid rgba(123, 30, 43, 0.05);
+      border-radius: 20px;
+      pointer-events: none;
+    }
+
+    .story-card h4 {
+      font-family: var(--ff-serif);
+      font-size: 1.8rem;
+      color: var(--text);
+      margin-bottom: 5px;
+    }
+
+    .story-card .location {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--maroon);
+      margin-bottom: 20px;
+      display: block;
+      font-weight: 600;
+    }
+
+    .story-card blockquote {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--gray);
+      font-style: italic;
+      position: relative;
+      padding-left: 15px;
+      border-left: 2px solid var(--maroon);
+    }
+
+    .featured-cta {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    @media (min-width: 1024px) {
+      .featured-layout {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 60px;
+        align-items: flex-start;
+        padding: 0 40px;
+      }
+
+      .featured-hero-img {
+        height: 750px;
+        margin-bottom: 0;
+      }
+
+      .story-card {
+        margin: 50px 0 0 -100px;
+        width: 450px;
+      }
+
+      .supporting-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .support-img.one {
+        height: 400px;
+      }
+
+      .support-img.two {
+        height: 350px;
+        margin-top: 0;
+      }
+    }
+
+    /* ── SECTION 06: TESTIMONIALS (INFINITE LOOP) ── */
+    .testimonials-showcase {
+      padding: 100px 0 80px;
+      background-color: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .testimonials-intro {
+      text-align: center;
+      margin-bottom: 50px;
+      padding: 0 20px;
+    }
+
+    .testimonial-track-container {
+      width: 100%;
+      overflow: hidden;
+      padding: 20px 0;
+      position: relative;
+    }
+
+    /* Gradient Masks for smooth fade */
+    .testimonial-track-container::before,
+    .testimonial-track-container::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 150px;
+      height: 100%;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .testimonial-track-container::before {
+      left: 0;
+      background: linear-gradient(to right, var(--bg) 0%, transparent 100%);
+    }
+
+    .testimonial-track-container::after {
+      right: 0;
+      background: linear-gradient(to left, var(--bg) 0%, transparent 100%);
+    }
+
+    .testimonial-track {
+      display: flex;
+      gap: 30px;
+      width: max-content;
+      animation: scrollTestimonials 60s linear infinite;
+    }
+
+    .testimonial-track:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes scrollTestimonials {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(calc(-50% - 15px));
+      }
+    }
+
+    .testimonial-card {
+      flex: 0 0 320px;
+      background: var(--white);
+      border-radius: 32px;
+      padding: 35px 30px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(233, 222, 211, 0.4);
+      position: relative;
+      transition: all 0.4s ease;
+    }
+
+    .testimonial-card:hover {
+      border-color: var(--maroon);
+      transform: translateY(-5px);
+    }
+
+    .testimonial-top {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .couple-thumb {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--beige);
+      flex-shrink: 0;
+    }
+
+    .couple-info h4 {
+      font-family: var(--ff-serif);
+      font-size: 1.1rem;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .couple-info .location {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gray);
+    }
+
+    .testimonial-text {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--gray);
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .testimonial-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(0, 0, 0, 0.03);
+      padding-top: 15px;
+    }
+
+    .rating {
+      color: #FFD700;
+      font-size: 0.75rem;
+      display: flex;
+      gap: 2px;
+    }
+
+    .wedding-tag {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      color: var(--maroon);
+    }
+
+    @media (min-width: 1024px) {
+      .testimonial-card {
+        flex: 0 0 380px;
+      }
+
+      .testimonial-track {
+        animation-duration: 80s;
+      }
+    }
+
+    /* ── SECTION 07: REELS SHOWCASE (3D ROTATING STACK) ── */
+    .reels-showcase {
+      padding: 100px 0 150px;
+      background: linear-gradient(135deg, #fff 0%, #fef8f8 50%, #fcf2c4 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .reels-intro {
+      text-align: center;
+      margin-bottom: 60px;
+      padding: 0 20px;
+    }
+
+    .reels-3d-stack-container {
+      width: 100%;
+      height: 480px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .wrap_card {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      --w-card: 260px;
+      --h-card: 380px;
+      --rotate-card: 12deg;
+    }
+
+    .card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      overflow: hidden;
+      animation: rotating 18s cubic-bezier(0.75, 0, 0, 1.01) infinite 0s;
+      border-radius: 24px;
+      background: var(--bg);
+      width: var(--w-card);
+      height: var(--h-card);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      transition: all 0.5s ease;
+      /* Stage Variables (Z, Top, Left, Transform, Opacity) */
+      --s1-z: 10;
+      --s1-t: 0;
+      --s1-l: 50%;
+      --s1-tr: translate(-50%, 0) rotate(0deg);
+      --s1-o: 1;
+      --s2-z: 5;
+      --s2-t: 20px;
+      --s2-l: 35%;
+      --s2-tr: translate(-50%, 0) rotate(-12deg);
+      --s2-o: 0.8;
+      --s3-z: 2;
+      --s3-t: 40px;
+      --s3-l: 25%;
+      --s3-tr: translate(-50%, 0) rotate(-24deg);
+      --s3-o: 0.4;
+      --s4-z: 0;
+      --s4-t: 60px;
+      --s4-l: 50%;
+      --s4-tr: translate(-50%, 0) rotate(0deg);
+      --s4-o: 0;
+      --s5-z: 2;
+      --s5-t: 40px;
+      --s5-l: 75%;
+      --s5-tr: translate(-50%, 0) rotate(24deg);
+      --s5-o: 0.4;
+      --s6-z: 5;
+      --s6-t: 20px;
+      --s6-l: 65%;
+      --s6-tr: translate(-50%, 0) rotate(12deg);
+      --s6-o: 0.8;
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card .content {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(123, 30, 43, 0.85) 0%, transparent 60%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 30px;
+      color: #fff;
+    }
+
+    .card .content h4 {
+      font-family: var(--ff-serif);
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+
+    .card .content span {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      opacity: 0.8;
+    }
+
+    /* Assigning Initial Stages to 6 Cards */
+    .card:nth-child(1) {
+      animation-delay: 0s;
+      --bg: #7B1E2B;
+    }
+
+    .card:nth-child(2) {
+      animation-delay: -3s;
+      --bg: #2D1F1A;
+    }
+
+    .card:nth-child(3) {
+      animation-delay: -6s;
+      --bg: #4a141c;
+    }
+
+    .card:nth-child(4) {
+      animation-delay: -9s;
+      --bg: #1a1a1a;
+    }
+
+    .card:nth-child(5) {
+      animation-delay: -12s;
+      --bg: #5c1621;
+    }
+
+    .card:nth-child(6) {
+      animation-delay: -15s;
+      --bg: #3d2b24;
+    }
+
+    @keyframes rotating {
+
+      0%,
+      100% {
+        z-index: var(--s1-z);
+        top: var(--s1-t);
+        left: var(--s1-l);
+        transform: var(--s1-tr);
+        opacity: var(--s1-o);
+      }
+
+      16.66% {
+        z-index: var(--s2-z);
+        top: var(--s2-t);
+        left: var(--s2-l);
+        transform: var(--s2-tr);
+        opacity: var(--s2-o);
+      }
+
+      33.33% {
+        z-index: var(--s3-z);
+        top: var(--s3-t);
+        left: var(--s3-l);
+        transform: var(--s3-tr);
+        opacity: var(--s3-o);
+      }
+
+      50% {
+        z-index: var(--s4-z);
+        top: var(--s4-t);
+        left: var(--s4-l);
+        transform: var(--s4-tr);
+        opacity: var(--s4-o);
+      }
+
+      66.66% {
+        z-index: var(--s5-z);
+        top: var(--s5-t);
+        left: var(--s5-l);
+        transform: var(--s5-tr);
+        opacity: var(--s5-o);
+      }
+
+      83.33% {
+        z-index: var(--s6-z);
+        top: var(--s6-t);
+        left: var(--s6-l);
+        transform: var(--s6-tr);
+        opacity: var(--s6-o);
+      }
+    }
+
+    .lines {
+      position: absolute;
+      bottom: -40px;
+      left: 0;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .line {
+      width: 200px;
+      height: 1px;
+      background: var(--maroon);
+      margin: 5px 0;
+      opacity: 0.2;
+    }
+
+    @media (max-width: 768px) {
+      .wrap_card {
+        width: 280px;
+        height: 350px;
+        --w-card: 180px;
+        --h-card: 300px;
+      }
+
+      .card {
+        --s2-l: 25%;
+        --s3-l: 10%;
+        --s5-l: 90%;
+        --s6-l: 75%;
+      }
+
+      .card .content h4 {
+        font-size: 1rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .reels-3d-container {
+        height: 600px;
+      }
+
+      .reels-wrapper {
+        width: 320px;
+        height: 450px;
+      }
+
+      .reel-slide {
+        width: 300px;
+        height: 450px;
+      }
+    }
+
+    /* ── SECTION 08: RECOGNITION & TRUST ── */
+    .recognition-section {
+      padding: 100px 0;
+      background-color: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .recognition-intro {
+      text-align: center;
+      margin-bottom: 60px;
+      padding: 0 20px;
+    }
+
+    .awards-slider-container {
+      padding: 0 20px;
+      margin-bottom: 80px;
+    }
+
+    .awards-slider {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 30px;
+      scrollbar-width: none;
+    }
+
+    .awards-slider::-webkit-scrollbar {
+      display: none;
+    }
+
+    .award-card {
+      flex: 0 0 280px;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(233, 222, 211, 0.5);
+      border-radius: 30px;
+      padding: 40px 30px;
+      scroll-snap-align: center;
+      text-align: center;
+      transition: all 0.4s ease;
+    }
+
+    .award-card:hover {
+      background: var(--white);
+      transform: translateY(-5px);
+      border-color: var(--maroon);
+    }
+
+    .award-icon {
+      font-size: 2.5rem;
+      color: var(--maroon);
+      margin-bottom: 25px;
+      opacity: 0.8;
+    }
+
+    .award-card h4 {
+      font-family: var(--ff-serif);
+      font-size: 1.3rem;
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .award-card span {
+      font-size: 0.75rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Stats Grid */
+    .trust-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px 20px;
+      padding: 0 20px;
+      margin-bottom: 80px;
+    }
+
+    .stat-block {
+      text-align: center;
+      position: relative;
+    }
+
+    .stat-number {
+      font-family: var(--ff-serif);
+      font-size: 3.5rem;
+      color: var(--maroon);
+      line-height: 1;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gray);
+      font-weight: 600;
+    }
+
+    /* Featured In Area */
+    .featured-in {
+      text-align: center;
+      padding-top: 60px;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .featured-in span {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--gray);
+      margin-bottom: 40px;
+      display: block;
+    }
+
+    .logo-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 40px 60px;
+      padding: 0 20px;
+      opacity: 0.5;
+      filter: grayscale(1);
+    }
+
+    .logo-item {
+      font-family: var(--ff-serif);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.5px;
+    }
+
+    @media (min-width: 1024px) {
+      .awards-slider {
+        justify-content: center;
+        gap: 30px;
+        overflow: visible;
+      }
+
+      .award-card {
+        flex: 0 0 300px;
+      }
+
+      .trust-stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+        max-width: 1100px;
+        margin: 0 auto 100px;
+      }
+
+      .stat-number {
+        font-size: 5rem;
+      }
+    }
+
+    /* ── SECTION 09: LUXURY BOOKING CTA (CUTE & COMPACT) ── */
+    .booking-cta-section {
+      padding: 60px 0;
+      margin: 0 20px 80px;
+      background: linear-gradient(135deg, #7B1E2B 0%, #5A1220 100%);
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+      text-align: center;
+      border-radius: 40px;
+      box-shadow: 0 20px 40px rgba(123, 30, 43, 0.15);
+    }
+
+    /* Silhouette Background */
+    .cta-bg-silhouette {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('images/hero_wedding.png');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.15;
+      mix-blend-mode: overlay;
+      z-index: 0;
+    }
+
+    .cta-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+      filter: blur(80px);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 5;
+      max-width: 650px;
+      margin: 0 auto;
+      padding: 0 25px;
+    }
+
+    .booking-cta-section .tag {
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 25px;
+      display: inline-block;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .booking-cta-section h2 {
+      font-family: var(--ff-serif);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.2;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    .cta-description {
+      font-size: 0.95rem;
+      color: rgba(248, 245, 241, 0.7);
+      margin-bottom: 35px;
+      line-height: 1.5;
+    }
+
+    .cta-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-white {
+      background: #fff;
+      color: var(--maroon);
+      padding: 18px 45px;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-white:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-outline-white {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      padding: 18px 45px;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.4s ease;
+    }
+
+    .btn-outline-white:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: #fff;
+    }
+
+    @media (min-width: 768px) {
+      .cta-btns {
+        flex-direction: row;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .booking-cta-section {
+        padding: 180px 0;
+      }
+    }
+
+    /* ── SECTION 08: INTERACTIVE PACKAGE BUILDER ── */
+    .builder-section {
+      padding: 100px 0 120px;
+      background-color: var(--white);
+      position: relative;
+    }
+
+    .builder-intro {
+      text-align: center;
+      margin-bottom: 80px;
+      padding: 0 20px;
+    }
+
+    .builder-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 50px;
+      position: relative;
+    }
+
+    .builder-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+    }
+
+    .builder-step-block {
+      padding: 0 5px;
+    }
+
+    .step-header {
+      margin-bottom: 30px;
+    }
+
+    .step-number {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--maroon);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .step-header h3 {
+      font-family: var(--ff-serif);
+      font-size: 2.2rem;
+      color: var(--text);
+    }
+
+    /* Step 01: Event Cards */
+    .event-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 15px;
+    }
+
+    .event-card {
+      background: var(--bg);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      padding: 25px 15px;
+      border-radius: 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      position: relative;
+      user-select: none;
+    }
+
+    .event-card i {
+      font-size: 1.5rem;
+      color: var(--maroon);
+      margin-bottom: 15px;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .event-card h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: var(--text);
+    }
+
+    .event-card .price-label {
+      font-size: 0.7rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .event-card.selected {
+      background: #fff;
+      border-color: var(--maroon);
+      box-shadow: 0 15px 35px rgba(123, 30, 43, 0.1);
+      transform: translateY(-5px);
+    }
+
+    .event-card.selected i {
+      transform: scale(1.2);
+    }
+
+    .event-card .check-mark {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 20px;
+      height: 20px;
+      background: var(--maroon);
+      color: #fff;
+      border-radius: 50%;
+      font-size: 0.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0.5);
+      transition: all 0.3s ease;
+    }
+
+    .event-card.selected .check-mark {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Step 02: Coverage Selection */
+    .coverage-options {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    .coverage-card {
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      padding: 25px 30px;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all 0.4s ease;
+    }
+
+    .coverage-card h4 {
+      font-family: var(--ff-serif);
+      font-size: 1.3rem;
+      color: var(--text);
+    }
+
+    .coverage-card .radio-btn {
+      width: 24px;
+      height: 24px;
+      border: 2px solid rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      position: relative;
+    }
+
+    .coverage-card.selected {
+      border-color: var(--maroon);
+      background: var(--bg);
+    }
+
+    .coverage-card.selected .radio-btn {
+      border-color: var(--maroon);
+    }
+
+    .coverage-card.selected .radio-btn::after {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      background: var(--maroon);
+      border-radius: 50%;
+    }
+
+    /* Step 03: Optional Services */
+    .optional-services-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .service-toggle-row {
+      background: var(--bg);
+      padding: 20px 25px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
+    }
+
+    .service-toggle-row:hover {
+      background: #fff;
+      border-color: rgba(123, 30, 43, 0.1);
+    }
+
+    .service-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .service-info i {
+      color: var(--maroon);
+      font-size: 1.1rem;
+    }
+
+    .service-info span {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .toggle-switch {
+      width: 44px;
+      height: 24px;
+      background: #ddd;
+      border-radius: 20px;
+      position: relative;
+      transition: 0.3s;
+    }
+
+    .toggle-switch::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 18px;
+      height: 18px;
+      background: #fff;
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+
+    .service-toggle-row.selected .toggle-switch {
+      background: var(--maroon);
+    }
+
+    .service-toggle-row.selected .toggle-switch::after {
+      left: 23px;
+    }
+
+    /* Step 04: Duration Slider */
+    .slider-container {
+      padding: 20px 0;
+    }
+
+    .custom-range {
+      width: 100%;
+      height: 6px;
+      background: var(--bg);
+      border-radius: 10px;
+      -webkit-appearance: none;
+      outline: none;
+    }
+
+    .custom-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 24px;
+      height: 24px;
+      background: var(--maroon);
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(123, 30, 43, 0.3);
+      border: 3px solid #fff;
+    }
+
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Step 05: Pricing Card */
+    .pricing-card-sticky {
+      background: var(--maroon);
+      color: #fff;
+      padding: 40px;
+      border-radius: 40px;
+      box-shadow: 0 25px 60px rgba(123, 30, 43, 0.2);
+      position: sticky;
+      top: 100px;
+      height: fit-content;
+      z-index: 10;
+    }
+
+    .price-header span {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      opacity: 0.7;
+    }
+
+    .price-value {
+      font-family: var(--ff-serif);
+      font-size: 3.5rem;
+      margin: 15px 0 30px;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .price-value small {
+      font-size: 1.2rem;
+      opacity: 0.6;
+    }
+
+    .selected-summary {
+      margin-bottom: 35px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 25px;
+    }
+
+    .summary-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 200px;
+      overflow-y: auto;
+      padding-right: 10px;
+    }
+
+    .summary-list::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    .summary-list::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+    }
+
+    .summary-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    .summary-item i {
+      color: #FFD700;
+      font-size: 0.7rem;
+    }
+
+    .builder-cta {
+      width: 100%;
+      background: #fff;
+      color: var(--maroon);
+      border: none;
+      padding: 18px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.4s ease;
+    }
+
+    .builder-cta:hover {
+      background: var(--bg);
+      transform: translateY(-3px);
+    }
+
+    /* AI Suggestion Box */
+    .suggestion-box {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 20px;
+      border-radius: 20px;
+      margin-bottom: 30px;
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .suggestion-box i {
+      font-size: 1.2rem;
+      color: #FFD700;
+    }
+
+    .suggestion-box p {
+      font-size: 0.8rem;
+      line-height: 1.4;
+      opacity: 0.9;
+    }
+
+    @media (max-width: 1024px) {
+      .builder-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .pricing-card-sticky {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        top: auto;
+        padding: 25px;
+        border-radius: 30px;
+        z-index: 1001;
+        display: none; /* Toggle via JS or always show simplified */
+      }
+
+      .pricing-card-sticky.active {
+        display: block;
+        animation: slideUp 0.5s ease forwards;
+      }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @media (min-width: 1024px) {
+      .builder-grid {
+        grid-template-columns: 1fr 400px;
+        gap: 80px;
+      }
+    }
+
+    /* ── SECTION 10: PREMIUM FOOTER ── */
+    footer {
+      background-color: #F3ECE6;
+      padding: 80px 0 40px;
+      border-top: 1px solid rgba(123, 30, 43, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+      opacity: 0.03;
+      pointer-events: none;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 50px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer-brand h2 {
+      font-family: var(--ff-serif);
+      font-size: 2rem;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .footer-brand p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--gray);
+      max-width: 300px;
+      margin-bottom: 30px;
+    }
+
+    .footer-links h4,
+    .footer-contact h4 {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--maroon);
+      margin-bottom: 25px;
+      font-weight: 700;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .footer-nav a {
+      font-size: 0.9rem;
+      color: var(--gray);
+      transition: all 0.3s ease;
+      width: fit-content;
+      position: relative;
+    }
+
+    .footer-nav a::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--maroon);
+      transition: width 0.3s ease;
+    }
+
+    .footer-nav a:hover {
+      color: var(--text);
+    }
+
+    .footer-nav a:hover::after {
+      width: 100%;
+    }
+
+    .footer-contact p {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 12px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .social-icon {
+      width: 45px;
+      height: 45px;
+      background: rgba(123, 30, 43, 0.05);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 1rem;
+      transition: all 0.4s ease;
+    }
+
+    .social-icon:hover {
+      background: var(--maroon);
+      color: #fff;
+      transform: translateY(-5px);
+    }
+
+    .footer-bottom {
+      margin-top: 60px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(0, 0, 0, 0.03);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      text-align: center;
+    }
+
+    .footer-bottom p {
+      font-size: 0.75rem;
+      color: var(--gray);
+      opacity: 0.7;
+    }
+
+    @media (min-width: 768px) {
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .footer-content {
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page-wrapper">
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="close-menu" id="closeMenu"><i class="fa-solid fa-xmark"></i></div>
+      <div class="nav-logo" style="margin-bottom: 40px;">
+        <img src="Vaibhavam Logo.jpeg" alt="Vaibhavam Logo">
+      </div>
+      <a href="#">Home</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+      <a href="#" class="btn btn-m" style="margin-top: 20px;">Book Now</a>
+    </div>
+
+    <nav>
+      <div class="nav-logo">
+        <img src="Vaibhavam Logo.jpeg" alt="Vaibhavam Logo">
+      </div>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-right" style="display:flex;align-items:center;gap:15px">
+        <a href="#contact" class="btn btn-m">Book Now</a>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-bg-logo">VAIBHAVAM &nbsp;&nbsp; VAIBHAVAM &nbsp;&nbsp;</div>
+      <h1 class="hero-title">Capturing the pure joy of your wedding,<br><span>exactly as it happened</span></h1>
+      <p class="hero-sub">At Vaibhavam Photography, we don't just take pictures—we save your most beautiful memories.
+        From real smiles to happy tears, we capture every special moment for couples in Hyderabad so you can relive your
+        big day forever.</p>
+      <div class="image-strip-container">
+        <div class="image-strip">
+          <div class="strip-card"><img src="images/hero_wedding.png" alt="Wedding"></div>
+          <div class="strip-card"><img src="images/gallery_1.png" alt="Wedding"></div>
+          <div class="strip-card"><img src="images/gallery_2.png" alt="Wedding"></div>
+          <div class="strip-card"><img src="images/gallery_3.png" alt="Wedding"></div>
+          <div class="strip-card"><img src="images/gallery_4.png" alt="Wedding"></div>
+          <div class="strip-card"><img src="images/gallery_1.png" alt="Wedding"></div>
+          <div class="strip-card"><img src="images/gallery_2.png" alt="Wedding"></div>
+        </div>
+      </div>
+      <div class="hero-cta-bottom"><a href="#contact" class="btn btn-m" style="padding:15px 35px">Check Our Special
+          Winter
+          Offers</a></div>
+    </section>
+
+    <!-- SECTION 02: GALLERY SHOWCASE (INFINITE PILL) -->
+    <section class="gallery-showcase" id="gallery">
+      <div class="wrap">
+        <div class="gallery-header reveal-up">
+          <span class="tag">Wedding Stories</span>
+          <h2>Capturing your wedding's magic</h2>
+          <p>Preserving timeless memories to cherish forever with our cinematic editorial lens.</p>
+        </div>
+
+        <div class="infinite-gallery-container reveal-up" style="transition-delay: 0.2s;">
+          <div class="infinite-gallery-track">
+            <!-- Set 1 -->
+            <div class="gallery-pill">
+              <img src="images/gallery_1.png" alt="Wedding">
+              <div class="pill-overlay"><h4>Aarav & Meera</h4></div>
+            </div>
+            <div class="gallery-pill">
+              <img src="images/gallery_2.png" alt="Wedding">
+              <div class="pill-overlay"><h4>Rahul & Sneha</h4></div>
+            </div>
+            <div class="gallery-pill">
+              <img src="images/gallery_3.png" alt="Wedding">
+              <div class="pill-overlay"><h4>Vikram & Ananya</h4></div>
+            </div>
+            <div class="gallery-pill">
+              <img src="images/gallery_4.png" alt="Wedding">
+              <div class="pill-overlay"><h4>Karan & Ishita</h4></div>
+            </div>
+            <div class="gallery-pill">
+              <img src="images/hero_wedding.png" alt="Wedding">
+              <div class="pill-overlay"><h4>Aditya & Riya</h4></div>
+            </div>
+            <!-- Set 2 (Duplicate for Loop) -->
+            <div class="gallery-pill">
+              <img src="images/gallery_1.png" alt="Wedding">
+              <div class="pill-overlay"><h4>Aarav & Meera</h4></div>
+            </div>
+            <div class="gallery-pill">
+              <img src="images/gallery_2.png" alt="Wedding">
+              <div class="pill-overlay"><h4>Rahul & Sneha</h4></div>
+            </div>
+            <div class="gallery-pill">
+              <img src="images/gallery_3.png" alt="Wedding">
+              <div class="pill-overlay"><h4>Vikram & Ananya</h4></div>
+            </div>
+            <div class="gallery-pill">
+              <img src="images/gallery_4.png" alt="Wedding">
+              <div class="pill-overlay"><h4>Karan & Ishita</h4></div>
+            </div>
+            <div class="gallery-pill">
+              <img src="images/hero_wedding.png" alt="Wedding">
+              <div class="pill-overlay"><h4>Aditya & Riya</h4></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 03: ABOUT BRAND -->
+    <section class="about-brand" id="about">
+      <div class="wrap">
+        <div class="about-grid">
+          <div class="about-image-container reveal-up">
+            <img src="images/hero_wedding.png" alt="Vaibhavam Studio Portrait">
+            <div class="trust-badge">
+              <i class="fa-solid fa-star"></i>
+              <span>100+ Weddings Captured</span>
+            </div>
+          </div>
+
+          <div class="about-content-inner reveal-up" style="transition-delay: 0.2s;">
+            <span class="tag">About The Studio</span>
+            <h2>Crafting emotions into timeless frames</h2>
+            <p>We believe wedding photography is more than posing for pictures — it’s about preserving emotions,
+              traditions, and the once-in-a-lifetime moments that become family memories forever.</p>
+            <p>Based in Hyderabad, our studio specializes in cinematic wedding storytelling with a blend of candid
+              emotions and editorial elegance.</p>
+
+            <div class="stats-container">
+              <div class="stat-card">
+                <h3>100+</h3>
+                <p>Weddings<br>Captured</p>
+              </div>
+              <div class="stat-card">
+                <h3>8+ Yrs</h3>
+                <p>Industry<br>Experience</p>
+              </div>
+              <div class="stat-card">
+                <h3>95%</h3>
+                <p>Client<br>Happiness</p>
+              </div>
+              <div class="stat-card">
+                <h3>50+</h3>
+                <p>Global<br>Destinations</p>
+              </div>
+            </div>
+
+            <div class="signature-area">
+              <div class="signature-text">Varun</div>
+              <div class="founder-title">The Storytelling Studio</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 04: MOTION ALBUM SERVICES -->
+    <section class="services-showcase" id="services">
+      <div class="wrap">
+        <div class="services-intro reveal-up">
+          <span class="tag">Our Services</span>
+          <h2>Wedding experiences crafted with elegance</h2>
+          <p>Hover to open our cinematic wedding albums and explore our premium services.</p>
+        </div>
+
+        <div class="services-list">
+          <!-- Album 01 -->
+          <div class="service-book-container reveal-up">
+            <div class="book">
+              <div class="book-page">
+                <h3>Wedding Photography</h3>
+                <p>Elegant candid and traditional wedding coverage crafted to preserve every emotional moment
+                  beautifully.</p>
+                <div class="book-cta">View Gallery <i class="fa-solid fa-arrow-right"></i></div>
+              </div>
+              <div class="cover">
+                <div class="cover-img"><img src="images/gallery_1.png" alt="Wedding Photography"></div>
+                <div class="cover-title">
+                  <div class="icon"><i class="fa-solid fa-camera"></i></div>
+                  <h3>Wedding Photography</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Album 02 -->
+          <div class="service-book-container reveal-up" style="transition-delay: 0.1s;">
+            <div class="book">
+              <div class="book-page">
+                <h3>Cinematic Films</h3>
+                <p>Luxury wedding films that transform your celebration into an emotional cinematic experience.</p>
+                <div class="book-cta">View Gallery <i class="fa-solid fa-arrow-right"></i></div>
+              </div>
+              <div class="cover">
+                <div class="cover-img"><img src="images/gallery_3.png" alt="Cinematic Films"></div>
+                <div class="cover-title">
+                  <div class="icon"><i class="fa-solid fa-video"></i></div>
+                  <h3>Cinematic Films</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Album 03 -->
+          <div class="service-book-container reveal-up" style="transition-delay: 0.2s;">
+            <div class="book">
+              <div class="book-page">
+                <h3>Pre-Wedding Shoots</h3>
+                <p>Creative storytelling sessions designed around your personalities, chemistry, and love story.</p>
+                <div class="book-cta">View Gallery <i class="fa-solid fa-arrow-right"></i></div>
+              </div>
+              <div class="cover">
+                <div class="cover-img"><img src="images/gallery_2.png" alt="Pre-Wedding Shoots"></div>
+                <div class="cover-title">
+                  <div class="icon"><i class="fa-solid fa-heart"></i></div>
+                  <h3>Pre-Wedding Shoots</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Album 04 -->
+          <div class="service-book-container reveal-up" style="transition-delay: 0.3s;">
+            <div class="book">
+              <div class="book-page">
+                <h3>Destination Weddings</h3>
+                <p>Capturing beautiful celebrations across stunning destinations with a timeless luxury aesthetic.</p>
+                <div class="book-cta">View Gallery <i class="fa-solid fa-arrow-right"></i></div>
+              </div>
+              <div class="cover">
+                <div class="cover-img"><img src="images/gallery_4.png" alt="Destination Weddings"></div>
+                <div class="cover-title">
+                  <div class="icon"><i class="fa-solid fa-globe"></i></div>
+                  <h3>Destination Weddings</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Album 05 -->
+          <div class="service-book-container reveal-up" style="transition-delay: 0.4s;">
+            <div class="book">
+              <div class="book-page">
+                <h3>Traditional Coverage</h3>
+                <p>Authentic coverage for engagements, haldi, mehendi, receptions, and family celebrations.</p>
+                <div class="book-cta">View Gallery <i class="fa-solid fa-arrow-right"></i></div>
+              </div>
+              <div class="cover">
+                <div class="cover-img"><img src="images/hero_wedding.png" alt="Traditional Coverage"></div>
+                <div class="cover-title">
+                  <div class="icon"><i class="fa-solid fa-om"></i></div>
+                  <h3>Traditional Events</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 05: FEATURED WEDDING STORY -->
+    <section class="featured-story" id="featured">
+      <div class="wrap">
+        <div class="featured-intro reveal-up">
+          <span class="tag">Featured Story</span>
+          <h2>A timeless celebration of love</h2>
+          <p>From intimate emotions to grand celebrations, every frame was crafted to preserve their story beautifully.
+          </p>
+        </div>
+
+        <div class="featured-layout">
+          <div class="featured-hero-img reveal-up">
+            <img src="images/gallery_1.png" alt="Featured Wedding Story">
+          </div>
+
+          <div class="featured-content">
+            <div class="story-card reveal-up" style="transition-delay: 0.2s;">
+              <h4>Aryan & Saanvi</h4>
+              <span class="location">Taj Falaknuma Palace, Hyderabad</span>
+              <blockquote>"Our wedding felt magical, and every emotion was captured beautifully beyond our expectations.
+                The team made us feel so comfortable throughout the day."</blockquote>
+            </div>
+
+            <div class="supporting-grid reveal-up" style="transition-delay: 0.3s;">
+              <div class="support-img one">
+                <img src="images/gallery_2.png" alt="Wedding Moment">
+              </div>
+              <div class="support-img two">
+                <img src="images/gallery_3.png" alt="Wedding Moment">
+              </div>
+            </div>
+
+            <div class="featured-cta reveal-up" style="transition-delay: 0.4s;">
+              <a href="#" class="btn btn-m" style="padding: 15px 40px; border-radius: 100px;">Explore Full Wedding
+                Story</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 06: CLIENT LOVE (INFINITE LOOP) -->
+    <section class="testimonials-showcase" id="testimonials">
+      <div class="wrap">
+        <div class="testimonials-intro reveal-up">
+          <span class="tag">Client Love</span>
+          <h2>Love stories told by our couples</h2>
+          <p>Every celebration we capture becomes a memory our couples cherish forever.</p>
+        </div>
+      </div>
+
+      <div class="testimonial-track-container">
+        <div class="testimonial-track">
+          <!-- ORIGINAL LIST -->
+          <div class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="couple-thumb"><img src="images/gallery_1.png" alt="Couple"></div>
+              <div class="couple-info">
+                <h4>Akhil & Nithya</h4>
+                <span class="location">Hyderabad</span>
+              </div>
+            </div>
+            <p class="testimonial-text">"They captured the quiet emotions we didn't even notice. The photos feel like a
+              beautiful dream we can relive."</p>
+            <div class="testimonial-footer">
+              <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                  class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+              <span class="wedding-tag">Royal Wedding</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="couple-thumb"><img src="images/gallery_2.png" alt="Couple"></div>
+              <div class="couple-info">
+                <h4>Rahul & Sneha</h4>
+                <span class="location">Destination</span>
+              </div>
+            </div>
+            <p class="testimonial-text">"The cinematic film brought us to tears. Truly world-class vision and
+              professionalism from the entire team."</p>
+            <div class="testimonial-footer">
+              <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                  class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+              <span class="wedding-tag">Cinematic Film</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="couple-thumb"><img src="images/gallery_3.png" alt="Couple"></div>
+              <div class="couple-info">
+                <h4>Vikram & Ananya</h4>
+                <span class="location">Vizag</span>
+              </div>
+            </div>
+            <p class="testimonial-text">"Vaibhavam delivered more than just photos — they delivered a legacy. Highly
+              recommend for grand celebrations."</p>
+            <div class="testimonial-footer">
+              <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                  class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+              <span class="wedding-tag">Grand Wedding</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="couple-thumb"><img src="images/gallery_4.png" alt="Couple"></div>
+              <div class="couple-info">
+                <h4>Siddharth & Ishani</h4>
+                <span class="location">Bengaluru</span>
+              </div>
+            </div>
+            <p class="testimonial-text">"They were so patient with our families and made everyone feel comfortable. The
+              candids are just pure magic!"</p>
+            <div class="testimonial-footer">
+              <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                  class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+              <span class="wedding-tag">Temple Wedding</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="couple-thumb"><img src="images/hero_wedding.png" alt="Couple"></div>
+              <div class="couple-info">
+                <h4>Arjun & Kavya</h4>
+                <span class="location">Hyderabad</span>
+              </div>
+            </div>
+            <p class="testimonial-text">"Exceptional quality. They don't just take pictures; they tell stories. Every
+              frame has so much depth and heart."</p>
+            <div class="testimonial-footer">
+              <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                  class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+              <span class="wedding-tag">Urban Wedding</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="couple-thumb"><img src="images/gallery_1.png" alt="Couple"></div>
+              <div class="couple-info">
+                <h4>Karthik & Divya</h4>
+                <span class="location">Chennai</span>
+              </div>
+            </div>
+            <p class="testimonial-text">"Found them through Instagram and it was the best decision. Professional,
+              timely, and incredibly talented artists."</p>
+            <div class="testimonial-footer">
+              <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                  class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+              <span class="wedding-tag">Cultural Event</span>
+            </div>
+          </div>
+
+          <!-- CLONED LIST FOR INFINITE LOOP -->
+          <div class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="couple-thumb"><img src="images/gallery_1.png" alt="Couple"></div>
+              <div class="couple-info">
+                <h4>Akhil & Nithya</h4>
+                <span class="location">Hyderabad</span>
+              </div>
+            </div>
+            <p class="testimonial-text">"They captured the quiet emotions we didn't even notice. The photos feel like a
+              beautiful dream we can relive."</p>
+            <div class="testimonial-footer">
+              <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                  class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+              <span class="wedding-tag">Royal Wedding</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="couple-thumb"><img src="images/gallery_2.png" alt="Couple"></div>
+              <div class="couple-info">
+                <h4>Rahul & Sneha</h4>
+                <span class="location">Destination</span>
+              </div>
+            </div>
+            <p class="testimonial-text">"The cinematic film brought us to tears. Truly world-class vision and
+              professionalism from the entire team."</p>
+            <div class="testimonial-footer">
+              <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                  class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+              <span class="wedding-tag">Cinematic Film</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="couple-thumb"><img src="images/gallery_3.png" alt="Couple"></div>
+              <div class="couple-info">
+                <h4>Vikram & Ananya</h4>
+                <span class="location">Vizag</span>
+              </div>
+            </div>
+            <p class="testimonial-text">"Vaibhavam delivered more than just photos — they delivered a legacy. Highly
+              recommend for grand celebrations."</p>
+            <div class="testimonial-footer">
+              <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                  class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+              <span class="wedding-tag">Grand Wedding</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="couple-thumb"><img src="images/gallery_4.png" alt="Couple"></div>
+              <div class="couple-info">
+                <h4>Siddharth & Ishani</h4>
+                <span class="location">Bengaluru</span>
+              </div>
+            </div>
+            <p class="testimonial-text">"They were so patient with our families and made everyone feel comfortable. The
+              candids are just pure magic!"</p>
+            <div class="testimonial-footer">
+              <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                  class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+              <span class="wedding-tag">Temple Wedding</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="couple-thumb"><img src="images/hero_wedding.png" alt="Couple"></div>
+              <div class="couple-info">
+                <h4>Arjun & Kavya</h4>
+                <span class="location">Hyderabad</span>
+              </div>
+            </div>
+            <p class="testimonial-text">"Exceptional quality. They don't just take pictures; they tell stories. Every
+              frame has so much depth and heart."</p>
+            <div class="testimonial-footer">
+              <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                  class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+              <span class="wedding-tag">Urban Wedding</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="couple-thumb"><img src="images/gallery_1.png" alt="Couple"></div>
+              <div class="couple-info">
+                <h4>Karthik & Divya</h4>
+                <span class="location">Chennai</span>
+              </div>
+            </div>
+            <p class="testimonial-text">"Found them through Instagram and it was the best decision. Professional,
+              timely, and incredibly talented artists."</p>
+            <div class="testimonial-footer">
+              <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                  class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+              <span class="wedding-tag">Cultural Event</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 07: REELS SHOWCASE (3D ROTATING STACK) -->
+    <section class="reels-showcase" id="reels">
+      <div class="reels-logo-pattern"></div>
+      <div class="wrap">
+        <div class="reels-intro reveal-up">
+          <span class="tag">Behind The Lens</span>
+          <h2>The moments behind every masterpiece</h2>
+          <p>Experience our cinematic highlights in a perpetually rotating 3D gallery.</p>
+        </div>
+
+        <div class="reels-3d-stack-container reveal-up" style="transition-delay: 0.2s;">
+          <div class="wrap_card">
+            <!-- Card 1 -->
+            <div class="card">
+              <img src="images/gallery_1.png" alt="Reel">
+              <div class="content">
+                <span>0:45</span>
+                <h4>The Royal Entry</h4>
+              </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="card">
+              <img src="images/gallery_2.png" alt="Reel">
+              <div class="content">
+                <span>0:58</span>
+                <h4>Golden Hour Film</h4>
+              </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="card">
+              <img src="images/gallery_3.png" alt="Reel">
+              <div class="content">
+                <span>1:12</span>
+                <h4>Behind The Scenes</h4>
+              </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="card">
+              <img src="images/gallery_4.png" alt="Reel">
+              <div class="content">
+                <span>0:35</span>
+                <h4>Candid Smiles</h4>
+              </div>
+            </div>
+            <!-- Card 5 -->
+            <div class="card">
+              <img src="images/hero_wedding.png" alt="Reel">
+              <div class="content">
+                <span>1:05</span>
+                <h4>Grand Ballroom</h4>
+              </div>
+            </div>
+            <!-- Card 6 -->
+            <div class="card">
+              <img src="images/gallery_1.png" alt="Reel">
+              <div class="content">
+                <span>0:52</span>
+                <h4>Final Vows</h4>
+              </div>
+            </div>
+
+            <!-- Decorative Lines -->
+            <div class="lines">
+              <div class="line"></div>
+              <div class="line"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 08: AWARDS & TRUST -->
+    <section class="recognition-section" id="recognition">
+      <div class="wrap">
+        <div class="recognition-intro reveal-up">
+          <span class="tag">Recognition</span>
+          <h2>Trusted to capture unforgettable celebrations</h2>
+          <p>Over the years, our work has been recognized for its emotional storytelling, cinematic visuals, and
+            timeless wedding artistry.</p>
+        </div>
+
+        <div class="awards-slider-container reveal-up" style="transition-delay: 0.2s;">
+          <div class="awards-slider">
+            <!-- Card 01 -->
+            <div class="award-card">
+              <div class="award-icon"><i class="fa-solid fa-trophy"></i></div>
+              <h4>Best Wedding Storytelling Studio</h4>
+              <span>Hyderabad Wedding Awards 2025</span>
+            </div>
+            <!-- Card 02 -->
+            <div class="award-card">
+              <div class="award-icon"><i class="fa-solid fa-award"></i></div>
+              <h4>Featured Luxury Wedding Photographer</h4>
+              <span>Editorial Wedding Magazine</span>
+            </div>
+            <!-- Card 03 -->
+            <div class="award-card">
+              <div class="award-icon"><i class="fa-solid fa-camera-retro"></i></div>
+              <h4>100+ Premium Weddings Captured</h4>
+              <span>Across Global Destinations</span>
+            </div>
+            <!-- Card 04 -->
+            <div class="award-card">
+              <div class="award-icon"><i class="fa-solid fa-star-half-stroke"></i></div>
+              <h4>Top Rated Couple Experience</h4>
+              <span>Loved by Modern Couples</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="trust-stats-grid reveal-up" style="transition-delay: 0.3s;">
+          <div class="stat-block">
+            <span class="stat-number">100+</span>
+            <span class="stat-label">Weddings Captured</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-number">8+</span>
+            <span class="stat-label">Years Experience</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-number">50+</span>
+            <span class="stat-label">Destination Events</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-number">95%</span>
+            <span class="stat-label">Client Referrals</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 09: LUXURY BOOKING CTA -->
+    <section class="booking-cta-section" id="booking">
+      <div class="cta-bg-silhouette"></div>
+      <div class="cta-glow"></div>
+
+      <div class="wrap">
+        <div class="cta-content">
+          <span class="tag reveal-up">Reserve Your Wedding Dates</span>
+          <h2 class="reveal-up" style="transition-delay: 0.1s;">Let’s create memories that last forever</h2>
+          <p class="cta-description reveal-up" style="transition-delay: 0.2s;">
+            Our team captures weddings with timeless elegance, emotional storytelling, and cinematic artistry crafted
+            for modern couples.
+          </p>
+
+          <div class="cta-btns reveal-up" style="transition-delay: 0.3s;">
+            <a href="#" class="btn-white">Schedule Consultation</a>
+            <a href="#" class="btn-outline-white"><i class="fa-brands fa-whatsapp" style="margin-right: 10px;"></i>
+              WhatsApp Us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 08: INTERACTIVE WEDDING PACKAGE BUILDER -->
+    <section class="builder-section" id="builder">
+      <div class="wrap">
+        <div class="builder-intro reveal-up">
+          <span class="tag">Customize Your Experience</span>
+          <h2>Build your perfect wedding package</h2>
+          <p>Every wedding is unique. Customize your photography experience based on your events, coverage, and
+            cinematic preferences.</p>
+        </div>
+
+        <div class="builder-grid">
+          <!-- Selection Steps -->
+          <div class="builder-steps reveal-up" style="transition-delay: 0.2s;">
+            
+            <!-- Step 01: Events -->
+            <div class="builder-step-block">
+              <div class="step-header">
+                <span class="step-number">Step 01</span>
+                <h3>Select Wedding Events</h3>
+              </div>
+              <div class="event-cards-grid">
+                <div class="event-card selected" data-price="35000" data-name="Wedding Ceremony">
+                  <div class="check-mark"><i class="fa-solid fa-check"></i></div>
+                  <i class="fa-solid fa-om"></i>
+                  <h4>Wedding</h4>
+                  <span class="price-label">From ₹35k</span>
+                </div>
+                <div class="event-card" data-price="25000" data-name="Reception">
+                  <div class="check-mark"><i class="fa-solid fa-check"></i></div>
+                  <i class="fa-solid fa-champagne-glasses"></i>
+                  <h4>Reception</h4>
+                  <span class="price-label">From ₹25k</span>
+                </div>
+                <div class="event-card" data-price="15000" data-name="Haldi">
+                  <div class="check-mark"><i class="fa-solid fa-check"></i></div>
+                  <i class="fa-solid fa-sun"></i>
+                  <h4>Haldi</h4>
+                  <span class="price-label">From ₹15k</span>
+                </div>
+                <div class="event-card" data-price="15000" data-name="Mehendi">
+                  <div class="check-mark"><i class="fa-solid fa-check"></i></div>
+                  <i class="fa-solid fa-hands"></i>
+                  <h4>Mehendi</h4>
+                  <span class="price-label">From ₹15k</span>
+                </div>
+                <div class="event-card" data-price="20000" data-name="Engagement">
+                  <div class="check-mark"><i class="fa-solid fa-check"></i></div>
+                  <i class="fa-solid fa-ring"></i>
+                  <h4>Engagement</h4>
+                  <span class="price-label">From ₹20k</span>
+                </div>
+                <div class="event-card" data-price="25000" data-name="Pre-Wedding">
+                  <div class="check-mark"><i class="fa-solid fa-check"></i></div>
+                  <i class="fa-solid fa-camera-retro"></i>
+                  <h4>Pre-Wedding</h4>
+                  <span class="price-label">From ₹25k</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 02: Coverage -->
+            <div class="builder-step-block">
+              <div class="step-header">
+                <span class="step-number">Step 02</span>
+                <h3>Choose Coverage Style</h3>
+              </div>
+              <div class="coverage-options">
+                <div class="coverage-card selected" data-multiplier="1" data-name="Photography Only">
+                  <h4>Photography Only</h4>
+                  <div class="radio-btn"></div>
+                </div>
+                <div class="coverage-card" data-multiplier="1.8" data-name="Photography + Cinematic Film">
+                  <h4>Photography + Cinematic Film</h4>
+                  <div class="radio-btn"></div>
+                </div>
+                <div class="coverage-card" data-multiplier="2.5" data-name="Premium Luxury Coverage">
+                  <h4>Premium Luxury Coverage</h4>
+                  <div class="radio-btn"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 03: Optional Services -->
+            <div class="builder-step-block">
+              <div class="step-header">
+                <span class="step-number">Step 03</span>
+                <h3>Add Optional Services</h3>
+              </div>
+              <div class="optional-services-list">
+                <div class="service-toggle-row" data-price="15000" data-name="Drone Coverage">
+                  <div class="service-info">
+                    <i class="fa-solid fa-drone"></i>
+                    <span>Drone Coverage</span>
+                  </div>
+                  <div class="toggle-switch"></div>
+                </div>
+                <div class="service-toggle-row" data-price="20000" data-name="Same Day Edit Film">
+                  <div class="service-info">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>Same Day Edit Film</span>
+                  </div>
+                  <div class="toggle-switch"></div>
+                </div>
+                <div class="service-toggle-row" data-price="10000" data-name="Premium Wedding Album">
+                  <div class="service-info">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>Premium Wedding Album</span>
+                  </div>
+                  <div class="toggle-switch"></div>
+                </div>
+                <div class="service-toggle-row" data-price="8000" data-name="Instagram Reels Kit">
+                  <div class="service-info">
+                    <i class="fa-brands fa-instagram"></i>
+                    <span>Instagram Reels Kit</span>
+                  </div>
+                  <div class="toggle-switch"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 04: Duration -->
+            <div class="builder-step-block">
+              <div class="step-header">
+                <span class="step-number">Step 04</span>
+                <h3>Coverage Duration</h3>
+              </div>
+              <div class="slider-container">
+                <input type="range" min="1" max="5" value="1" class="custom-range" id="durationSlider">
+                <div class="slider-labels">
+                  <span>Half Day</span>
+                  <span>Full Day</span>
+                  <span>2 Days</span>
+                  <span>3 Days</span>
+                  <span>Luxury++</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Sticky Pricing Card -->
+          <div class="builder-sidebar reveal-up" style="transition-delay: 0.4s;">
+            <div class="pricing-card-sticky" id="pricingCard">
+              <div class="suggestion-box">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <p id="smartSuggestion">Most Hyderabad couples choose Photography + Cinematic Film.</p>
+              </div>
+
+              <div class="price-header">
+                <span>Estimated Investment</span>
+                <div class="price-value">
+                  <small>₹</small><span id="totalPrice">35,000</span>
+                </div>
+              </div>
+
+              <div class="selected-summary">
+                <div class="summary-list" id="summaryList">
+                  <div class="summary-item"><i class="fa-solid fa-circle-check"></i> Wedding Ceremony</div>
+                  <div class="summary-item"><i class="fa-solid fa-circle-check"></i> Photography Only</div>
+                </div>
+              </div>
+
+              <button class="builder-cta">Get Custom Quote</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 10: PREMIUM FOOTER -->
+    <footer>
+      <div class="wrap">
+        <div class="footer-content">
+          <!-- Brand Area -->
+          <div class="footer-brand reveal-up">
+            <div class="footer-logo" style="margin-bottom: 30px;">
+              <img src="Vaibhavam Logo.jpeg" alt="Vaibhavam Logo"
+                style="height: 180px; width: auto; object-fit: contain; filter: drop-shadow(0 8px 25px rgba(0,0,0,0.08));">
+            </div>
+            <p>Capturing timeless wedding stories with elegance, emotion, and cinematic artistry crafted for modern
+              couples.</p>
+            <div class="social-links">
+              <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+              <a href="#" class="social-icon"><i class="fa-brands fa-whatsapp"></i></a>
+              <a href="#" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
+              <a href="#" class="social-icon"><i class="fa-brands fa-pinterest"></i></a>
+            </div>
+          </div>
+
+          <!-- Nav Area -->
+          <div class="footer-links reveal-up" style="transition-delay: 0.1s;">
+            <h4>Navigation</h4>
+            <div class="footer-nav">
+              <a href="#home">Home</a>
+              <a href="#portfolio">Portfolio</a>
+              <a href="#services">Services</a>
+              <a href="#about">About</a>
+              <a href="#booking">Contact</a>
+            </div>
+          </div>
+
+          <!-- Contact Area -->
+          <div class="footer-contact reveal-up" style="transition-delay: 0.2s;">
+            <h4>Contact</h4>
+            <p>Hyderabad, Telangana</p>
+            <p>+91 7396787832</p>
+            <p>hello@vaibhavam.com</p>
+          </div>
+
+          <!-- Note Area -->
+          <div class="footer-contact reveal-up" style="transition-delay: 0.3s;">
+            <h4>Studio</h4>
+            <p>By Appointment Only</p>
+            <p>Mon - Sat: 10am - 7pm</p>
+          </div>
+        </div>
+
+        <div class="footer-bottom reveal-up">
+          <p>© 2026 Vaibhavam Photography. All Rights Reserved.</p>
+          <p>Crafted with <i class="fa-solid fa-heart" style="color: var(--maroon); margin: 0 5px;"></i> by UPliv.</p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = document.getElementById('closeMenu');
+
+    hamburger.onclick = () => mobileMenu.classList.add('active');
+    closeMenu.onclick = () => mobileMenu.classList.remove('active');
+    mobileMenu.querySelectorAll('a').forEach(link => link.onclick = () => mobileMenu.classList.remove('active'));
+
+    // Intersection Observer for reveal-up animations
+    const observerOptions = { threshold: 0.1 };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('on');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+    // Sticky Nav Scroll Effect
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+
+    /* ── WEDDING PACKAGE BUILDER LOGIC ── */
+    const totalPriceEl = document.getElementById('totalPrice');
+    const summaryListEl = document.getElementById('summaryList');
+    const smartSuggestionEl = document.getElementById('smartSuggestion');
+    const durationSlider = document.getElementById('durationSlider');
+
+    let state = {
+      events: [{ name: 'Wedding Ceremony', price: 35000 }],
+      coverage: { name: 'Photography Only', multiplier: 1 },
+      options: [],
+      duration: 1
+    };
+
+    function updateBuilder() {
+      // 1. Calculate Base Event Price
+      let basePrice = state.events.reduce((sum, e) => sum + e.price, 0);
+
+      // 2. Apply Coverage Multiplier
+      let subtotal = basePrice * state.coverage.multiplier;
+
+      // 3. Add Optional Services
+      let optionsPrice = state.options.reduce((sum, o) => sum + o.price, 0);
+
+      // 4. Duration Factor
+      let durationFactor = 1 + (state.duration - 1) * 0.4; // 40% increase per day
+
+      let total = (subtotal + optionsPrice) * durationFactor;
+
+      // Update Price with Count-up Effect (Simplified)
+      totalPriceEl.innerText = Math.round(total).toLocaleString('en-IN');
+
+      // Update Summary
+      summaryListEl.innerHTML = '';
+      [...state.events, state.coverage, ...state.options].forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'summary-item';
+        div.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${item.name}`;
+        summaryListEl.appendChild(div);
+      });
+
+      // Update Smart Suggestions
+      if (state.events.length >= 3) {
+        smartSuggestionEl.innerText = "Recommended for grand 2-3 day luxury weddings.";
+      } else if (state.coverage.multiplier === 1) {
+        smartSuggestionEl.innerText = "Most couples upgrade to 'Photography + Cinematic Film' for emotional storytelling.";
+      } else {
+        smartSuggestionEl.innerText = "Most Hyderabad couples choose Cinematic Film + Drone Coverage.";
+      }
+    }
+
+    // Event Listeners
+    document.querySelectorAll('.event-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const name = card.dataset.name;
+        const price = parseInt(card.dataset.price);
+
+        const index = state.events.findIndex(e => e.name === name);
+        if (index > -1) {
+          if (state.events.length > 1) { // Keep at least one
+            state.events.splice(index, 1);
+            card.classList.remove('selected');
+          }
+        } else {
+          state.events.push({ name, price });
+          card.classList.add('selected');
+        }
+        updateBuilder();
+      });
+    });
+
+    document.querySelectorAll('.coverage-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.coverage-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        state.coverage = { name: card.dataset.name, multiplier: parseFloat(card.dataset.multiplier) };
+        updateBuilder();
+      });
+    });
+
+    document.querySelectorAll('.service-toggle-row').forEach(row => {
+      row.addEventListener('click', () => {
+        const name = row.dataset.name;
+        const price = parseInt(row.dataset.price);
+
+        const index = state.options.findIndex(o => o.name === name);
+        if (index > -1) {
+          state.options.splice(index, 1);
+          row.classList.remove('selected');
+        } else {
+          state.options.push({ name, price });
+          row.classList.add('selected');
+        }
+        updateBuilder();
+      });
+    });
+
+    durationSlider.addEventListener('input', (e) => {
+      state.duration = parseInt(e.target.value);
+      updateBuilder();
+    });
+
+    // Initialize
+    updateBuilder();
+  </script>
+</body>
+
+</html>
