@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="description"
+    content="Vaibhavam Photography – Our Story. Meet the luxury wedding photography team in Hyderabad capturing cinematic memories.">
+  <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/1042/1042339.png">
+  <title>Our Story | Vaibhavam Photography | Luxury Wedding Photographers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Poppins:wght@300;400;500;600&family=Great+Vibes&family=Dancing+Script:wght@700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    :root {
+      --bg: #F8F5F1;
+      --maroon: #7B1E2B;
+      --maroon-d: #5A1220;
+      --beige: #E9DED3;
+      --text: #2D1F1A;
+      --gray: #6B625D;
+      --white: #fff;
+      --ff-serif: 'Cormorant Garamond', serif;
+      --ff-sans: 'Poppins', sans-serif;
+    }
+
+    html,
+    body {
+      max-width: 100%;
+      overflow-x: hidden;
+      position: relative;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--ff-sans);
+      background-color: var(--bg);
+      color: var(--text);
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 20px
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit
+    }
+
+    .tag {
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--maroon);
+      display: block;
+      margin-bottom: 15px
+    }
+
+    .sub {
+      font-size: .95rem;
+      color: var(--gray);
+      line-height: 1.7;
+      max-width: 500px
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: 50px;
+      font-size: .85rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s ease;
+      text-transform: none;
+    }
+
+    .btn-m {
+      background: var(--maroon);
+      color: #fff !important;
+    }
+
+    .btn-m:hover {
+      background: var(--maroon-d);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(123, 30, 43, 0.2);
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: rgba(248, 245, 241, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(123, 30, 43, 0.05);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    nav.scrolled {
+      background: rgba(248, 245, 241, 0.95);
+      padding: 8px 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Desktop Pill Style */
+    @media (min-width: 1024px) {
+      nav {
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 60px);
+        max-width: 1200px;
+        border-radius: 100px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        padding: 15px 40px;
+      }
+
+      nav.scrolled {
+        top: 0;
+        width: 100%;
+        max-width: 100%;
+        border-radius: 0;
+        padding: 12px 60px;
+        border-color: rgba(123, 30, 43, 0.05);
+      }
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-shrink: 0;
+    }
+
+    .nav-logo img {
+      height: 120px;
+      width: auto;
+      object-fit: contain;
+      margin: -40px 0;
+      transition: transform 0.3s ease;
+      filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
+    }
+
+    .nav-logo img:hover {
+      transform: scale(1.02);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 35px;
+      list-style: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+      color: var(--maroon);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-shrink: 0;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 2px;
+      background: var(--maroon);
+      border-radius: 2px;
+    }
+
+    @media (max-width: 1024px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ── ABOUT HERO ── */
+    .about-hero {
+      padding: 160px 0 80px;
+      background: linear-gradient(180deg, #E9DED3 0%, var(--bg) 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--ff-serif);
+      font-size: 20vw;
+      font-weight: 900;
+      color: rgba(123, 30, 43, 0.03);
+      white-space: nowrap;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .about-hero h1 {
+      font-family: var(--ff-serif);
+      font-size: clamp(3rem, 8vw, 6rem);
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-hero p {
+      max-width: 600px;
+      margin: 0 auto;
+      color: var(--gray);
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    /* ── OUR STORY SECTION ── */
+    .story-section {
+      padding: 100px 0;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    @media (min-width: 1024px) {
+      .story-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .story-content h2 {
+      font-family: var(--ff-serif);
+      font-size: 3rem;
+      line-height: 1.1;
+      margin-bottom: 30px;
+    }
+
+    .story-content p {
+      color: var(--gray);
+      line-height: 1.8;
+      margin-bottom: 25px;
+      font-size: 1.05rem;
+    }
+
+    .story-image {
+      position: relative;
+      border-radius: 40px;
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+    }
+
+    /* ── PHILOSOPHY ── */
+    .philosophy-section {
+      padding: 100px 0;
+      background: var(--white);
+    }
+
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+    }
+
+    .philosophy-card {
+      padding: 40px;
+      background: var(--bg);
+      border-radius: 30px;
+      transition: all 0.4s ease;
+    }
+
+    .philosophy-card:hover {
+      transform: translateY(-10px);
+      background: #fff;
+      box-shadow: 0 20px 40px rgba(123, 30, 43, 0.05);
+    }
+
+    .philosophy-card i {
+      font-size: 2rem;
+      color: var(--maroon);
+      margin-bottom: 25px;
+      display: block;
+    }
+
+    .philosophy-card h3 {
+      font-family: var(--ff-serif);
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    .philosophy-card p {
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* ── STATS GRID ── */
+    .stats-section {
+      padding: 100px 0;
+    }
+
+    .stats-editorial-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .stats-editorial-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 40px 20px;
+      background: #fff;
+      border-radius: 30px;
+      border: 1px solid rgba(123, 30, 43, 0.05);
+    }
+
+    .stat-number {
+      display: block;
+      font-family: var(--ff-serif);
+      font-size: 3.5rem;
+      color: var(--maroon);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--gray);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background-color: var(--bg);
+      padding: 100px 0 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+      opacity: 0.03;
+      pointer-events: none;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 50px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer-brand h2 {
+      font-family: var(--ff-serif);
+      font-size: 2rem;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .footer-brand p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--gray);
+      max-width: 300px;
+      margin-bottom: 30px;
+    }
+
+    .footer-links h4,
+    .footer-contact h4 {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--maroon);
+      margin-bottom: 25px;
+      font-weight: 700;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .footer-nav a {
+      font-size: 0.9rem;
+      color: var(--gray);
+      transition: all 0.3s ease;
+      width: fit-content;
+      position: relative;
+    }
+
+    .footer-nav a::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--maroon);
+      transition: width 0.3s ease;
+    }
+
+    .footer-nav a:hover {
+      color: var(--text);
+    }
+
+    .footer-nav a:hover::after {
+      width: 100%;
+    }
+
+    .footer-contact p {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 12px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .social-icon {
+      width: 45px;
+      height: 45px;
+      background: rgba(123, 30, 43, 0.05);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 1rem;
+      transition: all 0.4s ease;
+    }
+
+    .social-icon:hover {
+      background: var(--maroon);
+      color: #fff;
+      transform: translateY(-5px);
+    }
+
+    .footer-bottom {
+      margin-top: 60px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(0, 0, 0, 0.03);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      text-align: center;
+    }
+
+    .footer-bottom p {
+      font-size: 0.75rem;
+      color: var(--gray);
+      opacity: 0.7;
+    }
+
+    @media (min-width: 768px) {
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .footer-content {
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+      }
+    }
+
+    /* Animations */
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .reveal-up.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      transform: translateY(-100%);
+      transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+
+    .mobile-menu.active { transform: translateY(0); }
+    .mobile-menu a { font-family: var(--ff-serif); font-size: 2rem; font-weight: 600; }
+    .close-menu { position: absolute; top: 30px; right: 30px; font-size: 1.5rem; }
+  </style>
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <!-- NAVBAR -->
+    <nav id="navbar">
+      <div class="nav-logo">
+        <a href="index.html"><img src="Vaibhavam Logo.jpeg" alt="Vaibhavam Logo"></a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#gallery">Portfolio</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="quote.html">Get a Quote</a></li>
+      </ul>
+      <div class="nav-right" style="display:flex;align-items:center;gap:15px">
+        <a href="quote.html" class="btn btn-m">Book Now</a>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="close-menu" id="closeMenu"><i class="fa-solid fa-xmark"></i></div>
+      <div class="nav-logo" style="margin-bottom: 40px;">
+        <img src="Vaibhavam Logo.jpeg" alt="Vaibhavam Logo">
+      </div>
+      <a href="index.html">Home</a>
+      <a href="index.html#gallery">Portfolio</a>
+      <a href="about.html">About</a>
+      <a href="index.html#services">Services</a>
+      <a href="quote.html">Get a Quote</a>
+      <a href="quote.html" class="btn btn-m" style="margin-top: 20px;">Book Now</a>
+    </div>
+
+    <!-- ABOUT HERO -->
+    <header class="about-hero">
+      <div class="hero-bg-text">STORY</div>
+      <div class="wrap">
+        <span class="tag reveal-up">Beyond the Frames</span>
+        <h1 class="reveal-up" style="transition-delay: 0.1s;">Crafting Eternal<br>Wedding Narratives</h1>
+        <p class="reveal-up" style="transition-delay: 0.2s;">
+          We don't just take photographs; we document the soul of your celebration. Based in Hyderabad, Vaibhavam Photography is a boutique collective dedicated to cinematic storytelling and emotional elegance.
+        </p>
+      </div>
+    </header>
+
+    <!-- OUR STORY SECTION -->
+    <section class="story-section">
+      <div class="wrap">
+        <div class="story-grid">
+          <div class="story-image reveal-up">
+            <img src="images/hero_wedding.png" alt="Vaibhavam Wedding Photography">
+          </div>
+          <div class="story-content reveal-up" style="transition-delay: 0.2s;">
+            <span class="tag">Our Heritage</span>
+            <h2>Where Art Meets Emotion</h2>
+            <p>
+              Founded with a vision to redefine wedding imagery, Vaibhavam Photography has grown from a passionate duo into one of Hyderabad's most sought-after luxury photography teams.
+            </p>
+            <p>
+              Our style is rooted in fine-art realism—capturing the grand architecture of a wedding while never missing the quiet, stolen glances between the couple. We believe that every wedding is a cinematic masterpiece waiting to be told.
+            </p>
+            <p>
+              With over 10 years of experience and 500+ stories captured, we bring a level of technical precision and emotional intelligence that transforms a simple event into an eternal legacy.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHILOSOPHY SECTION -->
+    <section class="philosophy-section">
+      <div class="wrap">
+        <div class="builder-intro reveal-up" style="text-align: center; margin-bottom: 60px;">
+          <span class="tag">Our DNA</span>
+          <h2 class="serif" style="font-size: 3.5rem;">The Vaibhavam Philosophy</h2>
+        </div>
+        <div class="philosophy-grid">
+          <div class="philosophy-card reveal-up">
+            <i class="fa-solid fa-heart-pulse"></i>
+            <h3>Emotional Truth</h3>
+            <p>We prioritize real moments over poses. Our goal is for you to feel the same heartbeat when you look at your photos 20 years later.</p>
+          </div>
+          <div class="philosophy-card reveal-up" style="transition-delay: 0.1s;">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <h3>Cinematic Artistry</h3>
+            <p>Every frame is treated like a movie still. From lighting to color grading, we ensure your wedding looks like a grand cinematic production.</p>
+          </div>
+          <div class="philosophy-card reveal-up" style="transition-delay: 0.2s;">
+            <i class="fa-solid fa-infinity"></i>
+            <h3>Timeless Eternity</h3>
+            <p>We avoid passing trends. Our editing style is natural and refined, ensuring your memories never go out of style.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS SECTION -->
+    <section class="stats-section">
+      <div class="wrap">
+        <div class="stats-editorial-grid">
+          <div class="stat-item reveal-up">
+            <span class="stat-number">500+</span>
+            <span class="stat-label">Weddings Captured</span>
+          </div>
+          <div class="stat-item reveal-up" style="transition-delay: 0.1s;">
+            <span class="stat-number">10+</span>
+            <span class="stat-label">Years of Artistry</span>
+          </div>
+          <div class="stat-item reveal-up" style="transition-delay: 0.2s;">
+            <span class="stat-number">15M+</span>
+            <span class="stat-label">Views on Cinema</span>
+          </div>
+          <div class="stat-item reveal-up" style="transition-delay: 0.3s;">
+            <span class="stat-number">98%</span>
+            <span class="stat-label">Client Smiles</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREMIUM FOOTER -->
+    <footer>
+      <div class="wrap">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <div class="nav-logo" style="margin-bottom: 20px;">
+              <img src="Vaibhavam Logo.jpeg" alt="Vaibhavam Logo" style="height: 100px; width: auto;">
+            </div>
+            <p>Capturing timeless wedding stories with elegance, emotion, and cinematic artistry crafted for modern couples.</p>
+            <div class="social-links">
+              <a href="https://www.instagram.com/vaibhavam_by_varun/" target="_blank" rel="noopener" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+              <a href="https://wa.me/918639972913" target="_blank" rel="noopener" class="social-icon"><i class="fa-brands fa-whatsapp"></i></a>
+              <a href="#" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+          </div>
+          
+          <div class="footer-links">
+            <h4>Navigation</h4>
+            <div class="footer-nav">
+              <a href="index.html">Home</a>
+              <a href="index.html#gallery">Portfolio</a>
+              <a href="index.html#services">Services</a>
+              <a href="about.html">About</a>
+              <a href="quote.html">Get a Quote</a>
+            </div>
+          </div>
+
+          <div class="footer-links">
+            <h4>Contact</h4>
+            <div class="footer-nav">
+              <p style="color: var(--gray); font-size: 0.9rem;">Adoni, Andhra Pradesh</p>
+              <a href="tel:+918639972913">+91 8639972913</a>
+              <a href="mailto:Vaibhavambyvarun@gmail.com">Vaibhavambyvarun@gmail.com</a>
+            </div>
+          </div>
+
+          <div class="footer-contact">
+            <h4>Studio</h4>
+            <p><strong>Office:</strong> H/no: 2-322, bankers colony</p>
+            <p>Thirumala nagar, Adoni 518302</p>
+            <p>By Appointment Only</p>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2026 Vaibhavam Photography. All Rights Reserved.</p>
+          <p>Crafted with ❤️ by UPliv.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Reveal Animations
+    const observerOptions = { threshold: 0.1 };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+
+    // Navbar Scroll
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      if (window.scrollY > 50) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    });
+
+    // Mobile Menu
+    const openBtn = document.getElementById('hamburger');
+    const closeBtn = document.getElementById('closeMenu');
+    const menu = document.getElementById('mobileMenu');
+
+    if (openBtn) openBtn.onclick = () => menu.classList.add('active');
+    if (closeBtn) closeBtn.onclick = () => menu.classList.remove('active');
+  </script>
+</body>
+</html>
