@@ -37,7 +37,7 @@
     html,
     body {
       max-width: 100%;
-      overflow-x: hidden;
+      overflow-x: clip;
       position: relative;
       scroll-behavior: smooth;
     }
@@ -334,10 +334,7 @@
     }
 
     .sticky-stack-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15vh; /* Large gap so they scroll up */
+      display: block;
       padding: 0 40px;
       position: relative;
       z-index: 5;
@@ -346,6 +343,7 @@
     .scrolly-card {
       width: clamp(320px, 75vw, 1000px);
       height: 70vh; /* Large cinematic height */
+      margin: 0 auto 30vh auto; /* 30vh gap between cards so they scroll up and stack */
       border-radius: 30px;
       overflow: hidden;
       position: sticky;
@@ -419,7 +417,6 @@
     @media (max-width: 768px) {
       .sticky-stack-container {
         padding: 0 20px;
-        gap: 10vh;
       }
       .scrolly-header {
         padding: 60px 20px 30px;
@@ -430,6 +427,10 @@
       .scrolly-card {
         width: 100%;
         height: 55vh;
+        margin: 0 auto 15vh auto;
+      }
+      .scrolly-card:last-child {
+        margin-bottom: 0;
       }
       .scrolly-card-overlay {
         padding: 30px;
