@@ -300,34 +300,18 @@
       color: var(--text);
     }
 
-    /* ── SCROLLYTELLING SHOWCASE ── */
+    /* ── CINEMATIC STICKY STACK SHOWCASE ── */
     .scrollytelling-showcase {
       position: relative;
       background: #180508; /* Deep rich dark background for cinematic focus */
       color: #fff;
       overflow: visible;
       margin-top: 60px;
-    }
-
-    .scrolly-scroll-container {
-      height: 300vh; /* 3 screens worth of scroll */
-      position: relative;
-    }
-
-    .scrolly-sticky-wrapper {
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      overflow: hidden;
-      padding: 80px 0;
+      padding-bottom: 20vh;
     }
 
     .scrolly-header {
-      padding: 0 60px;
-      margin-bottom: 40px;
+      padding: 80px 60px 40px;
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
@@ -349,59 +333,59 @@
       line-height: 1.6;
     }
 
-    .scrolly-track-container {
-      width: 100%;
-      overflow: hidden;
-      padding-left: 60px;
+    .sticky-stack-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15vh; /* Large gap so they scroll up */
+      padding: 0 40px;
       position: relative;
       z-index: 5;
     }
 
-    .scrolly-track {
-      display: flex;
-      gap: 40px;
-      width: max-content;
-      will-change: transform;
-      transition: transform 0.1s cubic-bezier(0.1, 0.9, 0.2, 1);
-    }
-
     .scrolly-card {
-      width: clamp(320px, 65vw, 800px);
-      height: 52vh;
+      width: clamp(320px, 75vw, 1000px);
+      height: 70vh; /* Large cinematic height */
       border-radius: 30px;
       overflow: hidden;
-      position: relative;
-      flex-shrink: 0;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+      position: sticky;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
       background: var(--maroon-d);
+      transition: transform 0.5s cubic-bezier(0.1, 0.9, 0.2, 1);
     }
+    
+    /* Staggered sticky top offsets so they stack like a deck */
+    .scrolly-card:nth-child(1) { top: 10vh; z-index: 1; }
+    .scrolly-card:nth-child(2) { top: 13vh; z-index: 2; }
+    .scrolly-card:nth-child(3) { top: 16vh; z-index: 3; }
+    .scrolly-card:nth-child(4) { top: 19vh; z-index: 4; }
 
     .scrolly-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-      opacity: 0.75;
+      opacity: 0.85;
     }
 
     .scrolly-card:hover img {
-      transform: scale(1.08);
+      transform: scale(1.04);
     }
 
     .scrolly-card-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+      background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 40%, transparent 100%);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 40px;
+      padding: 60px;
       z-index: 2;
     }
 
     .scrolly-card-number {
       font-family: var(--ff-serif);
-      font-size: clamp(3rem, 8vw, 5rem);
+      font-size: clamp(4rem, 10vw, 8rem);
       color: rgba(255, 255, 255, 0.08);
       position: absolute;
       top: 20px;
@@ -411,54 +395,44 @@
     }
 
     .scrolly-card-overlay span {
-      font-size: 0.75rem;
+      font-size: 0.85rem;
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
       color: var(--beige);
       margin-bottom: 10px;
     }
 
     .scrolly-card-overlay h3 {
       font-family: var(--ff-serif);
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-size: clamp(2rem, 4vw, 3.2rem);
       color: #fff;
       margin-bottom: 12px;
     }
 
     .scrolly-card-overlay p {
-      font-size: 0.9rem;
+      font-size: 1.05rem;
       color: rgba(255, 255, 255, 0.70);
-      max-width: 480px;
-      line-height: 1.5;
+      max-width: 500px;
+      line-height: 1.6;
     }
 
     @media (max-width: 768px) {
-      .scrolly-scroll-container {
-        height: auto;
-      }
-      .scrolly-sticky-wrapper {
-        position: relative;
-        height: auto;
-        padding: 50px 0;
+      .sticky-stack-container {
+        padding: 0 20px;
+        gap: 10vh;
       }
       .scrolly-header {
-        padding: 0 20px;
+        padding: 60px 20px 30px;
         flex-direction: column;
         align-items: flex-start;
         gap: 15px;
-        margin-bottom: 30px;
-      }
-      .scrolly-track-container {
-        padding-left: 20px;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
       }
       .scrolly-card {
-        width: 85vw;
-        height: 42vh;
+        width: 100%;
+        height: 55vh;
       }
       .scrolly-card-overlay {
-        padding: 25px;
+        padding: 30px;
       }
     }
 
@@ -1086,60 +1060,55 @@
 
     <!-- SCROLLYTELLING SHOWCASE SECTION -->
     <section class="scrollytelling-showcase">
-      <div class="scrolly-scroll-container">
-        <div class="scrolly-sticky-wrapper">
-          <div class="scrolly-header">
-            <div>
-              <span class="tag" style="color: var(--beige);">Featured Chapters</span>
-              <h2>Visual Stories</h2>
-            </div>
-            <p>
-              Every love story has a rhythm, a unique set of colors, and unspoken words. Scroll to traverse through our signature wedding frames.
-            </p>
+      <div class="scrolly-header">
+        <div>
+          <span class="tag" style="color: var(--beige);">Featured Chapters</span>
+          <h2>Visual Stories</h2>
+        </div>
+        <p>
+          Every love story has a rhythm, a unique set of colors, and unspoken words. Scroll to traverse through our signature wedding frames.
+        </p>
+      </div>
+      
+      <div class="sticky-stack-container">
+        <!-- Chapter 1 -->
+        <div class="scrolly-card">
+          <img src="images/%E2%80%9CGrace%20in%20every%20glance%2C%20a%20dream%20in%20every%20moment.%E2%80%9DShrikanth%20%26%20pooja..%20(2).webp" alt="The Grand Celebration">
+          <div class="scrolly-card-number">01</div>
+          <div class="scrolly-card-overlay">
+            <span>Chapter I</span>
+            <h3>The Grand Celebration</h3>
+            <p>Opulent celebrations, golden haldi droplets, and the sacred pheras that bind two souls for a lifetime.</p>
           </div>
-          <div class="scrolly-track-container">
-            <div class="scrolly-track" id="scrollyTrack">
-              <!-- Chapter 1 -->
-              <div class="scrolly-card">
-                <img src="images/%E2%80%9CGrace%20in%20every%20glance%2C%20a%20dream%20in%20every%20moment.%E2%80%9DShrikanth%20%26%20pooja..%20(2).webp" alt="The Grand Celebration">
-                <div class="scrolly-card-number">01</div>
-                <div class="scrolly-card-overlay">
-                  <span>Chapter I</span>
-                  <h3>The Grand Celebration</h3>
-                  <p>Opulent celebrations, golden haldi droplets, and the sacred pheras that bind two souls for a lifetime.</p>
-                </div>
-              </div>
-              <!-- Chapter 2 -->
-              <div class="scrolly-card">
-                <img src="images/Varun%20%26%20Priya%E2%9D%A4%EF%B8%8FA%20love%20story%20for%20the%20ages%20beginsCaptured%20by%20Vaibhavam%20wedding%20photography%2C%20their.webp" alt="Whispers of Love">
-                <div class="scrolly-card-number">02</div>
-                <div class="scrolly-card-overlay">
-                  <span>Chapter II</span>
-                  <h3>Whispers of Love</h3>
-                  <p>Candid outdoor encounters, shared laughter, and quiet moments captured against the setting sun.</p>
-                </div>
-              </div>
-              <!-- Chapter 3 -->
-              <div class="scrolly-card">
-                <img src="images/A%20moment%20framed%20in%20grandeur%20%23weddinginspiration%20%23weddingphotography%20%23couplegoals%20%23trendingpos%20(1).webp" alt="Royal Elegance">
-                <div class="scrolly-card-number">03</div>
-                <div class="scrolly-card-overlay">
-                  <span>Chapter III</span>
-                  <h3>Royal Elegance</h3>
-                  <p>Focusing on the fine details, exquisite styling, and portraits that capture the royalty within you.</p>
-                </div>
-              </div>
-              <!-- Chapter 4 -->
-              <div class="scrolly-card">
-                <img src="images/The%20beginning%20of%20forever%2C%20wrapped%20in%20love%20and%20laughter%20%F0%9F%92%ABBook%20now%20%40%208639972913%20(3).webp" alt="Beginning of Forever">
-                <div class="scrolly-card-number">04</div>
-                <div class="scrolly-card-overlay">
-                  <span>Chapter IV</span>
-                  <h3>Timeless Vows</h3>
-                  <p>The dawn of forever, painted with smiles, laughter, and promises that outlive the passage of time.</p>
-                </div>
-              </div>
-            </div>
+        </div>
+        <!-- Chapter 2 -->
+        <div class="scrolly-card">
+          <img src="images/Varun%20%26%20Priya%E2%9D%A4%EF%B8%8FA%20love%20story%20for%20the%20ages%20beginsCaptured%20by%20Vaibhavam%20wedding%20photography%2C%20their.webp" alt="Whispers of Love">
+          <div class="scrolly-card-number">02</div>
+          <div class="scrolly-card-overlay">
+            <span>Chapter II</span>
+            <h3>Whispers of Love</h3>
+            <p>Candid outdoor encounters, shared laughter, and quiet moments captured against the setting sun.</p>
+          </div>
+        </div>
+        <!-- Chapter 3 -->
+        <div class="scrolly-card">
+          <img src="images/A%20moment%20framed%20in%20grandeur%20%23weddinginspiration%20%23weddingphotography%20%23couplegoals%20%23trendingpos%20(1).webp" alt="Royal Elegance">
+          <div class="scrolly-card-number">03</div>
+          <div class="scrolly-card-overlay">
+            <span>Chapter III</span>
+            <h3>Royal Elegance</h3>
+            <p>Focusing on the fine details, exquisite styling, and portraits that capture the royalty within you.</p>
+          </div>
+        </div>
+        <!-- Chapter 4 -->
+        <div class="scrolly-card">
+          <img src="images/The%20beginning%20of%20forever%2C%20wrapped%20in%20love%20and%20laughter%20%F0%9F%92%ABBook%20now%20%40%208639972913%20(3).webp" alt="Beginning of Forever">
+          <div class="scrolly-card-number">04</div>
+          <div class="scrolly-card-overlay">
+            <span>Chapter IV</span>
+            <h3>Timeless Vows</h3>
+            <p>The dawn of forever, painted with smiles, laughter, and promises that outlive the passage of time.</p>
           </div>
         </div>
       </div>
@@ -1643,42 +1612,7 @@
     if (openBtn) openBtn.onclick = () => menu.classList.add('active');
     if (closeBtn) closeBtn.onclick = () => menu.classList.remove('active');
 
-    // Scrollytelling Horizontal Scroll Logic
-    const scrollySection = document.querySelector('.scrollytelling-showcase');
-    const scrollyContainer = document.querySelector('.scrolly-scroll-container');
-    const scrollyTrack = document.getElementById('scrollyTrack');
 
-    function animateScrollytelling() {
-      if (!scrollySection || !scrollyTrack) return;
-      if (window.innerWidth <= 768) {
-        scrollyTrack.style.transform = 'none';
-        return;
-      }
-
-      const rect = scrollyContainer.getBoundingClientRect();
-      const scrollPosition = -rect.top;
-      const totalScrollableHeight = rect.height - window.innerHeight;
-      
-      if (scrollPosition >= 0 && scrollPosition <= totalScrollableHeight) {
-        const trackWidth = scrollyTrack.scrollWidth;
-        const maxTranslate = trackWidth - window.innerWidth + 120; // 120px padding offset
-        const percentage = scrollPosition / totalScrollableHeight;
-        const translateVal = percentage * maxTranslate;
-        
-        scrollyTrack.style.transform = `translateX(-${translateVal}px)`;
-      } else if (scrollPosition < 0) {
-        scrollyTrack.style.transform = 'translateX(0)';
-      } else if (scrollPosition > totalScrollableHeight) {
-        const trackWidth = scrollyTrack.scrollWidth;
-        const maxTranslate = trackWidth - window.innerWidth + 120;
-        scrollyTrack.style.transform = `translateX(-${maxTranslate}px)`;
-      }
-    }
-
-    window.addEventListener('scroll', () => {
-      requestAnimationFrame(animateScrollytelling);
-    });
-    window.addEventListener('resize', animateScrollytelling);
 
     // Staggered Progressive Reveal Observer for initial load
     const revealObserver = new IntersectionObserver((entries) => {
