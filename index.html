@@ -1291,6 +1291,31 @@
       overflow: hidden;
     }
 
+    /* Zigzag logo watermark layer */
+    .reels-logo-pattern {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      /* Two offset rows of the logo create a classic brick/zigzag tile */
+      background-image:
+        url('Vaibhavam Logo.jpeg'),
+        url('Vaibhavam Logo.jpeg');
+      background-size: 120px auto, 120px auto;
+      background-repeat: repeat, repeat;
+      /* Row 1 starts at (0,0), Row 2 is offset by half the width (60px) and shifted down by half the row height */
+      background-position: 0 0, 60px 80px;
+      opacity: 0.055;
+      filter: grayscale(100%);
+      /* Subtle slow drift animation for depth */
+      animation: logoPatternDrift 30s linear infinite;
+    }
+
+    @keyframes logoPatternDrift {
+      from { background-position: 0 0, 60px 80px; }
+      to   { background-position: 120px 160px, 180px 240px; }
+    }
+
     .reels-intro {
       text-align: center;
       margin-bottom: 60px;
