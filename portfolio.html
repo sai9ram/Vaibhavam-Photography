@@ -668,6 +668,158 @@
         padding: 180px 0;
       }
     }
+
+    /* ── FOOTER ── */
+    footer {
+      background-color: var(--bg);
+      padding: 100px 0 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+      opacity: 0.03;
+      pointer-events: none;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 50px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer-brand h2 {
+      font-family: var(--ff-serif);
+      font-size: 2rem;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .footer-brand p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--gray);
+      max-width: 300px;
+      margin-bottom: 30px;
+    }
+
+    .footer-links h4,
+    .footer-contact h4 {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--maroon);
+      margin-bottom: 25px;
+      font-weight: 700;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .footer-nav a {
+      font-size: 0.9rem;
+      color: var(--gray);
+      transition: all 0.3s ease;
+      width: fit-content;
+      position: relative;
+    }
+
+    .footer-nav a::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--maroon);
+      transition: width 0.3s ease;
+    }
+
+    .footer-nav a:hover {
+      color: var(--text);
+    }
+
+    .footer-nav a:hover::after {
+      width: 100%;
+    }
+
+    .footer-contact p {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 12px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .social-icon {
+      width: 45px;
+      height: 45px;
+      background: rgba(123, 30, 43, 0.05);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 1rem;
+      transition: all 0.4s ease;
+    }
+
+    .social-icon:hover {
+      background: var(--maroon);
+      color: #fff;
+      transform: translateY(-5px);
+    }
+
+    .footer-bottom {
+      margin-top: 60px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(0, 0, 0, 0.03);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      text-align: center;
+    }
+
+    .footer-bottom p {
+      font-size: 0.75rem;
+      color: var(--gray);
+      opacity: 0.7;
+    }
+
+    @media (min-width: 768px) {
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .footer-content {
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+      }
+    }
   </style>
 </head>
 
@@ -681,8 +833,8 @@
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="portfolio.html">Portfolio</a></li>
-        <li><a href="about.html">About</a></li>
         <li><a href="index.html#services">Services</a></li>
+        <li><a href="about.html">About</a></li>
       </ul>
       <div class="nav-right" style="display:flex;align-items:center;gap:15px">
         <a href="quote.html" class="btn btn-m">Build Your Package</a>
@@ -698,8 +850,8 @@
       </div>
       <a href="index.html">Home</a>
       <a href="portfolio.html">Portfolio</a>
-      <a href="about.html">About</a>
       <a href="index.html#services">Services</a>
+      <a href="about.html">About</a>
       <a href="quote.html" class="btn btn-m" style="margin-top: 20px;">Build Your Package</a>
     </div>
 
