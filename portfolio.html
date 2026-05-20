@@ -547,23 +547,54 @@
     /* ── VIDEOS SECTION ── */
     .videos-section {
       padding: 100px 0;
-      background: var(--white);
+      background: #180508; /* Cinematic dark background */
+      color: #fff;
+      overflow: visible;
     }
 
-    .videos-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 40px;
+    .videos-section .section-title-wrapper h2 {
+      color: #fff;
+    }
+
+    .videos-sticky-stack {
+      display: block;
+      padding: 0 40px;
+      position: relative;
+      z-index: 5;
     }
 
     .video-card {
-      position: relative;
+      width: clamp(320px, 75vw, 1000px);
+      height: 70vh; /* Large cinematic height */
+      margin: 0 auto 30vh auto; /* 30vh gap between cards so they scroll up and stack */
       border-radius: 30px;
       overflow: hidden;
-      aspect-ratio: 16/9;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+      position: sticky;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
       cursor: pointer;
       background: #000;
+    }
+
+    /* Staggered sticky top offsets for 6 videos */
+    .video-card:nth-child(1) { top: 10vh; z-index: 1; }
+    .video-card:nth-child(2) { top: 13vh; z-index: 2; }
+    .video-card:nth-child(3) { top: 16vh; z-index: 3; }
+    .video-card:nth-child(4) { top: 19vh; z-index: 4; }
+    .video-card:nth-child(5) { top: 22vh; z-index: 5; }
+    .video-card:nth-child(6) { top: 25vh; z-index: 6; }
+
+    @media (max-width: 768px) {
+      .videos-sticky-stack {
+        padding: 0 20px;
+      }
+      .video-card {
+        width: 100%;
+        height: 55vh;
+        margin: 0 auto 15vh auto;
+      }
+      .video-card:last-child {
+        margin-bottom: 0;
+      }
     }
 
     /* Hover preview video elements */
@@ -1426,11 +1457,11 @@
     <section class="videos-section" id="videos">
       <div class="wrap">
         <div class="section-title-wrapper reveal-up">
-          <span class="tag">Cinema Showcase</span>
+          <span class="tag" style="color: var(--beige);">Cinema Showcase</span>
           <h2>Wedding Films</h2>
         </div>
 
-        <div class="videos-grid reveal-up">
+        <div class="videos-sticky-stack reveal-up">
           <!-- Video Card 1 -->
           <div class="video-card" data-video-src="videos/AQMDQaHIc6m9aEmWJ2I8Hu1Q4HJP7lFj3KfH6XWDGpQaQKDB7WOuZfYiHFlrVIPsBhgLcHLU4Mhhw5fOR7yYmbj1ZJ3IV9nN.mp4">
             <video class="preview-video" muted loop playsinline src="videos/AQMDQaHIc6m9aEmWJ2I8Hu1Q4HJP7lFj3KfH6XWDGpQaQKDB7WOuZfYiHFlrVIPsBhgLcHLU4Mhhw5fOR7yYmbj1ZJ3IV9nN.mp4"></video>
