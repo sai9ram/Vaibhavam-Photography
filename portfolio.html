@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="description"
+    content="Explore the stunning portfolio of Vaibhavam Photography. View our luxury wedding photos, pre-wedding films, and editorial masterpieces.">
+  <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/1042/1042339.png">
+  <title>Portfolio | Vaibhavam Photography | Luxury Wedding Photographers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Poppins:wght@300;400;500;600&family=Great+Vibes&family=Dancing+Script:wght@700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    :root {
+      --bg: #F8F5F1;
+      --maroon: #7B1E2B;
+      --maroon-d: #5A1220;
+      --beige: #E9DED3;
+      --text: #2D1F1A;
+      --gray: #6B625D;
+      --white: #fff;
+      --ff-serif: 'Cormorant Garamond', serif;
+      --ff-sans: 'Poppins', sans-serif;
+    }
+
+    html,
+    body {
+      max-width: 100%;
+      overflow-x: hidden;
+      position: relative;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--ff-sans);
+      background-color: var(--bg);
+      color: var(--text);
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 20px
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit
+    }
+
+    .tag {
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--maroon);
+      display: block;
+      margin-bottom: 15px
+    }
+
+    .sub {
+      font-size: .95rem;
+      color: var(--gray);
+      line-height: 1.7;
+      max-width: 500px
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: 50px;
+      font-size: .85rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s ease;
+      text-transform: none;
+    }
+
+    .btn-m {
+      background: var(--maroon);
+      color: #fff !important;
+    }
+
+    .btn-m:hover {
+      background: var(--maroon-d);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(123, 30, 43, 0.2);
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: rgba(248, 245, 241, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(123, 30, 43, 0.05);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    nav.scrolled {
+      background: rgba(248, 245, 241, 0.95);
+      padding: 8px 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Desktop Pill Style */
+    @media (min-width: 1024px) {
+      nav {
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 60px);
+        max-width: 1200px;
+        border-radius: 100px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        padding: 15px 40px;
+      }
+
+      nav.scrolled {
+        top: 0;
+        width: 100%;
+        max-width: 100%;
+        border-radius: 0;
+        padding: 12px 60px;
+        border-color: rgba(123, 30, 43, 0.05);
+      }
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-shrink: 0;
+    }
+
+    .nav-logo img {
+      height: 120px;
+      width: auto;
+      object-fit: contain;
+      margin: -40px 0;
+      transition: transform 0.3s ease;
+      filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
+    }
+
+    .nav-logo img:hover {
+      transform: scale(1.02);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 35px;
+      list-style: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+      color: var(--maroon);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-shrink: 0;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 2px;
+      background: var(--maroon);
+      border-radius: 2px;
+    }
+
+    @media (max-width: 1024px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ── PORTFOLIO HERO ── */
+    .portfolio-hero {
+      padding: 160px 0 60px;
+      background: linear-gradient(180deg, #E9DED3 0%, var(--bg) 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ── FILTER CONTROLS ── */
+    .filter-controls {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 40px 0 20px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1px solid rgba(123, 30, 43, 0.2);
+      color: var(--text);
+      padding: 12px 30px;
+      border-radius: 100px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.4s ease;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--maroon);
+      border-color: var(--maroon);
+      color: var(--white);
+      box-shadow: 0 10px 20px rgba(123, 30, 43, 0.15);
+    }
+
+    /* ── PORTFOLIO SECTION ── */
+    .portfolio-section {
+      padding: 40px 0 100px;
+    }
+
+    .section-title-wrapper {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title-wrapper h2 {
+      font-family: var(--ff-serif);
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      color: var(--text);
+    }
+
+    /* ── IMAGES GRID ── */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+    }
+
+    @media (max-width: 480px) {
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .portfolio-card {
+      position: relative;
+      border-radius: 30px;
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+      cursor: pointer;
+      background: var(--beige);
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .portfolio-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+
+    .portfolio-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(58, 12, 21, 0.8) 0%, rgba(58, 12, 21, 0.2) 70%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 30px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 2;
+    }
+
+    .portfolio-card:hover .card-overlay {
+      opacity: 1;
+    }
+
+    .card-overlay span {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 8px;
+    }
+
+    .card-overlay h3 {
+      font-family: var(--ff-serif);
+      font-size: 1.8rem;
+      color: var(--white);
+      line-height: 1.2;
+    }
+
+    /* ── VIDEOS SECTION ── */
+    .videos-section {
+      padding: 100px 0;
+      background: var(--white);
+    }
+
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 40px;
+    }
+
+    .video-card {
+      position: relative;
+      border-radius: 30px;
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+      cursor: pointer;
+      background: #000;
+    }
+
+    /* Hover preview video elements */
+    .video-card video.preview-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.85;
+      transition: opacity 0.3s ease, transform 0.6s ease;
+    }
+
+    .video-card:hover video.preview-video {
+      opacity: 1;
+      transform: scale(1.03);
+    }
+
+    .video-play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70px;
+      height: 70px;
+      background: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--maroon);
+      font-size: 1.5rem;
+      box-shadow: 0 10px 25px rgba(123, 30, 43, 0.2);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 5;
+    }
+
+    .video-card:hover .video-play-btn {
+      transform: translate(-50%, -50%) scale(1.15);
+      background: var(--maroon);
+      color: var(--white);
+    }
+
+    .video-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, transparent 60%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 25px;
+      z-index: 3;
+    }
+
+    .video-card-overlay span {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 5px;
+    }
+
+    .video-card-overlay h3 {
+      font-family: var(--ff-serif);
+      font-size: 1.5rem;
+      color: var(--white);
+    }
+
+    /* ── LIGHTBOX & MODALS ── */
+    .lightbox-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(12, 5, 6, 0.98);
+      z-index: 3000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .lightbox-modal.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      color: var(--white);
+      font-size: 2rem;
+      cursor: pointer;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .lightbox-close:hover {
+      background: var(--maroon);
+      transform: rotate(90deg);
+    }
+
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 80vh;
+      position: relative;
+    }
+
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    .lightbox-video-container {
+      width: 100%;
+      max-width: 960px;
+      aspect-ratio: 16/9;
+      background: #000;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    .lightbox-video-container video {
+      width: 100%;
+      height: 100%;
+    }
+
+    .lightbox-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--white);
+      font-size: 2.5rem;
+      cursor: pointer;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+
+    .lightbox-arrow:hover {
+      background: var(--maroon);
+    }
+
+    .lightbox-arrow-left {
+      left: 30px;
+    }
+
+    .lightbox-arrow-right {
+      right: 30px;
+    }
+
+    /* ── LUXURY BOOKING CTA ── */
+    .booking-cta-section {
+      padding: 60px 0;
+      margin: 0 20px 80px;
+      background: #3A0C15;
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+      text-align: center;
+      border-radius: 40px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Silhouette Background */
+    .cta-bg-silhouette {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(135deg, rgba(123, 30, 43, 0.85) 0%, rgba(58, 12, 21, 0.9) 100%), url('images/%E2%80%9CGrace%20in%20every%20glance%2C%20a%20dream%20in%20every%20moment.%E2%80%9DShrikanth%20%26%20pooja..%20(2).webp');
+      background-size: cover;
+      background-position: center;
+      opacity: 1;
+      z-index: 0;
+      transition: transform 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .booking-cta-section:hover .cta-bg-silhouette {
+      transform: scale(1.06);
+    }
+
+    .cta-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+      filter: blur(80px);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 5;
+      max-width: 650px;
+      margin: 0 auto;
+      padding: 0 25px;
+    }
+
+    .booking-cta-section .tag {
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 25px;
+      display: inline-block;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .booking-cta-section h2 {
+      font-family: var(--ff-serif);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.2;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    .cta-description {
+      font-size: 0.95rem;
+      color: rgba(248, 245, 241, 0.7);
+      margin-bottom: 35px;
+      line-height: 1.5;
+    }
+
+    .cta-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-white {
+      background: #fff;
+      color: var(--maroon);
+      padding: 18px 45px;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-white:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-outline-white {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      padding: 18px 45px;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.4s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-outline-white:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: #fff;
+    }
+
+    @media (min-width: 768px) {
+      .cta-btns {
+        flex-direction: row;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .booking-cta-section {
+        padding: 180px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <!-- NAVBAR -->
+    <nav id="navbar">
+      <div class="nav-logo">
+        <a href="index.html"><img src="Vaibhavam Logo.jpeg" alt="Vaibhavam Logo"></a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="index.html#services">Services</a></li>
+      </ul>
+      <div class="nav-right" style="display:flex;align-items:center;gap:15px">
+        <a href="quote.html" class="btn btn-m">Build Your Package</a>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="close-menu" id="closeMenu"><i class="fa-solid fa-xmark"></i></div>
+      <div class="nav-logo" style="margin-bottom: 40px;">
+        <img src="Vaibhavam Logo.jpeg" alt="Vaibhavam Logo">
+      </div>
+      <a href="index.html">Home</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="about.html">About</a>
+      <a href="index.html#services">Services</a>
+      <a href="quote.html" class="btn btn-m" style="margin-top: 20px;">Build Your Package</a>
+    </div>
+
+    <!-- PORTFOLIO HERO -->
+    <header class="portfolio-hero">
+      <div class="hero-bg-text">PORTFOLIO</div>
+      <div class="wrap">
+        <span class="tag reveal-up">Visual Narratives</span>
+        <h1 class="reveal-up" style="transition-delay: 0.1s;">Our Masterpieces</h1>
+        <p class="reveal-up" style="transition-delay: 0.2s;">
+          A curated collection of timeless love stories, raw emotional glances, and grand celebrations captured across India.
+        </p>
+      </div>
+    </header>
+
+    <!-- PORTFOLIO IMAGES SECTION -->
+    <section class="portfolio-section" id="photos">
+      <div class="wrap">
+        <div class="section-title-wrapper reveal-up">
+          <span class="tag">Images Showcase</span>
+          <h2>Captured Moments</h2>
+        </div>
+
+        <div class="filter-controls reveal-up">
+          <button class="filter-btn active" data-filter="all">All Stories</button>
+          <button class="filter-btn" data-filter="weddings">Weddings</button>
+          <button class="filter-btn" data-filter="pre-weddings">Pre-Weddings</button>
+        </div>
+
+        <div class="portfolio-grid reveal-up">
+          <!-- Card 1 -->
+          <div class="portfolio-card" data-category="weddings">
+            <img src="images/%E2%80%9CGrace%20in%20every%20glance%2C%20a%20dream%20in%20every%20moment.%E2%80%9DShrikanth%20%26%20pooja..%20(2).webp" alt="Shrikanth & Pooja">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>Shrikanth & Pooja</h3>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div class="portfolio-card" data-category="weddings">
+            <img src="images/Varun%20%26%20Priya%E2%9D%A4%EF%B8%8FA%20love%20story%20for%20the%20ages%20beginsCaptured%20by%20Vaibhavam%20wedding%20photography%2C%20their%20(3).webp" alt="Varun & Priya">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>Varun & Priya</h3>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div class="portfolio-card" data-category="pre-weddings">
+            <img src="images/A%20moment%20frozen%20in%20love%2C%20forever%20yours...%E2%9D%A4%EF%B8%8F%20(1).webp" alt="A moment frozen in love">
+            <div class="card-overlay">
+              <span>Pre-Weddings</span>
+              <h3>Frozen in Love</h3>
+            </div>
+          </div>
+          <!-- Card 4 -->
+          <div class="portfolio-card" data-category="weddings">
+            <img src="images/A%20moment%20framed%20in%20grandeur%20%23weddinginspiration%20%23weddingphotography%20%23couplegoals%20%23trendingpos%20(1).webp" alt="Framed in Grandeur">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>Framed in Grandeur</h3>
+            </div>
+          </div>
+          <!-- Card 5 -->
+          <div class="portfolio-card" data-category="weddings">
+            <img src="images/Golden%20rains%20and%20bridal%20dreams...%23bride%20Shusmita%23haldiceremony%20%23haldi%20%23wedding%20%23indianwedding%20%23%20(1).webp" alt="Shusmita Haldi Ceremony">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>Shusmita's Haldi</h3>
+            </div>
+          </div>
+          <!-- Card 6 -->
+          <div class="portfolio-card" data-category="pre-weddings">
+            <img src="images/We%E2%80%99re%20all%20tangled%20up%20in%20love%20and%20laughter.%20%F0%9F%92%9E%23preweddingphoto%20%23prewedding%20%23wedding%20%23preweddin%20(3).webp" alt="Love and Laughter">
+            <div class="card-overlay">
+              <span>Pre-Weddings</span>
+              <h3>Love & Laughter</h3>
+            </div>
+          </div>
+          <!-- Card 7 -->
+          <div class="portfolio-card" data-category="pre-weddings">
+            <img src="images/The%20beginning%20of%20forever%2C%20wrapped%20in%20love%20and%20laughter%20%F0%9F%92%ABBook%20now%20%40%208639972913.webp" alt="Beginning of Forever">
+            <div class="card-overlay">
+              <span>Pre-Weddings</span>
+              <h3>Beginning of Forever</h3>
+            </div>
+          </div>
+          <!-- Card 8 -->
+          <div class="portfolio-card" data-category="weddings">
+            <img src="images/A%20love%20as%20gentle%20as%20petals%2C%20yet%20timeless%20Those%20who%20believe%20love%20should%20feel%20as%20beautiful%20as%20it%20%20(2).webp" alt="Gentle Petals">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>Gentle Petals</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO VIDEOS SECTION -->
+    <section class="videos-section" id="videos">
+      <div class="wrap">
+        <div class="section-title-wrapper reveal-up">
+          <span class="tag">Cinema Showcase</span>
+          <h2>Wedding Films</h2>
+        </div>
+
+        <div class="videos-grid reveal-up">
+          <!-- Video Card 1 -->
+          <div class="video-card" data-video-src="videos/AQMDQaHIc6m9aEmWJ2I8Hu1Q4HJP7lFj3KfH6XWDGpQaQKDB7WOuZfYiHFlrVIPsBhgLcHLU4Mhhw5fOR7yYmbj1ZJ3IV9nN.mp4">
+            <video class="preview-video" muted loop playsinline src="videos/AQMDQaHIc6m9aEmWJ2I8Hu1Q4HJP7lFj3KfH6XWDGpQaQKDB7WOuZfYiHFlrVIPsBhgLcHLU4Mhhw5fOR7yYmbj1ZJ3IV9nN.mp4"></video>
+            <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+            <div class="video-card-overlay">
+              <span>Wedding Film</span>
+              <h3>Eternal Echoes</h3>
+            </div>
+          </div>
+          <!-- Video Card 2 -->
+          <div class="video-card" data-video-src="videos/Just%20you%2C%20me%2C%20and%20a%20lifetime%20to%20go.Somu%20%26%20harshi%23couplegoals%20%23lovestory%20%23togetherforever%20%23couple.mp4">
+            <video class="preview-video" muted loop playsinline src="videos/Just%20you%2C%20me%2C%20and%20a%20lifetime%20to%20go.Somu%20%26%20harshi%23couplegoals%20%23lovestory%20%23togetherforever%20%23couple.mp4"></video>
+            <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+            <div class="video-card-overlay">
+              <span>Cinematic Story</span>
+              <h3>Somu & Harshi</h3>
+            </div>
+          </div>
+          <!-- Video Card 3 -->
+          <div class="video-card" data-video-src="videos/Pavan%20%26%20varsha%20engagement%20album.mp4">
+            <video class="preview-video" muted loop playsinline src="videos/Pavan%20%26%20varsha%20engagement%20album.mp4"></video>
+            <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+            <div class="video-card-overlay">
+              <span>Engagement Film</span>
+              <h3>Pavan & Varsha</h3>
+            </div>
+          </div>
+          <!-- Video Card 4 -->
+          <div class="video-card" data-video-src="videos/Rohith%20%26%20priyanka..%23preweddinginspiration%20%23preweddingoutdoor%20%23preweddingstyle%20%23weddingphotograph.mp4">
+            <video class="preview-video" muted loop playsinline src="videos/Rohith%20%26%20priyanka..%23preweddinginspiration%20%23preweddingoutdoor%20%23preweddingstyle%20%23weddingphotograph.mp4"></video>
+            <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+            <div class="video-card-overlay">
+              <span>Pre-Wedding Film</span>
+              <h3>Rohith & Priyanka</h3>
+            </div>
+          </div>
+          <!-- Video Card 5 -->
+          <div class="video-card" data-video-src="videos/Sandeep%20%26%20Prachi....Reception%20wedding%20photography%20Brides%20of%20indiaVimala%20regency.mp4">
+            <video class="preview-video" muted loop playsinline src="videos/Sandeep%20%26%20Prachi....Reception%20wedding%20photography%20Brides%20of%20indiaVimala%20regency.mp4"></video>
+            <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+            <div class="video-card-overlay">
+              <span>Wedding Highlight</span>
+              <h3>Sandeep & Prachi</h3>
+            </div>
+          </div>
+          <!-- Video Card 6 -->
+          <div class="video-card" data-video-src="videos/The%20editing%20process..%23weddingphotography%20%23prewedding%20%23lightroom%20%23weddinginspiration%20%23makeupartis.mp4">
+            <video class="preview-video" muted loop playsinline src="videos/The%20editing%20process..%23weddingphotography%20%23prewedding%20%23lightroom%20%23weddinginspiration%20%23makeupartis.mp4"></video>
+            <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+            <div class="video-card-overlay">
+              <span>Behind the Scenes</span>
+              <h3>The Art of Editing</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- IMAGE LIGHTBOX MODAL -->
+    <div class="lightbox-modal" id="imageLightbox">
+      <div class="lightbox-close"><i class="fa-solid fa-xmark"></i></div>
+      <div class="lightbox-arrow lightbox-arrow-left"><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="lightbox-content">
+        <img class="lightbox-img" src="" alt="Lightbox Image">
+      </div>
+      <div class="lightbox-arrow lightbox-arrow-right"><i class="fa-solid fa-chevron-right"></i></div>
+    </div>
+
+    <!-- VIDEO LIGHTBOX MODAL -->
+    <div class="lightbox-modal" id="videoLightbox">
+      <div class="lightbox-close"><i class="fa-solid fa-xmark"></i></div>
+      <div class="lightbox-content">
+        <div class="lightbox-video-container">
+          <video id="lightboxVideoPlayer" controls playsinline src=""></video>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 09: LUXURY BOOKING CTA -->
+    <section class="booking-cta-section" id="booking">
+      <div class="cta-bg-silhouette"></div>
+      <div class="cta-glow"></div>
+
+      <div class="wrap">
+        <div class="cta-content">
+          <span class="tag reveal-up">Reserve Your Wedding Dates</span>
+          <h2 class="reveal-up" style="transition-delay: 0.1s;">Let’s create memories that last forever</h2>
+          <p class="cta-description reveal-up" style="transition-delay: 0.2s;">
+            Our team captures weddings with timeless elegance, emotional storytelling, and cinematic artistry crafted
+            for modern couples.
+          </p>
+
+          <div class="cta-btns reveal-up" style="transition-delay: 0.3s;">
+            <a href="quote.html" class="btn-white">Build Your Package</a>
+            <a href="https://wa.me/918639972913" class="btn-outline-white"><i class="fa-brands fa-whatsapp"
+                style="margin-right: 10px;"></i>
+              WhatsApp Us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREMIUM FOOTER -->
+    <footer>
+      <div class="wrap">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <div class="nav-logo" style="margin-bottom: 20px;">
+              <img src="Vaibhavam Logo.jpeg" alt="Vaibhavam Logo" style="height: 100px; width: auto;">
+            </div>
+            <p>Capturing timeless wedding stories with elegance, emotion, and cinematic artistry crafted for modern couples.</p>
+            <div class="social-links">
+              <a href="https://www.instagram.com/vaibhavam_by_varun/" target="_blank" rel="noopener" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+              <a href="https://wa.me/918639972913" target="_blank" rel="noopener" class="social-icon"><i class="fa-brands fa-whatsapp"></i></a>
+              <a href="#" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+          </div>
+          
+          <div class="footer-links">
+            <h4>Navigation</h4>
+            <div class="footer-nav">
+              <a href="index.html">Home</a>
+              <a href="portfolio.html">Portfolio</a>
+              <a href="index.html#services">Services</a>
+              <a href="about.html">About</a>
+              <a href="quote.html">Build Your Package</a>
+            </div>
+          </div>
+
+          <div class="footer-links">
+            <h4>Contact</h4>
+            <div class="footer-nav">
+              <p style="color: var(--gray); font-size: 0.9rem;">Adoni, Andhra Pradesh</p>
+              <a href="tel:+918639972913">+91 8639972913</a>
+              <a href="mailto:Vaibhavambyvarun@gmail.com">Vaibhavambyvarun@gmail.com</a>
+            </div>
+          </div>
+
+          <div class="footer-contact">
+            <h4>Studio</h4>
+            <p><strong>Office:</strong> H/no: 2-322, bankers colony</p>
+            <p>Thirumala nagar, Adoni 518302</p>
+            <p>By Appointment Only</p>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2026 Vaibhavam Photography. All Rights Reserved.</p>
+          <p>Crafted with ❤️ by UPliv.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Reveal Animations
+    const observerOptions = { threshold: 0.1 };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+
+    // Navbar Scroll
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      if (window.scrollY > 50) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    });
+
+    // Mobile Menu
+    const openBtn = document.getElementById('hamburger');
+    const closeBtn = document.getElementById('closeMenu');
+    const menu = document.getElementById('mobileMenu');
+
+    if (openBtn) openBtn.onclick = () => menu.classList.add('active');
+    if (closeBtn) closeBtn.onclick = () => menu.classList.remove('active');
+
+    // Filter functionality
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const portfolioCards = document.querySelectorAll('.portfolio-card');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filterValue = btn.getAttribute('data-filter');
+
+        portfolioCards.forEach(card => {
+          if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+            card.style.display = 'block';
+            setTimeout(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'scale(1)';
+            }, 50);
+          } else {
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.8)';
+            setTimeout(() => {
+              card.style.display = 'none';
+            }, 300);
+          }
+        });
+      });
+    });
+
+    // Lightbox for Images
+    const lightbox = document.getElementById('imageLightbox');
+    const lightboxImg = lightbox.querySelector('.lightbox-img');
+    const closeLightbox = lightbox.querySelector('.lightbox-close');
+    const prevArrow = lightbox.querySelector('.lightbox-arrow-left');
+    const nextArrow = lightbox.querySelector('.lightbox-arrow-right');
+    
+    let activeCards = [];
+    let currentImgIndex = 0;
+
+    function updateActiveCards() {
+      const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+      activeCards = Array.from(portfolioCards).filter(card => {
+        return activeFilter === 'all' || card.getAttribute('data-category') === activeFilter;
+      });
+    }
+
+    function showImage(index) {
+      if (index < 0) index = activeCards.length - 1;
+      if (index >= activeCards.length) index = 0;
+      currentImgIndex = index;
+      const imgSrc = activeCards[currentImgIndex].querySelector('img').getAttribute('src');
+      lightboxImg.setAttribute('src', imgSrc);
+    }
+
+    portfolioCards.forEach(card => {
+      card.addEventListener('click', () => {
+        updateActiveCards();
+        currentImgIndex = activeCards.indexOf(card);
+        showImage(currentImgIndex);
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    closeLightbox.addEventListener('click', () => {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+
+    prevArrow.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showImage(currentImgIndex - 1);
+    });
+
+    nextArrow.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showImage(currentImgIndex + 1);
+    });
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Video modal lightbox
+    const videoCards = document.querySelectorAll('.video-card');
+    const videoLightbox = document.getElementById('videoLightbox');
+    const videoPlayer = document.getElementById('lightboxVideoPlayer');
+    const closeVideoLightbox = videoLightbox.querySelector('.lightbox-close');
+
+    videoCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const videoSrc = card.getAttribute('data-video-src');
+        videoPlayer.setAttribute('src', videoSrc);
+        videoLightbox.classList.add('active');
+        videoPlayer.play();
+        document.body.style.overflow = 'hidden';
+      });
+
+      const previewVideo = card.querySelector('.preview-video');
+      card.addEventListener('mouseenter', () => {
+        if (previewVideo) previewVideo.play();
+      });
+      card.addEventListener('mouseleave', () => {
+        if (previewVideo) {
+          previewVideo.pause();
+          previewVideo.currentTime = 0;
+        }
+      });
+    });
+
+    closeVideoLightbox.addEventListener('click', () => {
+      videoLightbox.classList.remove('active');
+      videoPlayer.pause();
+      videoPlayer.setAttribute('src', '');
+      document.body.style.overflow = '';
+    });
+
+    videoLightbox.addEventListener('click', (e) => {
+      if (e.target === videoLightbox) {
+        videoLightbox.classList.remove('active');
+        videoPlayer.pause();
+        videoPlayer.setAttribute('src', '');
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
+</body>
+</html>
