@@ -570,6 +570,148 @@
     .mobile-menu.active { transform: translateY(0); }
     .mobile-menu a { font-family: var(--ff-serif); font-size: 2rem; font-weight: 600; }
     .close-menu { position: absolute; top: 30px; right: 30px; font-size: 1.5rem; }
+
+    /* ── VISION & MISSION ── */
+    .vision-mission-section {
+      padding: 100px 0;
+      background: var(--bg);
+    }
+
+    .vision-mission-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 50px;
+      margin-top: 50px;
+    }
+
+    @media (min-width: 768px) {
+      .vision-mission-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+      }
+    }
+
+    .vision-mission-card {
+      padding: 50px;
+      background: var(--white);
+      border-radius: 40px;
+      border: 1px solid rgba(123, 30, 43, 0.03);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.02);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .vision-mission-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 60px rgba(123, 30, 43, 0.05);
+    }
+
+    .vision-mission-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--maroon);
+      opacity: 0.8;
+    }
+
+    .vision-mission-card i {
+      font-size: 2.5rem;
+      color: var(--maroon);
+      margin-bottom: 25px;
+      display: inline-block;
+    }
+
+    .vision-mission-card h3 {
+      font-family: var(--ff-serif);
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+
+    .vision-mission-card p {
+      color: var(--gray);
+      line-height: 1.8;
+      font-size: 1.05rem;
+    }
+
+    /* ── ABOUT CTA SECTION ── */
+    .about-cta-section {
+      padding: 100px 0;
+      background: linear-gradient(135deg, var(--maroon-d) 0%, #3A0A12 100%);
+      color: var(--white);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-cta-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+      opacity: 0.05;
+      pointer-events: none;
+    }
+
+    .about-cta-content {
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .about-cta-content .tag {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .about-cta-content h2 {
+      font-family: var(--ff-serif);
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin: 25px 0;
+      line-height: 1.1;
+      font-weight: 500;
+    }
+
+    .about-cta-content p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      opacity: 0.85;
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .about-cta-content .btn-white {
+      display: inline-block;
+      padding: 18px 45px;
+      background: var(--white);
+      color: var(--maroon);
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: all 0.4s ease;
+      text-decoration: none;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-cta-content .btn-white:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      background: var(--maroon);
+      color: var(--white);
+    }
   </style>
 </head>
 
@@ -621,10 +763,7 @@
     <section class="story-section">
       <div class="wrap">
         <div class="story-grid">
-          <div class="story-image reveal-up">
-            <img src="images/hero_wedding.png" alt="Vaibhavam Wedding Photography">
-          </div>
-          <div class="story-content reveal-up" style="transition-delay: 0.2s;">
+          <div class="story-content reveal-up">
             <span class="tag">Our Heritage</span>
             <h2>Where Art Meets Emotion</h2>
             <p>
@@ -636,6 +775,9 @@
             <p>
               With over 10 years of experience and 500+ stories captured, we bring a level of technical precision and emotional intelligence that transforms a simple event into an eternal legacy.
             </p>
+          </div>
+          <div class="story-image reveal-up" style="transition-delay: 0.2s;">
+            <img src="images/Varun%20%26%20Priya%E2%9D%A4%EF%B8%8FA%20love%20story%20for%20the%20ages%20beginsCaptured%20by%20Vaibhavam%20wedding%20photography%2C%20their%20(3).webp" alt="Vaibhavam Wedding Photography">
           </div>
         </div>
       </div>
@@ -668,6 +810,28 @@
       </div>
     </section>
 
+    <!-- VISION & MISSION SECTION -->
+    <section class="vision-mission-section">
+      <div class="wrap">
+        <div class="builder-intro reveal-up" style="text-align: center; margin-bottom: 60px;">
+          <span class="tag">Our Purpose</span>
+          <h2 class="serif" style="font-size: 3.5rem;">Vision & Mission</h2>
+        </div>
+        <div class="vision-mission-grid">
+          <div class="vision-mission-card reveal-up">
+            <i class="fa-solid fa-eye"></i>
+            <h3>Our Vision</h3>
+            <p>To be the premier storyteller of love, preservation, and legacy—transforming weddings into timeless, high-fashion visual narratives that couples will treasure for generations.</p>
+          </div>
+          <div class="vision-mission-card reveal-up" style="transition-delay: 0.2s;">
+            <i class="fa-solid fa-bullseye"></i>
+            <h3>Our Mission</h3>
+            <p>To capture every authentic emotion, stolen glance, and grand celebration with artistic integrity and technical mastery, delivering an unparalleled luxury photography experience.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- STATS SECTION -->
     <section class="stats-section">
       <div class="wrap">
@@ -688,6 +852,18 @@
             <span class="stat-number">98%</span>
             <span class="stat-label">Client Smiles</span>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT CTA SECTION -->
+    <section class="about-cta-section reveal-up">
+      <div class="wrap">
+        <div class="about-cta-content">
+          <span class="tag">Reserve Your Story</span>
+          <h2>Let’s create memories that last forever</h2>
+          <p>Whether it's a grand destination wedding or an intimate ceremony, we are here to craft your timeless legacy.</p>
+          <a href="quote.html" class="btn-white">Build Your Package</a>
         </div>
       </div>
     </section>
