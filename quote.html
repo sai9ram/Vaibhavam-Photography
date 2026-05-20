@@ -244,18 +244,20 @@
     }
 
     .card-img-wrapper {
-      width: 100%;
+      width: 65px;
       height: 65px; /* Smaller image height for mobile */
-      border-radius: 8px;
+      border-radius: 50%;
       overflow: hidden;
-      margin-bottom: 2px;
+      margin-bottom: 5px;
+      flex-shrink: 0;
     }
 
     @media (min-width: 1200px) {
       .card-img-wrapper {
+        width: 100px;
         height: 100px; /* Smaller image height for desktop */
-        border-radius: 10px;
-        margin-bottom: 4px;
+        border-radius: 50%;
+        margin-bottom: 8px;
       }
     }
 
