@@ -638,79 +638,136 @@
       font-size: 1.05rem;
     }
 
-    /* ── ABOUT CTA SECTION ── */
-    .about-cta-section {
-      padding: 100px 0;
-      background: linear-gradient(135deg, var(--maroon-d) 0%, #3A0A12 100%);
-      color: var(--white);
-      text-align: center;
+    /* ── LUXURY BOOKING CTA ── */
+    .booking-cta-section {
+      padding: 60px 0;
+      margin: 0 20px 80px;
+      background: #3A0C15;
       position: relative;
       overflow: hidden;
+      color: #fff;
+      text-align: center;
+      border-radius: 40px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
     }
 
-    .about-cta-section::before {
-      content: "";
+    /* Silhouette Background */
+    .cta-bg-silhouette {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
-      opacity: 0.05;
+      background-image: linear-gradient(135deg, rgba(123, 30, 43, 0.85) 0%, rgba(58, 12, 21, 0.9) 100%), url('images/%E2%80%9CGrace%20in%20every%20glance%2C%20a%20dream%20in%20every%20moment.%E2%80%9DShrikanth%20%26%20pooja..%20(2).webp');
+      background-size: cover;
+      background-position: center;
+      opacity: 1;
+      z-index: 0;
+      transition: transform 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .booking-cta-section:hover .cta-bg-silhouette {
+      transform: scale(1.06);
+    }
+
+    .cta-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+      filter: blur(80px);
+      z-index: 1;
       pointer-events: none;
     }
 
-    .about-cta-content {
-      max-width: 700px;
-      margin: 0 auto;
+    .cta-content {
       position: relative;
-      z-index: 2;
+      z-index: 5;
+      max-width: 650px;
+      margin: 0 auto;
+      padding: 0 25px;
     }
 
-    .about-cta-content .tag {
-      background: rgba(255, 255, 255, 0.1);
-      color: var(--white);
+    .booking-cta-section .tag {
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 25px;
+      display: inline-block;
       border-color: rgba(255, 255, 255, 0.2);
     }
 
-    .about-cta-content h2 {
+    .booking-cta-section h2 {
       font-family: var(--ff-serif);
-      font-size: clamp(2.5rem, 6vw, 4rem);
-      margin: 25px 0;
-      line-height: 1.1;
-      font-weight: 500;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.2;
+      margin-bottom: 20px;
+      color: #fff;
     }
 
-    .about-cta-content p {
-      font-size: 1.1rem;
-      line-height: 1.7;
-      opacity: 0.85;
-      margin-bottom: 40px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
+    .cta-description {
+      font-size: 0.95rem;
+      color: rgba(248, 245, 241, 0.7);
+      margin-bottom: 35px;
+      line-height: 1.5;
     }
 
-    .about-cta-content .btn-white {
-      display: inline-block;
-      padding: 18px 45px;
-      background: var(--white);
+    .cta-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-white {
+      background: #fff;
       color: var(--maroon);
-      border-radius: 50px;
-      font-size: 0.9rem;
+      padding: 18px 45px;
+      border-radius: 100px;
       font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 2px;
+      font-size: 0.95rem;
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-white:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-outline-white {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      padding: 18px 45px;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.95rem;
       transition: all 0.4s ease;
       text-decoration: none;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      display: inline-block;
     }
 
-    .about-cta-content .btn-white:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-      background: var(--maroon);
-      color: var(--white);
+    .btn-outline-white:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: #fff;
+    }
+
+    @media (min-width: 768px) {
+      .cta-btns {
+        flex-direction: row;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .booking-cta-section {
+        padding: 180px 0;
+      }
     }
   </style>
 </head>
@@ -856,14 +913,26 @@
       </div>
     </section>
 
-    <!-- ABOUT CTA SECTION -->
-    <section class="about-cta-section reveal-up">
+    <!-- SECTION 09: LUXURY BOOKING CTA -->
+    <section class="booking-cta-section" id="booking">
+      <div class="cta-bg-silhouette"></div>
+      <div class="cta-glow"></div>
+
       <div class="wrap">
-        <div class="about-cta-content">
-          <span class="tag">Reserve Your Story</span>
-          <h2>Let’s create memories that last forever</h2>
-          <p>Whether it's a grand destination wedding or an intimate ceremony, we are here to craft your timeless legacy.</p>
-          <a href="quote.html" class="btn-white">Build Your Package</a>
+        <div class="cta-content">
+          <span class="tag reveal-up">Reserve Your Wedding Dates</span>
+          <h2 class="reveal-up" style="transition-delay: 0.1s;">Let’s create memories that last forever</h2>
+          <p class="cta-description reveal-up" style="transition-delay: 0.2s;">
+            Our team captures weddings with timeless elegance, emotional storytelling, and cinematic artistry crafted
+            for modern couples.
+          </p>
+
+          <div class="cta-btns reveal-up" style="transition-delay: 0.3s;">
+            <a href="quote.html" class="btn-white">Build Your Package</a>
+            <a href="https://wa.me/918639972913" class="btn-outline-white"><i class="fa-brands fa-whatsapp"
+                style="margin-right: 10px;"></i>
+              WhatsApp Us</a>
+          </div>
         </div>
       </div>
     </section>
