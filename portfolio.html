@@ -109,16 +109,6 @@
       box-shadow: 0 10px 20px rgba(123, 30, 43, 0.2);
     }
 
-    .reveal-up {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
-    }
-    .reveal-up.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
     /* ── NAVBAR ── */
     nav {
       position: fixed;
@@ -310,158 +300,247 @@
       color: var(--text);
     }
 
-    /* ── CHAPTER SECTION ── */
-    .chapter-container {
-      margin-top: 100px;
-      margin-bottom: 60px;
+    /* ── SCROLLYTELLING SHOWCASE ── */
+    .scrollytelling-showcase {
       position: relative;
-      padding-left: 20px;
-      border-left: 2px solid var(--maroon);
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+      background: #180508; /* Deep rich dark background for cinematic focus */
+      color: #fff;
+      overflow: visible;
+      margin-top: 60px;
     }
 
-    .chapter-container.active {
-      opacity: 1;
-      transform: translateY(0);
+    .scrolly-scroll-container {
+      height: 300vh; /* 3 screens worth of scroll */
+      position: relative;
     }
 
-    .chapter-num {
-      position: absolute;
-      left: 10px;
-      top: -40px;
+    .scrolly-sticky-wrapper {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+      padding: 80px 0;
+    }
+
+    .scrolly-header {
+      padding: 0 60px;
+      margin-bottom: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      position: relative;
+      z-index: 10;
+    }
+
+    .scrolly-header h2 {
       font-family: var(--ff-serif);
-      font-size: 8rem;
-      font-weight: 700;
-      color: var(--maroon);
-      opacity: 0.04;
-      line-height: 1;
-      pointer-events: none;
-      user-select: none;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      line-height: 1.1;
+      color: #f8f5f1;
     }
 
-    .chapter-header {
-      max-width: 600px;
-    }
-
-    .chapter-subtitle {
-      display: inline-block;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      color: var(--maroon);
-      margin-bottom: 10px;
-      font-weight: 600;
-    }
-
-    .chapter-title {
-      font-family: var(--ff-serif);
-      font-size: clamp(2rem, 4vw, 3rem);
-      color: var(--text);
-      margin-bottom: 15px;
-      line-height: 1.2;
-    }
-
-    .chapter-desc {
+    .scrolly-header p {
       font-size: 0.95rem;
+      color: rgba(248, 245, 241, 0.6);
+      max-width: 400px;
       line-height: 1.6;
-      color: var(--gray);
+    }
+
+    .scrolly-track-container {
+      width: 100%;
+      overflow: hidden;
+      padding-left: 60px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .scrolly-track {
+      display: flex;
+      gap: 40px;
+      width: max-content;
+      will-change: transform;
+      transition: transform 0.1s cubic-bezier(0.1, 0.9, 0.2, 1);
+    }
+
+    .scrolly-card {
+      width: clamp(320px, 65vw, 800px);
+      height: 52vh;
+      border-radius: 30px;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+      background: var(--maroon-d);
+    }
+
+    .scrolly-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity: 0.75;
+    }
+
+    .scrolly-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .scrolly-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 40px;
+      z-index: 2;
+    }
+
+    .scrolly-card-number {
+      font-family: var(--ff-serif);
+      font-size: clamp(3rem, 8vw, 5rem);
+      color: rgba(255, 255, 255, 0.08);
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .scrolly-card-overlay span {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--beige);
+      margin-bottom: 10px;
+    }
+
+    .scrolly-card-overlay h3 {
+      font-family: var(--ff-serif);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .scrolly-card-overlay p {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.70);
+      max-width: 480px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      .scrolly-scroll-container {
+        height: auto;
+      }
+      .scrolly-sticky-wrapper {
+        position: relative;
+        height: auto;
+        padding: 50px 0;
+      }
+      .scrolly-header {
+        padding: 0 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 30px;
+      }
+      .scrolly-track-container {
+        padding-left: 20px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .scrolly-card {
+        width: 85vw;
+        height: 42vh;
+      }
+      .scrolly-card-overlay {
+        padding: 25px;
+      }
     }
 
     /* ── IMAGES GRID ── */
     .portfolio-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-auto-rows: 280px;
-      gap: 25px;
-      margin-bottom: 120px;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-auto-flow: dense;
+      gap: 40px;
+    }
+
+    @media (min-width: 768px) {
+      .portfolio-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .portfolio-card.card-tall {
+        grid-row: span 2;
+      }
+      .portfolio-card.card-wide {
+        grid-column: span 2;
+      }
+      .portfolio-card.card-large {
+        grid-column: span 2;
+        grid-row: span 2;
+      }
     }
 
     .portfolio-card {
       position: relative;
       border-radius: 30px;
       overflow: hidden;
+      aspect-ratio: 1/1; /* Default square */
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
       cursor: pointer;
       background: var(--beige);
-      transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), 
-                  box-shadow 0.8s cubic-bezier(0.165, 0.84, 0.44, 1),
-                  opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1),
-                  filter 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
       opacity: 0;
-      transform: translateY(40px) scale(0.98);
-      filter: blur(4px);
+      transform: translateY(50px);
     }
 
-    .portfolio-card.revealed {
+    .portfolio-card.reveal-active {
       opacity: 1;
-      transform: translateY(0) scale(1);
-      filter: blur(0);
+      transform: translateY(0);
     }
 
-    /* Bento Sizing on Desktop */
-    @media (min-width: 1024px) {
-      .portfolio-card.size-wide {
-        grid-column: span 2;
-      }
-      .portfolio-card.size-tall {
-        grid-row: span 2;
-      }
-      .portfolio-card.size-large {
-        grid-column: span 2;
-        grid-row: span 2;
-      }
+    .portfolio-card.card-tall {
+      aspect-ratio: 3/4;
     }
 
-    /* Bento Sizing on Tablet */
-    @media (min-width: 768px) and (max-width: 1023px) {
-      .portfolio-grid {
-        grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: 300px;
-      }
-      .portfolio-card.size-wide,
-      .portfolio-card.size-large {
-        grid-column: span 2;
-      }
-      .portfolio-card.size-tall,
-      .portfolio-card.size-large {
-        grid-row: span 2;
-      }
+    .portfolio-card.card-wide {
+      aspect-ratio: 4/3;
     }
 
-    /* Sizing on Mobile */
+    .portfolio-card.card-large {
+      aspect-ratio: 1/1;
+    }
+
     @media (max-width: 767px) {
-      .portfolio-grid {
-        grid-template-columns: 1fr;
-        grid-auto-rows: auto;
-        gap: 20px;
-      }
-      .portfolio-card {
+      .portfolio-card.card-tall,
+      .portfolio-card.card-wide,
+      .portfolio-card.card-large {
+        grid-row: auto;
+        grid-column: auto;
         aspect-ratio: 4/5;
       }
-    }
-
-    .portfolio-card:hover {
-      transform: translateY(-8px) scale(1.01);
-      box-shadow: 0 25px 45px rgba(123, 30, 43, 0.08);
     }
 
     .portfolio-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+      transition: transform 0.8s ease;
     }
 
     .portfolio-card:hover img {
-      transform: scale(1.06);
+      transform: scale(1.05);
     }
 
     .card-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(0deg, rgba(58, 12, 21, 0.8) 0%, rgba(58, 12, 21, 0.2) 70%, transparent 100%);
+      background: linear-gradient(0deg, rgba(58, 12, 21, 0.85) 0%, rgba(58, 12, 21, 0.2) 70%, transparent 100%);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -1005,6 +1084,67 @@
       </div>
     </header>
 
+    <!-- SCROLLYTELLING SHOWCASE SECTION -->
+    <section class="scrollytelling-showcase">
+      <div class="scrolly-scroll-container">
+        <div class="scrolly-sticky-wrapper">
+          <div class="scrolly-header">
+            <div>
+              <span class="tag" style="color: var(--beige);">Featured Chapters</span>
+              <h2>Visual Stories</h2>
+            </div>
+            <p>
+              Every love story has a rhythm, a unique set of colors, and unspoken words. Scroll to traverse through our signature wedding frames.
+            </p>
+          </div>
+          <div class="scrolly-track-container">
+            <div class="scrolly-track" id="scrollyTrack">
+              <!-- Chapter 1 -->
+              <div class="scrolly-card">
+                <img src="images/%E2%80%9CGrace%20in%20every%20glance%2C%20a%20dream%20in%20every%20moment.%E2%80%9DShrikanth%20%26%20pooja..%20(2).webp" alt="The Grand Celebration">
+                <div class="scrolly-card-number">01</div>
+                <div class="scrolly-card-overlay">
+                  <span>Chapter I</span>
+                  <h3>The Grand Celebration</h3>
+                  <p>Opulent celebrations, golden haldi droplets, and the sacred pheras that bind two souls for a lifetime.</p>
+                </div>
+              </div>
+              <!-- Chapter 2 -->
+              <div class="scrolly-card">
+                <img src="images/Varun%20%26%20Priya%E2%9D%A4%EF%B8%8FA%20love%20story%20for%20the%20ages%20beginsCaptured%20by%20Vaibhavam%20wedding%20photography%2C%20their.webp" alt="Whispers of Love">
+                <div class="scrolly-card-number">02</div>
+                <div class="scrolly-card-overlay">
+                  <span>Chapter II</span>
+                  <h3>Whispers of Love</h3>
+                  <p>Candid outdoor encounters, shared laughter, and quiet moments captured against the setting sun.</p>
+                </div>
+              </div>
+              <!-- Chapter 3 -->
+              <div class="scrolly-card">
+                <img src="images/A%20moment%20framed%20in%20grandeur%20%23weddinginspiration%20%23weddingphotography%20%23couplegoals%20%23trendingpos%20(1).webp" alt="Royal Elegance">
+                <div class="scrolly-card-number">03</div>
+                <div class="scrolly-card-overlay">
+                  <span>Chapter III</span>
+                  <h3>Royal Elegance</h3>
+                  <p>Focusing on the fine details, exquisite styling, and portraits that capture the royalty within you.</p>
+                </div>
+              </div>
+              <!-- Chapter 4 -->
+              <div class="scrolly-card">
+                <img src="images/The%20beginning%20of%20forever%2C%20wrapped%20in%20love%20and%20laughter%20%F0%9F%92%ABBook%20now%20%40%208639972913%20(3).webp" alt="Beginning of Forever">
+                <div class="scrolly-card-number">04</div>
+                <div class="scrolly-card-overlay">
+                  <span>Chapter IV</span>
+                  <h3>Timeless Vows</h3>
+                  <p>The dawn of forever, painted with smiles, laughter, and promises that outlive the passage of time.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- PORTFOLIO IMAGES SECTION -->
     <section class="portfolio-section" id="photos">
       <div class="wrap">
@@ -1013,98 +1153,299 @@
           <h2>Captured Moments</h2>
         </div>
 
-        <div class="filter-controls reveal-up" style="margin-bottom: 50px;">
+        <div class="filter-controls reveal-up">
           <button class="filter-btn active" data-filter="all">All Stories</button>
           <button class="filter-btn" data-filter="weddings">Weddings</button>
           <button class="filter-btn" data-filter="pre-weddings">Pre-Weddings</button>
         </div>
 
-        <!-- Chapter I: The Anticipation -->
-        <div class="chapter-container reveal-up" data-chapter="1">
-          <div class="chapter-num">01</div>
-          <div class="chapter-header">
-            <span class="chapter-subtitle">Chapter I</span>
-            <h2 class="chapter-title">The Anticipation</h2>
-            <p class="chapter-desc">The early morning mist, intimate laughs, and the raw beauty of promises about to unfold.</p>
+        <div class="portfolio-grid reveal-up">
+          <!-- Card 1 -->
+          <div class="portfolio-card card-tall" data-category="weddings">
+            <img src="images/%E2%80%9CGrace%20in%20every%20glance%2C%20a%20dream%20in%20every%20moment.%E2%80%9DShrikanth%20%26%20pooja..%20(1).webp" alt="Shrikanth & Pooja">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>Graceful Glances</h3>
+            </div>
           </div>
-        </div>
-
-        <div class="portfolio-grid bento-grid reveal-up">
+          <!-- Card 2 -->
+          <div class="portfolio-card card-wide" data-category="weddings">
+            <img src="images/%E2%80%9CGrace%20in%20every%20glance%2C%20a%20dream%20in%20every%20moment.%E2%80%9DShrikanth%20%26%20pooja..%20(2).webp" alt="Shrikanth & Pooja">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>The Sacred Vows</h3>
+            </div>
+          </div>
           <!-- Card 3 -->
-          <div class="portfolio-card size-large" data-category="pre-weddings">
-            <img src="images/A%20moment%20frozen%20in%20love%2C%20forever%20yours...%E2%9D%A4%EF%B8%8F%20(1).webp" alt="A moment frozen in love">
+          <div class="portfolio-card" data-category="weddings">
+            <img src="images/%E2%80%9CGrace%20in%20every%20glance%2C%20a%20dream%20in%20every%20moment.%E2%80%9DShrikanth%20%26%20pooja..%20(3).webp" alt="Shrikanth & Pooja">
             <div class="card-overlay">
-              <span>Pre-Weddings</span>
-              <h3>Frozen in Love</h3>
+              <span>Weddings</span>
+              <h3>Regal Portrait</h3>
             </div>
           </div>
-          <!-- Card 6 -->
-          <div class="portfolio-card size-wide" data-category="pre-weddings">
-            <img src="images/We%E2%80%99re%20all%20tangled%20up%20in%20love%20and%20laughter.%20%F0%9F%92%9E%23preweddingphoto%20%23prewedding%20%23wedding%20%23preweddin%20(3).webp" alt="Love and Laughter">
+          <!-- Card 4 -->
+          <div class="portfolio-card" data-category="weddings">
+            <img src="images/%E2%80%9CGrace%20in%20every%20glance%2C%20a%20dream%20in%20every%20moment.%E2%80%9DShrikanth%20%26%20pooja..%20(4).webp" alt="Shrikanth & Pooja">
             <div class="card-overlay">
-              <span>Pre-Weddings</span>
-              <h3>Love & Laughter</h3>
-            </div>
-          </div>
-          <!-- Card 7 -->
-          <div class="portfolio-card size-tall" data-category="pre-weddings">
-            <img src="images/The%20beginning%20of%20forever%2C%20wrapped%20in%20love%20and%20laughter%20%F0%9F%92%ABBook%20now%20%40%208639972913.webp" alt="Beginning of Forever">
-            <div class="card-overlay">
-              <span>Pre-Weddings</span>
-              <h3>Beginning of Forever</h3>
+              <span>Weddings</span>
+              <h3>Bridal Details</h3>
             </div>
           </div>
           <!-- Card 5 -->
-          <div class="portfolio-card size-normal" data-category="weddings">
+          <div class="portfolio-card card-tall" data-category="weddings">
+            <img src="images/%E2%80%9CGrace%20in%20every%20glance%2C%20a%20dream%20in%20every%20moment.%E2%80%9DShrikanth%20%26%20pooja..%20(5).webp" alt="Shrikanth & Pooja">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>Pre-Rituals</h3>
+            </div>
+          </div>
+          <!-- Card 6 -->
+          <div class="portfolio-card card-large" data-category="weddings">
+            <img src="images/%E2%80%9CGrace%20in%20every%20glance%2C%20a%20dream%20in%20every%20moment.%E2%80%9DShrikanth%20%26%20pooja...webp" alt="Shrikanth & Pooja">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>Timeless Elegance</h3>
+            </div>
+          </div>
+          <!-- Card 7 -->
+          <div class="portfolio-card card-wide" data-category="weddings">
+            <img src="images/Srikanth%20%26%20pooja%20Not%20just%20a%20picture%2C%20a%20feeling.%20Captured%20beautifully%20by%20%23vaibhavamweddings%20(1).webp" alt="Srikanth & Pooja">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>Pure Joy</h3>
+            </div>
+          </div>
+          <!-- Card 8 -->
+          <div class="portfolio-card card-tall" data-category="weddings">
+            <img src="images/Srikanth%20%26%20pooja%20Not%20just%20a%20picture%2C%20a%20feeling.%20Captured%20beautifully%20by%20%23vaibhavamweddings.webp" alt="Srikanth & Pooja">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>Candid Glances</h3>
+            </div>
+          </div>
+          <!-- Card 9 -->
+          <div class="portfolio-card" data-category="weddings">
+            <img src="images/Varun%20%26%20Priya%E2%9D%A4%EF%B8%8FA%20love%20story%20for%20the%20ages%20beginsCaptured%20by%20Vaibhavam%20wedding%20photography%2C%20their%20(1).webp" alt="Varun & Priya">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>Varun & Priya</h3>
+            </div>
+          </div>
+          <!-- Card 10 -->
+          <div class="portfolio-card card-wide" data-category="weddings">
+            <img src="images/Varun%20%26%20Priya%E2%9D%A4%EF%B8%8FA%20love%20story%20for%20the%20ages%20beginsCaptured%20by%20Vaibhavam%20wedding%20photography%2C%20their%20(2).webp" alt="Varun & Priya">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>Shared Laughter</h3>
+            </div>
+          </div>
+          <!-- Card 11 -->
+          <div class="portfolio-card card-large" data-category="weddings">
+            <img src="images/Varun%20%26%20Priya%E2%9D%A4%EF%B8%8FA%20love%20story%20for%20the%20ages%20beginsCaptured%20by%20Vaibhavam%20wedding%20photography%2C%20their%20(3).webp" alt="Varun & Priya">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>Eternal Promise</h3>
+            </div>
+          </div>
+          <!-- Card 12 -->
+          <div class="portfolio-card card-tall" data-category="weddings">
+            <img src="images/Varun%20%26%20Priya%E2%9D%A4%EF%B8%8FA%20love%20story%20for%20the%20ages%20beginsCaptured%20by%20Vaibhavam%20wedding%20photography%2C%20their.webp" alt="Varun & Priya">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>The Beginning</h3>
+            </div>
+          </div>
+          <!-- Card 13 -->
+          <div class="portfolio-card card-wide" data-category="weddings">
+            <img src="images/_Love%20is%20in%20the%20little%20moments%20of%20care.Somashekar%20%26%20harshitha.%23weddinginspiration%23weddingphot%20(1).webp" alt="Somashekar & Harshitha">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>Tender Care</h3>
+            </div>
+          </div>
+          <!-- Card 14 -->
+          <div class="portfolio-card card-tall" data-category="weddings">
+            <img src="images/_Love%20is%20in%20the%20little%20moments%20of%20care.Somashekar%20%26%20harshitha.%23weddinginspiration%23weddingphot%20(2).webp" alt="Somashekar & Harshitha">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>Little Moments</h3>
+            </div>
+          </div>
+          <!-- Card 15 -->
+          <div class="portfolio-card" data-category="weddings">
+            <img src="images/_Love%20is%20in%20the%20little%20moments%20of%20care.Somashekar%20%26%20harshitha.%23weddinginspiration%23weddingphot.webp" alt="Somashekar & Harshitha">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>Sweet Vows</h3>
+            </div>
+          </div>
+          <!-- Card 16 -->
+          <div class="portfolio-card card-large" data-category="weddings">
+            <img src="images/A%20moment%20framed%20in%20grandeur%20%23weddinginspiration%20%23weddingphotography%20%23couplegoals%20%23trendingpos%20(1).webp" alt="Framed in Grandeur">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>Grandeur Showcase</h3>
+            </div>
+          </div>
+          <!-- Card 17 -->
+          <div class="portfolio-card" data-category="weddings">
+            <img src="images/A%20moment%20framed%20in%20grandeur%20%23weddinginspiration%20%23weddingphotography%20%23couplegoals%20%23trendingpos.webp" alt="Framed in Grandeur">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>Framed Memories</h3>
+            </div>
+          </div>
+          <!-- Card 18 -->
+          <div class="portfolio-card card-tall" data-category="weddings">
             <img src="images/Golden%20rains%20and%20bridal%20dreams...%23bride%20Shusmita%23haldiceremony%20%23haldi%20%23wedding%20%23indianwedding%20%23%20(1).webp" alt="Shusmita Haldi Ceremony">
             <div class="card-overlay">
               <span>Weddings</span>
               <h3>Shusmita's Haldi</h3>
             </div>
           </div>
-        </div>
-
-        <!-- Chapter II: The Vows -->
-        <div class="chapter-container reveal-up" data-chapter="2">
-          <div class="chapter-num">02</div>
-          <div class="chapter-header">
-            <span class="chapter-subtitle">Chapter II</span>
-            <h2 class="chapter-title">The Vows</h2>
-            <p class="chapter-desc">Eternal bonds sealed in grandeur, traditional rituals, and the timeless elegance of wedding ceremonies.</p>
-          </div>
-        </div>
-
-        <div class="portfolio-grid bento-grid reveal-up">
-          <!-- Card 2 -->
-          <div class="portfolio-card size-large" data-category="weddings">
-            <img src="images/Varun%20%26%20Priya%E2%9D%A4%EF%B8%8FA%20love%20story%20for%20the%20ages%20beginsCaptured%20by%20Vaibhavam%20wedding%20photography%2C%20their%20(3).webp" alt="Varun & Priya">
+          <!-- Card 19 -->
+          <div class="portfolio-card card-wide" data-category="weddings">
+            <img src="images/Golden%20rains%20and%20bridal%20dreams...%23bride%20Shusmita%23haldiceremony%20%23haldi%20%23wedding%20%23indianwedding%20%23%20(2).webp" alt="Shusmita Haldi Ceremony">
             <div class="card-overlay">
               <span>Weddings</span>
-              <h3>Varun & Priya</h3>
+              <h3>Golden Rains</h3>
             </div>
           </div>
-          <!-- Card 1 -->
-          <div class="portfolio-card size-wide" data-category="weddings">
-            <img src="images/%E2%80%9CGrace%20in%20every%20glance%2C%20a%20dream%20in%20every%20moment.%E2%80%9DShrikanth%20%26%20pooja..%20(2).webp" alt="Shrikanth & Pooja">
+          <!-- Card 20 -->
+          <div class="portfolio-card" data-category="weddings">
+            <img src="images/Golden%20rains%20and%20bridal%20dreams...%23bride%20Shusmita%23haldiceremony%20%23haldi%20%23wedding%20%23indianwedding%20%23.webp" alt="Shusmita Haldi Ceremony">
             <div class="card-overlay">
               <span>Weddings</span>
-              <h3>Shrikanth & Pooja</h3>
+              <h3>Bridal Glow</h3>
             </div>
           </div>
-          <!-- Card 4 -->
-          <div class="portfolio-card size-tall" data-category="weddings">
-            <img src="images/A%20moment%20framed%20in%20grandeur%20%23weddinginspiration%20%23weddingphotography%20%23couplegoals%20%23trendingpos%20(1).webp" alt="Framed in Grandeur">
-            <div class="card-overlay">
-              <span>Weddings</span>
-              <h3>Framed in Grandeur</h3>
-            </div>
-          </div>
-          <!-- Card 8 -->
-          <div class="portfolio-card size-normal" data-category="weddings">
-            <img src="images/A%20love%20as%20gentle%20as%20petals%2C%20yet%20timeless%20Those%20who%20believe%20love%20should%20feel%20as%20beautiful%20as%20it%20%20(2).webp" alt="Gentle Petals">
+          <!-- Card 21 -->
+          <div class="portfolio-card card-tall" data-category="weddings">
+            <img src="images/A%20love%20as%20gentle%20as%20petals%2C%20yet%20timeless%20Those%20who%20believe%20love%20should%20feel%20as%20beautiful%20as%20it%20%20(1).webp" alt="Gentle Petals">
             <div class="card-overlay">
               <span>Weddings</span>
               <h3>Gentle Petals</h3>
+            </div>
+          </div>
+          <!-- Card 22 -->
+          <div class="portfolio-card" data-category="weddings">
+            <img src="images/A%20love%20as%20gentle%20as%20petals%2C%20yet%20timeless%20Those%20who%20believe%20love%20should%20feel%20as%20beautiful%20as%20it%20%20(2).webp" alt="Gentle Petals">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>Petals of Love</h3>
+            </div>
+          </div>
+          <!-- Card 23 -->
+          <div class="portfolio-card card-wide" data-category="weddings">
+            <img src="images/A%20love%20as%20gentle%20as%20petals%2C%20yet%20timeless%20Those%20who%20believe%20love%20should%20feel%20as%20beautiful%20as%20it%20%20(3).webp" alt="Gentle Petals">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>Timeless Glances</h3>
+            </div>
+          </div>
+          <!-- Card 24 -->
+          <div class="portfolio-card" data-category="weddings">
+            <img src="images/A%20love%20as%20gentle%20as%20petals%2C%20yet%20timeless%20Those%20who%20believe%20love%20should%20feel%20as%20beautiful%20as%20it%20%204.(3).jpg" alt="Gentle Petals">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>Classic Pose</h3>
+            </div>
+          </div>
+          <!-- Card 25 -->
+          <div class="portfolio-card card-tall" data-category="weddings">
+            <img src="images/A%20love%20as%20gentle%20as%20petals%2C%20yet%20timeless%20Those%20who%20believe%20love%20should%20feel%20as%20beautiful%20as%20it%20.webp" alt="Gentle Petals">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>Beloved</h3>
+            </div>
+          </div>
+          <!-- Card 26 -->
+          <div class="portfolio-card card-wide" data-category="pre-weddings">
+            <img src="images/A%20moment%20frozen%20in%20love%2C%20forever%20yours...%E2%9D%A4%EF%B8%8FA%20(1).webp" alt="Frozen in Love">
+            <div class="card-overlay">
+              <span>Pre-Weddings</span>
+              <h3>Frozen in Love</h3>
+            </div>
+          </div>
+          <!-- Card 27 -->
+          <div class="portfolio-card card-tall" data-category="pre-weddings">
+            <img src="images/A%20moment%20frozen%20in%20love%2C%20forever%20yours...%E2%9D%A4%EF%B8%8F.webp" alt="Frozen in Love">
+            <div class="card-overlay">
+              <span>Pre-Weddings</span>
+              <h3>Sunset Romance</h3>
+            </div>
+          </div>
+          <!-- Card 28 -->
+          <div class="portfolio-card" data-category="pre-weddings">
+            <img src="images/The%20beginning%20of%20forever%2C%20wrapped%20in%20love%20and%20laughter%20%F0%9F%92%ABBook%20now%20%40%208639972913%20(1).webp" alt="Beginning of Forever">
+            <div class="card-overlay">
+              <span>Pre-Weddings</span>
+              <h3>Forever Begins</h3>
+            </div>
+          </div>
+          <!-- Card 29 -->
+          <div class="portfolio-card card-wide" data-category="pre-weddings">
+            <img src="images/The%20beginning%20of%20forever%2C%20wrapped%20in%20love%20and%20laughter%20%F0%9F%92%ABBook%20now%20%40%208639972913%20(2).webp" alt="Beginning of Forever">
+            <div class="card-overlay">
+              <span>Pre-Weddings</span>
+              <h3>Wrapped in Laughter</h3>
+            </div>
+          </div>
+          <!-- Card 30 -->
+          <div class="portfolio-card card-large" data-category="pre-weddings">
+            <img src="images/The%20beginning%20of%20forever%2C%20wrapped%20in%20love%20and%20laughter%20%F0%9F%92%ABBook%20now%20%40%208639972913%20(3).webp" alt="Beginning of Forever">
+            <div class="card-overlay">
+              <span>Pre-Weddings</span>
+              <h3>Sparkling Dreams</h3>
+            </div>
+          </div>
+          <!-- Card 31 -->
+          <div class="portfolio-card card-tall" data-category="pre-weddings">
+            <img src="images/The%20beginning%20of%20forever%2C%20wrapped%20in%20love%20and%20laughter%20%F0%9F%92%ABBook%20now%20%40%208639972913.webp" alt="Beginning of Forever">
+            <div class="card-overlay">
+              <span>Pre-Weddings</span>
+              <h3>Endless Smiles</h3>
+            </div>
+          </div>
+          <!-- Card 32 -->
+          <div class="portfolio-card card-wide" data-category="pre-weddings">
+            <img src="images/We%E2%80%99re%20all%20tangled%20up%20in%20love%20and%20laughter.%20%F0%9F%92%9E%23preweddingphoto%20%23prewedding%20%23wedding%20%23preweddin%20(1).webp" alt="Tangled in Love">
+            <div class="card-overlay">
+              <span>Pre-Weddings</span>
+              <h3>Tangled in Love</h3>
+            </div>
+          </div>
+          <!-- Card 33 -->
+          <div class="portfolio-card card-tall" data-category="pre-weddings">
+            <img src="images/We%E2%80%99re%20all%20tangled%20up%20in%20love%20and%20laughter.%20%F0%9F%92%9E%23preweddingphoto%20%23prewedding%20%23wedding%20%23preweddin%20(2).webp" alt="Tangled in Love">
+            <div class="card-overlay">
+              <span>Pre-Weddings</span>
+              <h3>Love and Laughter</h3>
+            </div>
+          </div>
+          <!-- Card 34 -->
+          <div class="portfolio-card" data-category="pre-weddings">
+            <img src="images/We%E2%80%99re%20all%20tangled%20up%20in%20love%20and%20laughter.%20%F0%9F%92%9E%23preweddingphoto%20%23prewedding%20%23wedding%20%23preweddin%20(3).webp" alt="Tangled in Love">
+            <div class="card-overlay">
+              <span>Pre-Weddings</span>
+              <h3>Sunset Embrace</h3>
+            </div>
+          </div>
+          <!-- Card 35 -->
+          <div class="portfolio-card" data-category="pre-weddings">
+            <img src="images/We%E2%80%99re%20all%20tangled%20up%20in%20love%20and%20laughter.%20%F0%9F%92%9E%23preweddingphoto%20%23prewedding%20%23wedding%20%23preweddin%20(4).webp" alt="Tangled in Love">
+            <div class="card-overlay">
+              <span>Pre-Weddings</span>
+              <h3>Cherished Moments</h3>
+            </div>
+          </div>
+          <!-- Card 36 -->
+          <div class="portfolio-card card-large" data-category="pre-weddings">
+            <img src="images/We%E2%80%99re%20all%20tangled%20up%20in%20love%20and%20laughter.%20%F0%9F%92%9E%23preweddingphoto%20%23prewedding%20%23wedding%20%23preweddin.webp" alt="Tangled in Love">
+            <div class="card-overlay">
+              <span>Pre-Weddings</span>
+              <h3>A Love Untamed</h3>
             </div>
           </div>
         </div>
@@ -1287,23 +1628,6 @@
 
     document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
 
-    // Bento Grid cards stagger reveal
-    const gridObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const cards = entry.target.querySelectorAll('.portfolio-card');
-          cards.forEach((card, idx) => {
-            setTimeout(() => {
-              card.classList.add('revealed');
-            }, idx * 120);
-          });
-          gridObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.05 });
-
-    document.querySelectorAll('.portfolio-grid').forEach(grid => gridObserver.observe(grid));
-
     // Navbar Scroll
     window.addEventListener('scroll', () => {
       const nav = document.getElementById('navbar');
@@ -1319,7 +1643,65 @@
     if (openBtn) openBtn.onclick = () => menu.classList.add('active');
     if (closeBtn) closeBtn.onclick = () => menu.classList.remove('active');
 
-    // Filter functionality
+    // Scrollytelling Horizontal Scroll Logic
+    const scrollySection = document.querySelector('.scrollytelling-showcase');
+    const scrollyContainer = document.querySelector('.scrolly-scroll-container');
+    const scrollyTrack = document.getElementById('scrollyTrack');
+
+    function animateScrollytelling() {
+      if (!scrollySection || !scrollyTrack) return;
+      if (window.innerWidth <= 768) {
+        scrollyTrack.style.transform = 'none';
+        return;
+      }
+
+      const rect = scrollyContainer.getBoundingClientRect();
+      const scrollPosition = -rect.top;
+      const totalScrollableHeight = rect.height - window.innerHeight;
+      
+      if (scrollPosition >= 0 && scrollPosition <= totalScrollableHeight) {
+        const trackWidth = scrollyTrack.offsetWidth;
+        const maxTranslate = trackWidth - window.innerWidth + 120; // 120px padding offset
+        const percentage = scrollPosition / totalScrollableHeight;
+        const translateVal = percentage * maxTranslate;
+        
+        scrollyTrack.style.transform = `translateX(-${translateVal}px)`;
+      } else if (scrollPosition < 0) {
+        scrollyTrack.style.transform = 'translateX(0)';
+      } else if (scrollPosition > totalScrollableHeight) {
+        const trackWidth = scrollyTrack.offsetWidth;
+        const maxTranslate = trackWidth - window.innerWidth + 120;
+        scrollyTrack.style.transform = `translateX(-${maxTranslate}px)`;
+      }
+    }
+
+    window.addEventListener('scroll', () => {
+      requestAnimationFrame(animateScrollytelling);
+    });
+    window.addEventListener('resize', animateScrollytelling);
+
+    // Staggered Progressive Reveal Observer for initial load
+    const revealObserver = new IntersectionObserver((entries) => {
+      let delay = 0;
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const card = entry.target;
+          setTimeout(() => {
+            card.classList.add('reveal-active');
+          }, delay);
+          delay += 100;
+          revealObserver.unobserve(card);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    const observerCards = document.querySelectorAll('.portfolio-card');
+    observerCards.forEach(card => revealObserver.observe(card));
+
+    // Filter functionality with staggered reveal resets
     const filterButtons = document.querySelectorAll('.filter-btn');
     const portfolioCards = document.querySelectorAll('.portfolio-card');
 
@@ -1329,40 +1711,22 @@
         btn.classList.add('active');
 
         const filterValue = btn.getAttribute('data-filter');
+        let visibleIndex = 0;
 
-        document.querySelectorAll('.chapter-container').forEach(chapter => {
-          const grid = chapter.nextElementSibling;
-          if (grid && grid.classList.contains('portfolio-grid')) {
-            let visibleCount = 0;
-            const cards = grid.querySelectorAll('.portfolio-card');
-            cards.forEach(card => {
-              const isMatch = filterValue === 'all' || card.getAttribute('data-category') === filterValue;
-              if (isMatch) {
-                visibleCount++;
-                card.style.display = 'block';
-                card.classList.add('revealed');
-                setTimeout(() => {
-                  card.style.opacity = '1';
-                  card.style.transform = 'scale(1)';
-                  card.style.filter = 'blur(0)';
-                }, 50);
-              } else {
-                card.style.opacity = '0';
-                card.style.transform = 'scale(0.95)';
-                card.style.filter = 'blur(4px)';
-                setTimeout(() => {
-                  card.style.display = 'none';
-                }, 300);
-              }
-            });
-
-            if (visibleCount === 0) {
-              chapter.style.display = 'none';
-              grid.style.display = 'none';
-            } else {
-              chapter.style.display = 'block';
-              grid.style.display = 'grid';
-            }
+        portfolioCards.forEach((card) => {
+          card.classList.remove('reveal-active');
+          if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+            card.style.display = 'block';
+            
+            // Stagger active cards fade-in
+            const currentDelay = visibleIndex * 60;
+            visibleIndex++;
+            
+            setTimeout(() => {
+              card.classList.add('reveal-active');
+            }, currentDelay);
+          } else {
+            card.style.display = 'none';
           }
         });
       });
