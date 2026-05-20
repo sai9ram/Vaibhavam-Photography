@@ -109,6 +109,16 @@
       box-shadow: 0 10px 20px rgba(123, 30, 43, 0.2);
     }
 
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    .reveal-up.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     /* ── NAVBAR ── */
     nav {
       position: fixed;
@@ -300,43 +310,152 @@
       color: var(--text);
     }
 
+    /* ── CHAPTER SECTION ── */
+    .chapter-container {
+      margin-top: 100px;
+      margin-bottom: 60px;
+      position: relative;
+      padding-left: 20px;
+      border-left: 2px solid var(--maroon);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .chapter-container.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .chapter-num {
+      position: absolute;
+      left: 10px;
+      top: -40px;
+      font-family: var(--ff-serif);
+      font-size: 8rem;
+      font-weight: 700;
+      color: var(--maroon);
+      opacity: 0.04;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .chapter-header {
+      max-width: 600px;
+    }
+
+    .chapter-subtitle {
+      display: inline-block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--maroon);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .chapter-title {
+      font-family: var(--ff-serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--text);
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
+
+    .chapter-desc {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--gray);
+    }
+
     /* ── IMAGES GRID ── */
     .portfolio-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 30px;
-    }
-
-    @media (max-width: 480px) {
-      .portfolio-grid {
-        grid-template-columns: 1fr;
-      }
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 280px;
+      gap: 25px;
+      margin-bottom: 120px;
     }
 
     .portfolio-card {
       position: relative;
       border-radius: 30px;
       overflow: hidden;
-      aspect-ratio: 4/5;
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
       cursor: pointer;
       background: var(--beige);
-      transition: transform 0.4s ease, opacity 0.4s ease;
+      transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), 
+                  box-shadow 0.8s cubic-bezier(0.165, 0.84, 0.44, 1),
+                  opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1),
+                  filter 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+      opacity: 0;
+      transform: translateY(40px) scale(0.98);
+      filter: blur(4px);
+    }
+
+    .portfolio-card.revealed {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+
+    /* Bento Sizing on Desktop */
+    @media (min-width: 1024px) {
+      .portfolio-card.size-wide {
+        grid-column: span 2;
+      }
+      .portfolio-card.size-tall {
+        grid-row: span 2;
+      }
+      .portfolio-card.size-large {
+        grid-column: span 2;
+        grid-row: span 2;
+      }
+    }
+
+    /* Bento Sizing on Tablet */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 300px;
+      }
+      .portfolio-card.size-wide,
+      .portfolio-card.size-large {
+        grid-column: span 2;
+      }
+      .portfolio-card.size-tall,
+      .portfolio-card.size-large {
+        grid-row: span 2;
+      }
+    }
+
+    /* Sizing on Mobile */
+    @media (max-width: 767px) {
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+        gap: 20px;
+      }
+      .portfolio-card {
+        aspect-ratio: 4/5;
+      }
     }
 
     .portfolio-card:hover {
-      transform: translateY(-8px);
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 25px 45px rgba(123, 30, 43, 0.08);
     }
 
     .portfolio-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.8s ease;
+      transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
     .portfolio-card:hover img {
-      transform: scale(1.05);
+      transform: scale(1.06);
     }
 
     .card-overlay {
@@ -894,55 +1013,33 @@
           <h2>Captured Moments</h2>
         </div>
 
-        <div class="filter-controls reveal-up">
+        <div class="filter-controls reveal-up" style="margin-bottom: 50px;">
           <button class="filter-btn active" data-filter="all">All Stories</button>
           <button class="filter-btn" data-filter="weddings">Weddings</button>
           <button class="filter-btn" data-filter="pre-weddings">Pre-Weddings</button>
         </div>
 
-        <div class="portfolio-grid reveal-up">
-          <!-- Card 1 -->
-          <div class="portfolio-card" data-category="weddings">
-            <img src="images/%E2%80%9CGrace%20in%20every%20glance%2C%20a%20dream%20in%20every%20moment.%E2%80%9DShrikanth%20%26%20pooja..%20(2).webp" alt="Shrikanth & Pooja">
-            <div class="card-overlay">
-              <span>Weddings</span>
-              <h3>Shrikanth & Pooja</h3>
-            </div>
+        <!-- Chapter I: The Anticipation -->
+        <div class="chapter-container reveal-up" data-chapter="1">
+          <div class="chapter-num">01</div>
+          <div class="chapter-header">
+            <span class="chapter-subtitle">Chapter I</span>
+            <h2 class="chapter-title">The Anticipation</h2>
+            <p class="chapter-desc">The early morning mist, intimate laughs, and the raw beauty of promises about to unfold.</p>
           </div>
-          <!-- Card 2 -->
-          <div class="portfolio-card" data-category="weddings">
-            <img src="images/Varun%20%26%20Priya%E2%9D%A4%EF%B8%8FA%20love%20story%20for%20the%20ages%20beginsCaptured%20by%20Vaibhavam%20wedding%20photography%2C%20their%20(3).webp" alt="Varun & Priya">
-            <div class="card-overlay">
-              <span>Weddings</span>
-              <h3>Varun & Priya</h3>
-            </div>
-          </div>
+        </div>
+
+        <div class="portfolio-grid bento-grid reveal-up">
           <!-- Card 3 -->
-          <div class="portfolio-card" data-category="pre-weddings">
+          <div class="portfolio-card size-large" data-category="pre-weddings">
             <img src="images/A%20moment%20frozen%20in%20love%2C%20forever%20yours...%E2%9D%A4%EF%B8%8F%20(1).webp" alt="A moment frozen in love">
             <div class="card-overlay">
               <span>Pre-Weddings</span>
               <h3>Frozen in Love</h3>
             </div>
           </div>
-          <!-- Card 4 -->
-          <div class="portfolio-card" data-category="weddings">
-            <img src="images/A%20moment%20framed%20in%20grandeur%20%23weddinginspiration%20%23weddingphotography%20%23couplegoals%20%23trendingpos%20(1).webp" alt="Framed in Grandeur">
-            <div class="card-overlay">
-              <span>Weddings</span>
-              <h3>Framed in Grandeur</h3>
-            </div>
-          </div>
-          <!-- Card 5 -->
-          <div class="portfolio-card" data-category="weddings">
-            <img src="images/Golden%20rains%20and%20bridal%20dreams...%23bride%20Shusmita%23haldiceremony%20%23haldi%20%23wedding%20%23indianwedding%20%23%20(1).webp" alt="Shusmita Haldi Ceremony">
-            <div class="card-overlay">
-              <span>Weddings</span>
-              <h3>Shusmita's Haldi</h3>
-            </div>
-          </div>
           <!-- Card 6 -->
-          <div class="portfolio-card" data-category="pre-weddings">
+          <div class="portfolio-card size-wide" data-category="pre-weddings">
             <img src="images/We%E2%80%99re%20all%20tangled%20up%20in%20love%20and%20laughter.%20%F0%9F%92%9E%23preweddingphoto%20%23prewedding%20%23wedding%20%23preweddin%20(3).webp" alt="Love and Laughter">
             <div class="card-overlay">
               <span>Pre-Weddings</span>
@@ -950,15 +1047,60 @@
             </div>
           </div>
           <!-- Card 7 -->
-          <div class="portfolio-card" data-category="pre-weddings">
+          <div class="portfolio-card size-tall" data-category="pre-weddings">
             <img src="images/The%20beginning%20of%20forever%2C%20wrapped%20in%20love%20and%20laughter%20%F0%9F%92%ABBook%20now%20%40%208639972913.webp" alt="Beginning of Forever">
             <div class="card-overlay">
               <span>Pre-Weddings</span>
               <h3>Beginning of Forever</h3>
             </div>
           </div>
+          <!-- Card 5 -->
+          <div class="portfolio-card size-normal" data-category="weddings">
+            <img src="images/Golden%20rains%20and%20bridal%20dreams...%23bride%20Shusmita%23haldiceremony%20%23haldi%20%23wedding%20%23indianwedding%20%23%20(1).webp" alt="Shusmita Haldi Ceremony">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>Shusmita's Haldi</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapter II: The Vows -->
+        <div class="chapter-container reveal-up" data-chapter="2">
+          <div class="chapter-num">02</div>
+          <div class="chapter-header">
+            <span class="chapter-subtitle">Chapter II</span>
+            <h2 class="chapter-title">The Vows</h2>
+            <p class="chapter-desc">Eternal bonds sealed in grandeur, traditional rituals, and the timeless elegance of wedding ceremonies.</p>
+          </div>
+        </div>
+
+        <div class="portfolio-grid bento-grid reveal-up">
+          <!-- Card 2 -->
+          <div class="portfolio-card size-large" data-category="weddings">
+            <img src="images/Varun%20%26%20Priya%E2%9D%A4%EF%B8%8FA%20love%20story%20for%20the%20ages%20beginsCaptured%20by%20Vaibhavam%20wedding%20photography%2C%20their%20(3).webp" alt="Varun & Priya">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>Varun & Priya</h3>
+            </div>
+          </div>
+          <!-- Card 1 -->
+          <div class="portfolio-card size-wide" data-category="weddings">
+            <img src="images/%E2%80%9CGrace%20in%20every%20glance%2C%20a%20dream%20in%20every%20moment.%E2%80%9DShrikanth%20%26%20pooja..%20(2).webp" alt="Shrikanth & Pooja">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>Shrikanth & Pooja</h3>
+            </div>
+          </div>
+          <!-- Card 4 -->
+          <div class="portfolio-card size-tall" data-category="weddings">
+            <img src="images/A%20moment%20framed%20in%20grandeur%20%23weddinginspiration%20%23weddingphotography%20%23couplegoals%20%23trendingpos%20(1).webp" alt="Framed in Grandeur">
+            <div class="card-overlay">
+              <span>Weddings</span>
+              <h3>Framed in Grandeur</h3>
+            </div>
+          </div>
           <!-- Card 8 -->
-          <div class="portfolio-card" data-category="weddings">
+          <div class="portfolio-card size-normal" data-category="weddings">
             <img src="images/A%20love%20as%20gentle%20as%20petals%2C%20yet%20timeless%20Those%20who%20believe%20love%20should%20feel%20as%20beautiful%20as%20it%20%20(2).webp" alt="Gentle Petals">
             <div class="card-overlay">
               <span>Weddings</span>
@@ -1145,6 +1287,23 @@
 
     document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
 
+    // Bento Grid cards stagger reveal
+    const gridObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const cards = entry.target.querySelectorAll('.portfolio-card');
+          cards.forEach((card, idx) => {
+            setTimeout(() => {
+              card.classList.add('revealed');
+            }, idx * 120);
+          });
+          gridObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05 });
+
+    document.querySelectorAll('.portfolio-grid').forEach(grid => gridObserver.observe(grid));
+
     // Navbar Scroll
     window.addEventListener('scroll', () => {
       const nav = document.getElementById('navbar');
@@ -1171,19 +1330,39 @@
 
         const filterValue = btn.getAttribute('data-filter');
 
-        portfolioCards.forEach(card => {
-          if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-            card.style.display = 'block';
-            setTimeout(() => {
-              card.style.opacity = '1';
-              card.style.transform = 'scale(1)';
-            }, 50);
-          } else {
-            card.style.opacity = '0';
-            card.style.transform = 'scale(0.8)';
-            setTimeout(() => {
-              card.style.display = 'none';
-            }, 300);
+        document.querySelectorAll('.chapter-container').forEach(chapter => {
+          const grid = chapter.nextElementSibling;
+          if (grid && grid.classList.contains('portfolio-grid')) {
+            let visibleCount = 0;
+            const cards = grid.querySelectorAll('.portfolio-card');
+            cards.forEach(card => {
+              const isMatch = filterValue === 'all' || card.getAttribute('data-category') === filterValue;
+              if (isMatch) {
+                visibleCount++;
+                card.style.display = 'block';
+                card.classList.add('revealed');
+                setTimeout(() => {
+                  card.style.opacity = '1';
+                  card.style.transform = 'scale(1)';
+                  card.style.filter = 'blur(0)';
+                }, 50);
+              } else {
+                card.style.opacity = '0';
+                card.style.transform = 'scale(0.95)';
+                card.style.filter = 'blur(4px)';
+                setTimeout(() => {
+                  card.style.display = 'none';
+                }, 300);
+              }
+            });
+
+            if (visibleCount === 0) {
+              chapter.style.display = 'none';
+              grid.style.display = 'none';
+            } else {
+              chapter.style.display = 'block';
+              grid.style.display = 'grid';
+            }
           }
         });
       });
