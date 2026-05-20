@@ -1660,7 +1660,7 @@
       const totalScrollableHeight = rect.height - window.innerHeight;
       
       if (scrollPosition >= 0 && scrollPosition <= totalScrollableHeight) {
-        const trackWidth = scrollyTrack.offsetWidth;
+        const trackWidth = scrollyTrack.scrollWidth;
         const maxTranslate = trackWidth - window.innerWidth + 120; // 120px padding offset
         const percentage = scrollPosition / totalScrollableHeight;
         const translateVal = percentage * maxTranslate;
@@ -1669,7 +1669,7 @@
       } else if (scrollPosition < 0) {
         scrollyTrack.style.transform = 'translateX(0)';
       } else if (scrollPosition > totalScrollableHeight) {
-        const trackWidth = scrollyTrack.offsetWidth;
+        const trackWidth = scrollyTrack.scrollWidth;
         const maxTranslate = trackWidth - window.innerWidth + 120;
         scrollyTrack.style.transform = `translateX(-${maxTranslate}px)`;
       }
