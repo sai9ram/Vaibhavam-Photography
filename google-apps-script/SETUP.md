@@ -1,50 +1,30 @@
-# Fix Email & Google Sheet Setup
+# Vaibhavam Quotation — Setup Guide
 
-## Error: `535 Username and Password not accepted`
+## Email: Web3Forms (recommended)
 
-This means Gmail **rejected** the password in Vercel. Your **normal Gmail password will NOT work**.
-
-### Option A — Fix Gmail (App Password)
-
-1. Open https://myaccount.google.com/security  
-2. Turn **ON** → **2-Step Verification** (required)  
-3. Search **App passwords** (or: Security → App passwords)  
-4. Create app: name `Vaibhavam Website` → **Create**  
-5. Copy the **16-character password** (example: `abcd efgh ijkl mnop`)  
-6. Vercel → **Settings** → **Environment Variables** → edit:
-   - `GMAIL_USER` = `Vaibhavambyvarun@gmail.com` (exact account)
-   - `GMAIL_APP_PASSWORD` = paste the 16 characters (spaces are OK)
-7. **Deployments** → ⋯ on latest → **Redeploy** (mandatory)
-
-**Common mistakes**
-- Using normal Gmail password ❌  
-- 2-Step Verification OFF ❌  
-- Added env vars but did not **Redeploy** ❌  
-- App password from a different Google account ❌  
-
----
-
-### Option B — Web3Forms (easier, recommended if Gmail fails)
-
-1. Go to https://web3forms.com → **Create Access Key** (free)  
-2. Verify your email when asked  
-3. Vercel → **Environment Variables** → add:
-   - `WEB3FORMS_ACCESS_KEY` = your access key from Web3Forms  
-4. **Redeploy**  
-5. You can **remove** `GMAIL_APP_PASSWORD` if you want (Web3Forms will send emails)
-
-Web3Forms sends the PDF to your inbox and CCs the customer.
+Follow **`WEB3FORMS-SETUP.md`** — takes about 5 minutes, no Gmail App Password needed.
 
 ---
 
 ## Google Sheet (CRM)
 
-Data is sent automatically. If you still see N/A, open Apps Script and paste the latest `Code.gs` from this folder, then redeploy the web app.
+Leads are sent automatically as form data. If columns show N/A, update your Apps Script with `Code.gs` from this folder and redeploy the web app.
 
 ---
 
-## Test
+## WhatsApp PDF (optional)
 
-Complete a quote at https://vaibhavam-photography.vercel.app/quote.html  
+Add to Vercel environment variables:
 
-Success message: *"Quotation PDF sent to your email and the Vaibhavam team."*
+| Key | Service |
+|-----|---------|
+| `ULTRAMSG_TOKEN` + `ULTRAMSG_INSTANCE` | [ultramsg.com](https://ultramsg.com) |
+| `CALLMEBOT_API_KEY` | [callmebot.com](https://www.callmebot.com/blog/free-api-whatsapp-messages/) |
+
+Without these, WhatsApp backup buttons still open after the quote is completed.
+
+---
+
+## Gmail (optional, not used by default)
+
+See `GMAIL-SETUP.md` only if you switch back to Gmail SMTP on Vercel.

@@ -139,7 +139,10 @@ async function sendViaWeb3Forms(data, pdfBuffer, fileName, adminEmail) {
     form.append('attachment', new Blob([pdfBuffer], { type: 'application/pdf' }), fileName);
     const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: form });
     const json = await res.json();
-    if (!json.success) return null;
+    if (!json.success) {
+      console.error('Web3Forms response:', json);
+      return null;
+    }
     return { client: true, admin: true };
   } catch (e) {
     console.error('Web3Forms error:', e);
@@ -210,49 +213,18 @@ module.exports = async (req, res) => {
     let delivery = { email: { client: false, admin: false }, whatsapp: { client: false, admin: false } };
     let lastError = '';
 
-    const gmailUser = (process.env.GMAIL_USER || '').trim();
-    const gmailPass = (process.env.GMAIL_APP_PASSWORD || '').replace(/\s/g, '');
-
-    if (gmailPass && gmailPass.length !== 16) {
-      lastError =
-        'GMAIL_APP_PASSWORD must be exactly 16 characters (Google App Password). ' +
-        'You may have saved your normal Gmail login password by mistake. Create an App Password and update Vercel, then Redeploy.';
-    } else if (gmailUser && gmailPass) {
-      const smtpConfigs = [
-        { host: 'smtp.gmail.com', port: 465, secure: true },
-        { host: 'smtp.gmail.com', port: 587, secure: false, requireTLS: true },
-      ];
-      for (const cfg of smtpConfigs) {
-        try {
-          const transporter = nodemailer.createTransport({
-            ...cfg,
-            auth: { user: gmailUser, pass: gmailPass },
-          });
-          await transporter.verify();
-          delivery.email = await sendEmails(transporter, gmailUser, adminEmail, data, pdfBuffer, fileName);
-          if (delivery.email.client && delivery.email.admin) break;
-        } catch (e) {
-          lastError = e.message || String(e);
-          console.error('Gmail SMTP error (' + cfg.port + '):', lastError);
-        }
-      }
-      if (lastError && /535|BadCredentials|Username and Password not accepted/i.test(lastError)) {
-        lastError =
-          'Gmail App Password rejected. You must use a 16-character App Password (not your normal Gmail password). ' +
-          'Create one at: Google Account → Security → 2-Step Verification (ON) → App passwords. ' +
-          'Then update GMAIL_APP_PASSWORD in Vercel and Redeploy. Or add WEB3FORMS_ACCESS_KEY instead (free at web3forms.com).';
-      }
-    } else {
-      lastError = 'Gmail not configured (GMAIL_USER / GMAIL_APP_PASSWORD missing on Vercel).';
-    }
-
-    if (!delivery.email.client || !delivery.email.admin) {
+    const web3Key = (process.env.WEB3FORMS_ACCESS_KEY || '').trim();
+    if (web3Key) {
       const web3 = await sendViaWeb3Forms(data, pdfBuffer, fileName, adminEmail);
       if (web3) {
-        delivery.email.client = delivery.email.client || web3.client;
-        delivery.email.admin = delivery.email.admin || web3.admin;
-        if (web3.admin || web3.client) lastError = '';
+        delivery.email = web3;
+        lastError = '';
+      } else {
+        lastError = 'Web3Forms failed. Check WEB3FORMS_ACCESS_KEY on Vercel.';
       }
+    } else {
+      lastError =
+        'WEB3FORMS_ACCESS_KEY not set on Vercel. Add it in Project Settings → Environment Variables, or paste the key in quote.html.';
     }
 
     const pdfUrl = await uploadPdfTemp(pdfBuffer, fileName);
