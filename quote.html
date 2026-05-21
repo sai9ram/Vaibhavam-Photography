@@ -1932,16 +1932,20 @@
 
         if (emailOk && waOk) {
           setSendStatus('success', 'Quotation PDF sent to your email and WhatsApp, and to the Vaibhavam team.');
-        } else if (emailOk || waOk) {
-          setSendStatus('partial', 'Quotation sent. Some channels may need a moment — use the buttons below if needed.');
+        } else if (emailOk) {
+          setSendStatus('success', 'Quotation PDF sent to your email and the Vaibhavam team. Open WhatsApp below to share on chat.');
           if (!waOk) triggerWhatsAppFallback(client, result.driveUrl);
+        } else if (waOk) {
+          setSendStatus('partial', 'WhatsApp sent. Email could not be delivered — use Download PDF or contact us.');
+          triggerWhatsAppFallback(client, result.driveUrl);
         } else {
-          setSendStatus('partial', 'PDF ready. Sending via backup WhatsApp — check your email shortly.');
+          const errHint = result.error ? ` ${result.error}` : '';
+          setSendStatus('error', 'Could not send PDF automatically.' + errHint + ' Use the buttons below.');
           triggerWhatsAppFallback(client, result.driveUrl);
         }
       } catch (err) {
         console.error('Auto delivery error:', err);
-        setSendStatus('error', 'Could not auto-send. Use the buttons below to download or share manually.');
+        setSendStatus('error', (err.message || 'Could not auto-send.') + ' Use the buttons below to download or share.');
         try {
           const pdfData = await buildQuotationPdf(client);
           currentQuotation = { client, pdfData };
@@ -1959,7 +1963,7 @@
       }, 1200);
     }
 
-    function buildLeadPayload(client, pdfData) {
+    function buildLeadPayloadObject(client, pdfData, includePdf) {
       const grouped = getGroupedItems();
       const requirementsList = [];
       Object.entries(grouped).forEach(([evt, items]) => {
@@ -1967,49 +1971,80 @@
         const serviceNames = items.map(i => i.name).join(', ');
         requirementsList.push(`${eventName}: ${serviceNames}`);
       });
-      const formData = new URLSearchParams();
-      formData.append('name', client.name);
-      formData.append('email', client.email);
-      formData.append('phone', client.phone);
-      formData.append('venue', client.venue);
-      formData.append('date', client.date);
-      formData.append('requirements', requirementsList.join(' | ') || 'None selected');
-      formData.append('budget', String(getTotal()));
-      formData.append('quoteId', client.quoteId || pdfData.quotId);
-      formData.append('pdfBase64', pdfData.base64);
-      formData.append('pdfFileName', pdfData.fileName);
-      return formData;
+      const payload = {
+        name: client.name,
+        email: client.email,
+        phone: client.phone,
+        venue: client.venue,
+        date: client.date,
+        requirements: requirementsList.join(' | ') || 'None selected',
+        budget: String(getTotal()),
+        quoteId: client.quoteId || pdfData.quotId,
+        pdfFileName: pdfData.fileName
+      };
+      if (includePdf) payload.pdfBase64 = pdfData.base64;
+      return payload;
     }
 
-    async function deliverQuotationAutomatically(client, pdfData) {
-      if (!GOOGLE_SHEETS_WEBAPP_URL || GOOGLE_SHEETS_WEBAPP_URL.includes('YOUR_GOOGLE_SHEETS_WEBAPP_URL')) {
-        throw new Error('Google Apps Script URL not configured');
-      }
-      const formData = buildLeadPayload(client, pdfData);
+    function getDeliveryApiUrl() {
+      const origin = window.location.origin;
+      if (!origin || origin === 'null' || window.location.protocol === 'file:') return null;
+      return origin + '/api/send-quotation';
+    }
+
+    async function submitLeadToSheetsOnly(client, pdfData) {
+      if (!GOOGLE_SHEETS_WEBAPP_URL || GOOGLE_SHEETS_WEBAPP_URL.includes('YOUR_GOOGLE_SHEETS_WEBAPP_URL')) return;
+      const payload = buildLeadPayloadObject(client, pdfData, false);
       try {
-        const res = await fetch(GOOGLE_SHEETS_WEBAPP_URL, {
-          method: 'POST',
-          mode: 'cors',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: formData.toString()
-        });
-        if (res.ok) {
-          try {
-            return await res.json();
-          } catch (e) {
-            return { success: true, delivery: { email: { client: true, admin: true }, whatsapp: { client: false, admin: false } } };
-          }
-        }
-      } catch (corsErr) {
         await fetch(GOOGLE_SHEETS_WEBAPP_URL, {
           method: 'POST',
           mode: 'no-cors',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: formData.toString()
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
         });
-        return { success: true, delivery: { email: { client: true, admin: true }, whatsapp: { client: false, admin: false } } };
+      } catch (e) {
+        console.warn('CRM sheet log failed:', e);
       }
-      throw new Error('Server delivery failed');
+    }
+
+    async function deliverQuotationAutomatically(client, pdfData) {
+      const payload = buildLeadPayloadObject(client, pdfData, true);
+      submitLeadToSheetsOnly(client, pdfData);
+
+      const apiUrl = getDeliveryApiUrl();
+      if (apiUrl) {
+        try {
+          const res = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const result = await res.json();
+          if (result.error && result.error.includes('Gmail not configured')) {
+            console.warn(result.error);
+          } else {
+            return result;
+          }
+        } catch (e) {
+          console.warn('Vercel API delivery failed:', e);
+        }
+      }
+
+      if (!GOOGLE_SHEETS_WEBAPP_URL || GOOGLE_SHEETS_WEBAPP_URL.includes('YOUR_GOOGLE_SHEETS_WEBAPP_URL')) {
+        throw new Error('Delivery API not available. Deploy on Vercel and set Gmail env vars.');
+      }
+
+      const res = await fetch(GOOGLE_SHEETS_WEBAPP_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const text = await res.text();
+      try {
+        return JSON.parse(text);
+      } catch (e) {
+        throw new Error('Server returned invalid response. Update Google Apps Script (see SETUP.md).');
+      }
     }
 
     async function generatePDF(client) {

@@ -3,10 +3,12 @@
  * Deploy: Deploy → New deployment → Web app → Execute as: Me → Who has access: Anyone
  *
  * Script Properties (Project settings → Script properties):
- *   ADMIN_EMAIL     — e.g. Vaibhavambyvarun@gmail.com
- *   ADMIN_PHONE     — e.g. 918639972913 (country code, no +)
- *   ULTRAMSG_TOKEN  — (optional) from ultramsg.com for WhatsApp PDF delivery
- *   ULTRAMSG_INSTANCE — (optional) e.g. instance12345
+ *   SHEET_ID          — (optional) spreadsheet ID if script is standalone
+ *   ADMIN_EMAIL       — e.g. Vaibhavambyvarun@gmail.com
+ *   ADMIN_PHONE       — e.g. 918639972913
+ *   ULTRAMSG_TOKEN    — (optional) WhatsApp PDF via ultramsg.com
+ *   ULTRAMSG_INSTANCE — (optional)
+ *   CALLMEBOT_API_KEY — (optional) WhatsApp link messages
  */
 
 var ADMIN_EMAIL_DEFAULT = 'Vaibhavambyvarun@gmail.com';
@@ -14,7 +16,7 @@ var ADMIN_PHONE_DEFAULT = '918639972913';
 
 function doPost(e) {
   try {
-    var params = e && e.parameter ? e.parameter : {};
+    var params = parseRequestParams_(e);
     var result = processQuotationLead(params);
     return ContentService
       .createTextOutput(JSON.stringify(result))
@@ -24,6 +26,27 @@ function doPost(e) {
       .createTextOutput(JSON.stringify({ success: false, error: String(err) }))
       .setMimeType(ContentService.MimeType.JSON);
   }
+}
+
+function parseRequestParams_(e) {
+  if (e && e.postData && e.postData.contents) {
+    var type = (e.postData.type || '').toLowerCase();
+    if (type.indexOf('application/json') >= 0) {
+      return JSON.parse(e.postData.contents);
+    }
+    if (type.indexOf('application/x-www-form-urlencoded') >= 0) {
+      var parsed = {};
+      e.postData.contents.split('&').forEach(function(pair) {
+        var parts = pair.split('=');
+        if (parts.length >= 2) {
+          parsed[decodeURIComponent(parts[0].replace(/\+/g, ' '))] =
+            decodeURIComponent(parts.slice(1).join('=').replace(/\+/g, ' '));
+        }
+      });
+      return parsed;
+    }
+  }
+  return (e && e.parameter) ? e.parameter : {};
 }
 
 function processQuotationLead(params) {
@@ -36,7 +59,7 @@ function processQuotationLead(params) {
   var delivery = { email: { client: false, admin: false }, whatsapp: { client: false, admin: false } };
 
   if (!params.pdfBase64) {
-    return { success: true, message: 'Lead saved (no PDF to deliver)', delivery: delivery };
+    return { success: true, message: 'Lead saved to sheet', delivery: delivery };
   }
 
   var fileName = params.pdfFileName || ('Vaibhavam_Quotation_' + (params.quoteId || 'quote') + '.pdf');
@@ -52,7 +75,7 @@ function processQuotationLead(params) {
   delivery.whatsapp = sendQuotationWhatsApp_(params, pdfBlob, fileName, driveUrl, adminPhone);
 
   return {
-    success: true,
+    success: delivery.email.client && delivery.email.admin,
     message: 'Quotation processed',
     delivery: delivery,
     driveUrl: driveUrl || null
@@ -60,18 +83,28 @@ function processQuotationLead(params) {
 }
 
 function appendLeadToSheet(params) {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  sheet.appendRow([
-    new Date(),
-    params.quoteId || '',
-    params.name || '',
-    params.email || '',
-    params.phone || '',
-    params.venue || '',
-    params.date || '',
-    params.requirements || '',
-    params.budget || ''
-  ]);
+  try {
+    var sheet;
+    var sheetId = PropertiesService.getScriptProperties().getProperty('SHEET_ID');
+    if (sheetId) {
+      sheet = SpreadsheetApp.openById(sheetId).getActiveSheet();
+    } else {
+      sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    }
+    sheet.appendRow([
+      new Date(),
+      params.quoteId || '',
+      params.name || '',
+      params.email || '',
+      params.phone || '',
+      params.venue || '',
+      params.date || '',
+      params.requirements || '',
+      params.budget || ''
+    ]);
+  } catch (e) {
+    Logger.log('Sheet append failed (lead still processed): ' + e);
+  }
 }
 
 function sendQuotationEmails_(params, pdfBlob, fileName, adminEmail) {
@@ -154,7 +187,6 @@ function sendQuotationWhatsApp_(params, pdfBlob, fileName, driveUrl, adminPhone)
     return sent;
   }
 
-  // Fallback: WhatsApp message with PDF download link (CallMeBot — optional)
   var callmeKey = props.getProperty('CALLMEBOT_API_KEY');
   if (callmeKey && driveUrl) {
     var linkMsg = caption + '\n\n📄 Download PDF:\n' + driveUrl;
