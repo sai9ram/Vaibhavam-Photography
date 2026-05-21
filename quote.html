@@ -1433,7 +1433,7 @@
     document.querySelectorAll('.option-card').forEach(card => {
       card.onclick = () => {
         const eventId = card.dataset.event;
-        const name = card.dataset.name;
+        const name = card.dataset.name || card.querySelector('h3')?.textContent?.trim();
         const price = parseInt(card.dataset.price);
         const key = eventId ? `${eventId}:${name}` : card.dataset.id;
         if (card.classList.contains('selected')) {
@@ -1967,7 +1967,8 @@
       Object.entries(grouped).forEach(([evt, items]) => {
         tableRows.push([{ content: EVENT_LABELS[evt] || evt, colSpan: 2, styles: { fillColor: [245,235,230], textColor: maroon, fontStyle: 'bold', fontSize: 8 } }]);
         items.forEach(({ name, price }) => {
-          tableRows.push([name, `Rs. ${price.toLocaleString('en-IN')}`]);
+          const priceLabel = price === 0 ? 'Included' : `Rs. ${price.toLocaleString('en-IN')}`;
+          tableRows.push([name || '—', priceLabel]);
         });
       });
 
