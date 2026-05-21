@@ -1945,8 +1945,11 @@
         }
       } catch (err) {
         console.error('Auto delivery error:', err);
-        const hint = err.message ? err.message + '. ' : '';
-        setSendStatus('error', hint + 'Use the buttons below to download or share. If this keeps happening, check Gmail App Password in Vercel and redeploy.');
+        let hint = err.message ? err.message : 'Could not send email.';
+        if (/535|BadCredentials|App Password rejected/i.test(hint)) {
+          hint = 'Gmail login failed — use a 16-character App Password (not your normal password), or switch to Web3Forms (see SETUP.md).';
+        }
+        setSendStatus('error', hint + ' Use the buttons below to download or share.');
         try {
           const pdfData = await buildQuotationPdf(client);
           currentQuotation = { client, pdfData };

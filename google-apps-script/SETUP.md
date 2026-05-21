@@ -1,54 +1,50 @@
-# Quotation Email & WhatsApp Setup
+# Fix Email & Google Sheet Setup
 
-## Vercel (recommended — site is on Vercel)
+## Error: `535 Username and Password not accepted`
 
-1. Open [Vercel Dashboard](https://vercel.com) → **vaibhavam-photography** → **Settings** → **Environment Variables**
-2. Add these for **Production**:
+This means Gmail **rejected** the password in Vercel. Your **normal Gmail password will NOT work**.
 
-| Name | Value |
-|------|--------|
-| `GMAIL_USER` | `Vaibhavambyvarun@gmail.com` |
-| `GMAIL_APP_PASSWORD` | Gmail **App Password** (16 characters, no spaces) |
-| `ADMIN_EMAIL` | `Vaibhavambyvarun@gmail.com` |
-| `ADMIN_PHONE` | `918639972913` |
+### Option A — Fix Gmail (App Password)
 
-### Create Gmail App Password
+1. Open https://myaccount.google.com/security  
+2. Turn **ON** → **2-Step Verification** (required)  
+3. Search **App passwords** (or: Security → App passwords)  
+4. Create app: name `Vaibhavam Website` → **Create**  
+5. Copy the **16-character password** (example: `abcd efgh ijkl mnop`)  
+6. Vercel → **Settings** → **Environment Variables** → edit:
+   - `GMAIL_USER` = `Vaibhavambyvarun@gmail.com` (exact account)
+   - `GMAIL_APP_PASSWORD` = paste the 16 characters (spaces are OK)
+7. **Deployments** → ⋯ on latest → **Redeploy** (mandatory)
 
-1. Google Account → **Security** → turn on **2-Step Verification**
-2. **App passwords** → Create → name it `Vaibhavam Website` → copy the 16-character password
-3. Paste that as `GMAIL_APP_PASSWORD` in Vercel (not your normal Gmail password)
-
-3. **Redeploy** the project after saving env vars (Deployments → **Redeploy** — required, or env vars will not work).
-
-**Troubleshooting Gmail:** Use an **App Password** (16 letters), not your normal Gmail password. Remove spaces when pasting. Variable names must be exact: `GMAIL_USER`, `GMAIL_APP_PASSWORD`.
-
-**Alternative (easier):** Add `WEB3FORMS_ACCESS_KEY` from [web3forms.com](https://web3forms.com) (free) — sends PDF email without Gmail setup.
-
-### Optional WhatsApp (PDF file or link)
-
-| Name | Purpose |
-|------|---------|
-| `ULTRAMSG_TOKEN` + `ULTRAMSG_INSTANCE` | Sends real PDF on WhatsApp ([ultramsg.com](https://ultramsg.com)) |
-| `CALLMEBOT_API_KEY` | Sends WhatsApp message with PDF download link ([callmebot.com](https://www.callmebot.com/blog/free-api-whatsapp-messages/)) |
-
-Without these, email still works; WhatsApp opens via the website backup buttons.
+**Common mistakes**
+- Using normal Gmail password ❌  
+- 2-Step Verification OFF ❌  
+- Added env vars but did not **Redeploy** ❌  
+- App password from a different Google account ❌  
 
 ---
 
-## Google Apps Script (CRM sheet + backup email)
+### Option B — Web3Forms (easier, recommended if Gmail fails)
 
-1. Open your CRM Google Sheet → **Extensions → Apps Script**
-2. Paste `Code.gs` from this folder → **Save**
-3. Run once and authorize **Gmail**, **Drive**, and **Sheets**
-4. **Deploy → New deployment → Web app** → Execute as **Me**, access **Anyone**
-5. Copy the URL into `quote.html` as `GOOGLE_SHEETS_WEBAPP_URL` if it changed
+1. Go to https://web3forms.com → **Create Access Key** (free)  
+2. Verify your email when asked  
+3. Vercel → **Environment Variables** → add:
+   - `WEB3FORMS_ACCESS_KEY` = your access key from Web3Forms  
+4. **Redeploy**  
+5. You can **remove** `GMAIL_APP_PASSWORD` if you want (Web3Forms will send emails)
 
-Optional Script properties: `SHEET_ID`, `ULTRAMSG_TOKEN`, `ULTRAMSG_INSTANCE`, `CALLMEBOT_API_KEY`
+Web3Forms sends the PDF to your inbox and CCs the customer.
+
+---
+
+## Google Sheet (CRM)
+
+Data is sent automatically. If you still see N/A, open Apps Script and paste the latest `Code.gs` from this folder, then redeploy the web app.
 
 ---
 
 ## Test
 
-1. Complete a quote on https://vaibhavam-photography.vercel.app/quote.html
-2. You should see: **“Quotation PDF sent to your email and the Vaibhavam team…”**
-3. Check inbox (and spam) for both customer and admin emails with PDF attached
+Complete a quote at https://vaibhavam-photography.vercel.app/quote.html  
+
+Success message: *"Quotation PDF sent to your email and the Vaibhavam team."*

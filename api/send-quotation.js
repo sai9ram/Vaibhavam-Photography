@@ -214,18 +214,29 @@ module.exports = async (req, res) => {
     const gmailPass = (process.env.GMAIL_APP_PASSWORD || '').replace(/\s/g, '');
 
     if (gmailUser && gmailPass) {
-      try {
-        const transporter = nodemailer.createTransport({
-          host: 'smtp.gmail.com',
-          port: 465,
-          secure: true,
-          auth: { user: gmailUser, pass: gmailPass },
-        });
-        await transporter.verify();
-        delivery.email = await sendEmails(transporter, gmailUser, adminEmail, data, pdfBuffer, fileName);
-      } catch (e) {
-        lastError = e.message || String(e);
-        console.error('Gmail SMTP error:', lastError);
+      const smtpConfigs = [
+        { host: 'smtp.gmail.com', port: 465, secure: true },
+        { host: 'smtp.gmail.com', port: 587, secure: false, requireTLS: true },
+      ];
+      for (const cfg of smtpConfigs) {
+        try {
+          const transporter = nodemailer.createTransport({
+            ...cfg,
+            auth: { user: gmailUser, pass: gmailPass },
+          });
+          await transporter.verify();
+          delivery.email = await sendEmails(transporter, gmailUser, adminEmail, data, pdfBuffer, fileName);
+          if (delivery.email.client && delivery.email.admin) break;
+        } catch (e) {
+          lastError = e.message || String(e);
+          console.error('Gmail SMTP error (' + cfg.port + '):', lastError);
+        }
+      }
+      if (lastError && /535|BadCredentials|Username and Password not accepted/i.test(lastError)) {
+        lastError =
+          'Gmail App Password rejected. You must use a 16-character App Password (not your normal Gmail password). ' +
+          'Create one at: Google Account → Security → 2-Step Verification (ON) → App passwords. ' +
+          'Then update GMAIL_APP_PASSWORD in Vercel and Redeploy. Or add WEB3FORMS_ACCESS_KEY instead (free at web3forms.com).';
       }
     } else {
       lastError = 'Gmail not configured (GMAIL_USER / GMAIL_APP_PASSWORD missing on Vercel).';
