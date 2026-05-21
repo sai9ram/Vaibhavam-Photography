@@ -1043,6 +1043,69 @@
         text-align: left;
       }
     }
+
+    /* ── FLOATING CONTACT ACTIONS ── */
+    .floating-contact-actions {
+      position: fixed;
+      bottom: 30px;
+      right: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 2000;
+      pointer-events: none;
+    }
+
+    .floating-contact-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 1.5rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: auto;
+      text-decoration: none;
+    }
+
+    .floating-contact-btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .floating-contact-btn.whatsapp-btn {
+      background: #25D366;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .floating-contact-btn.call-btn {
+      background: var(--maroon);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    /* Prevent overlap on quote.html with sticky footer */
+    body.has-sticky-footer .floating-contact-actions {
+      bottom: 110px;
+    }
+
+    @media (max-width: 768px) {
+      .floating-contact-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 1.3rem;
+      }
+      .floating-contact-actions {
+        bottom: 24px;
+        right: 16px;
+        gap: 10px;
+      }
+      body.has-sticky-footer .floating-contact-actions {
+        bottom: 100px;
+      }
+    }
   </style>
 </head>
 
@@ -1800,5 +1863,22 @@
       }
     });
   </script>
+
+  <!-- Floating Contact Buttons (WhatsApp & Call) -->
+  <div class="floating-contact-actions">
+    <a href="https://wa.me/918639972913?text=Hi%20Vaibhavam%20Photography,%20I'm%20interested%20in%20your%20services." 
+       class="floating-contact-btn whatsapp-btn" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       aria-label="Contact us on WhatsApp">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    <a href="tel:+918639972913" 
+       class="floating-contact-btn call-btn" 
+       aria-label="Call Vaibhavam Photography">
+      <i class="fa-solid fa-phone"></i>
+    </a>
+  </div>
+
 </body>
 </html>
