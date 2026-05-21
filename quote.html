@@ -1815,7 +1815,7 @@
       const quotId = `VBW-${Date.now().toString().slice(-6)}`;
 
       // Header background
-      doc.setFillColor(...maroon);
+      doc.setFillColor(255, 255, 255);
       doc.rect(0, 0, W, 48, 'F');
 
       // Try to load logo
@@ -1828,26 +1828,35 @@
         });
         const canvas = document.createElement('canvas');
         canvas.width = img.width; canvas.height = img.height;
-        canvas.getContext('2d').drawImage(img, 0, 0);
+        const ctx = canvas.getContext('2d');
+        // Fill canvas with white to avoid transparent pixels becoming black
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0);
         const logoData = canvas.toDataURL('image/jpeg');
         doc.addImage(logoData, 'JPEG', W/2 - 12, 6, 24, 24);
       } catch(e) {
         // Logo failed – just show text
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(14);
-        doc.setTextColor(255, 255, 255);
+        doc.setTextColor(...maroon);
         doc.text('VAIBHAVAM', W/2, 20, { align: 'center' });
       }
 
       // Company name under logo
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(11);
-      doc.setTextColor(255, 255, 255);
+      doc.setTextColor(...maroon);
       doc.text('VAIBHAVAM WEDDING PHOTOGRAPHY', W/2, 36, { align: 'center' });
       doc.setFont('helvetica', 'normal');
-      doc.setFontSize(8);
-      doc.setTextColor(233, 200, 200);
-      doc.text('\uD83D\uDCDE 8639972913  |  Vaibhavambyvarun@gmail.com', W/2, 43, { align: 'center' });
+      doc.setFontSize(8.5);
+      doc.setTextColor(...gray);
+      doc.text('Phone: 8639972913  |  Email: Vaibhavambyvarun@gmail.com', W/2, 43, { align: 'center' });
+
+      // Thin separator line at the bottom of the header
+      doc.setDrawColor(...beige);
+      doc.setLineWidth(0.25);
+      doc.line(16, 48, W-16, 48);
 
       // QUOTATION label
       let y = 58;
