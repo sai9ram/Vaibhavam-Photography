@@ -2305,6 +2305,7 @@
       align-items: center;
       justify-content: center;
       transition: opacity 1.2s cubic-bezier(0.77, 0, 0.175, 1), visibility 1.2s;
+      overflow: hidden;
     }
 
     #splash-screen.hidden {
@@ -2317,26 +2318,44 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      /* Ensures cinematic full-screen coverage */
+      will-change: transform;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transition: transform 0.5s ease;
     }
 
-    .splash-unmute-hint {
-      display: none;
-      /* Removed as we now use an entrance trigger */
+    @media (max-width: 768px) and (orientation: portrait) {
+      .splash-video {
+        width: 100vh;
+        height: 100vw;
+        object-fit: cover;
+        transform: rotate(90deg);
+        transform-origin: center;
+      }
     }
 
-    /* ── ENTRANCE TRIGGER ── */
+    @media (max-width: 768px) and (orientation: landscape) {
+      .splash-video {
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        transform: none;
+        transform-origin: center;
+      }
+    }
+
+    /* ── LUXURY ENTRANCE TRIGGER ── */
     #experience-trigger {
       position: fixed;
       inset: 0;
-      background: #000;
+      background: radial-gradient(circle at center, #18090b 0%, #000 100%);
       z-index: 10002;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       color: #fff;
-      transition: opacity 1s ease, visibility 1s;
+      transition: opacity 1s cubic-bezier(0.77, 0, 0.175, 1), visibility 1s;
+      overflow: hidden;
     }
 
     #experience-trigger.hidden {
@@ -2345,35 +2364,172 @@
       pointer-events: none;
     }
 
+    .trigger-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 30px;
+      max-width: 500px;
+      width: 100%;
+      animation: triggerFadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes triggerFadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .trigger-logo-container {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      padding: 3px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(123, 30, 43, 0.5));
+      box-shadow: 0 0 30px rgba(123, 30, 43, 0.3), inset 0 0 15px rgba(255, 255, 255, 0.1);
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: logoPulse 3s infinite ease-in-out;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .trigger-logo {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    @keyframes logoPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(123, 30, 43, 0.3); }
+      50% { transform: scale(1.03); box-shadow: 0 0 45px rgba(123, 30, 43, 0.5); }
+    }
+
+    .trigger-title {
+      font-family: var(--ff-serif);
+      font-size: 2.2rem;
+      font-weight: 300;
+      letter-spacing: 0.25em;
+      margin-bottom: 8px;
+      color: #fff;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      text-transform: uppercase;
+    }
+
+    .trigger-subtitle {
+      font-family: var(--ff-sans);
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.5em;
+      margin-bottom: 40px;
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: uppercase;
+    }
+
     .enter-btn {
       font-family: var(--ff-serif);
-      background: none;
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       color: #fff;
-      padding: 15px 40px;
-      font-size: 1.1rem;
+      padding: 16px 45px;
+      font-size: 1rem;
       border-radius: 100px;
       cursor: pointer;
       letter-spacing: 4px;
       text-transform: uppercase;
-      transition: all 0.5s ease;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
       overflow: hidden;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .enter-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -150%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.15),
+        transparent
+      );
+      transition: 0.8s;
+    }
+
+    .enter-btn:hover::before {
+      left: 150%;
     }
 
     .enter-btn:hover {
       background: #fff;
       color: #000;
       border-color: #fff;
-      transform: scale(1.05);
+      transform: scale(1.05) translateY(-2px);
+      box-shadow: 0 15px 35px rgba(255, 255, 255, 0.25);
     }
 
-    .enter-label {
-      font-size: 0.65rem;
-      letter-spacing: 3px;
+    .enter-btn:active {
+      transform: scale(0.98) translateY(0);
+    }
+
+    .landscape-hint {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 35px;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      opacity: 0.5;
-      margin-top: 20px;
+      color: rgba(255, 255, 255, 0.4);
+      animation: pulseHint 2.5s infinite ease-in-out;
+    }
+
+    .landscape-hint i {
+      font-size: 0.85rem;
+      animation: rotateIcon 3s infinite linear;
+    }
+
+    @keyframes rotateIcon {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes pulseHint {
+      0%, 100% { opacity: 0.3; transform: translateY(0); }
+      50% { opacity: 0.8; transform: translateY(-3px); }
+    }
+
+    @media (orientation: landscape) or (min-width: 769px) {
+      .landscape-hint {
+        display: none !important;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .trigger-logo-container {
+        width: 110px;
+        height: 110px;
+      }
+      .trigger-title {
+        font-size: 2.8rem;
+        letter-spacing: 0.3em;
+      }
+      .trigger-subtitle {
+        font-size: 0.8rem;
+        letter-spacing: 0.6em;
+      }
+      .enter-btn {
+        padding: 18px 55px;
+        font-size: 1.1rem;
+      }
     }
 
     /* ── EXIT INTENT POPUP ── */
@@ -2814,8 +2970,20 @@
 
   <!-- LUXURY ENTRANCE -->
   <div id="experience-trigger">
-    <button class="enter-btn" onclick="beginExperience()">Enter Experience</button>
-    <span class="enter-label">Vaibhavam Photography</span>
+    <div class="trigger-content">
+      <div class="trigger-logo-container">
+        <img class="trigger-logo" src="Vaibhavam Logo.jpeg" alt="Vaibhavam Logo">
+      </div>
+      <h1 class="trigger-title">VAIBHAVAM</h1>
+      <p class="trigger-subtitle">PHOTOGRAPHY</p>
+      <button class="enter-btn" onclick="beginExperience()">
+        <span class="btn-text">Enter Experience</span>
+      </button>
+      <div class="landscape-hint">
+        <i class="fa-solid fa-rotate"></i>
+        <span>Rotate device for cinematic view</span>
+      </div>
+    </div>
   </div>
 
   <!-- SPLASH SCREEN -->
