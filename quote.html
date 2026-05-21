@@ -13,6 +13,8 @@
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Poppins:wght@300;400;500;600&family=Great+Vibes&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
   <style>
     *,
     *::before,
@@ -428,6 +430,133 @@
         padding: 12px 25px;
       }
     }
+
+    /* ── QUOTATION MODAL ── */
+    .quot-overlay {
+      position: fixed; inset: 0;
+      background: rgba(20,8,8,0.75);
+      backdrop-filter: blur(6px);
+      z-index: 999;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.4s ease;
+      padding: 20px;
+    }
+    .quot-overlay.open { opacity: 1; pointer-events: all; }
+    .quot-modal {
+      background: #fff;
+      border-radius: 24px;
+      width: 100%; max-width: 560px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 36px 32px;
+      box-shadow: 0 40px 80px rgba(123,30,43,0.3);
+      transform: translateY(30px);
+      transition: transform 0.4s ease;
+      position: relative;
+    }
+    .quot-overlay.open .quot-modal { transform: translateY(0); }
+    .quot-close {
+      position: absolute; top: 18px; right: 22px;
+      background: none; border: none;
+      font-size: 1.4rem; color: var(--gray);
+      cursor: pointer; line-height: 1;
+    }
+    .quot-logo {
+      text-align: center; margin-bottom: 18px;
+    }
+    .quot-logo img { height: 70px; }
+    .quot-title {
+      font-family: var(--ff-serif);
+      font-size: 1.7rem;
+      color: var(--maroon);
+      text-align: center;
+      margin-bottom: 4px;
+    }
+    .quot-subtitle {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+    .quot-client-box {
+      background: var(--bg);
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-bottom: 22px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 20px;
+      font-size: 0.85rem;
+    }
+    .quot-client-box span { color: var(--gray); font-size: 0.75rem; }
+    .quot-client-box strong { color: var(--text); }
+    .quot-table { width: 100%; border-collapse: collapse; margin-bottom: 18px; font-size: 0.82rem; }
+    .quot-table th {
+      background: var(--maroon);
+      color: #fff;
+      padding: 9px 12px;
+      text-align: left;
+      font-weight: 600;
+    }
+    .quot-table td { padding: 8px 12px; border-bottom: 1px solid var(--beige); }
+    .quot-table tr:last-child td { border-bottom: none; }
+    .quot-table .group-row td {
+      background: rgba(123,30,43,0.06);
+      font-weight: 600;
+      color: var(--maroon);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .quot-total-row {
+      background: var(--maroon);
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+    .quot-total-row span { color: rgba(255,255,255,0.8); font-size: 0.85rem; }
+    .quot-total-row strong { color: #fff; font-size: 1.4rem; font-family: var(--ff-serif); }
+    .quot-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .quot-btn {
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: none; cursor: pointer;
+      font-family: var(--ff-sans);
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .quot-btn-pdf {
+      background: var(--maroon); color: #fff;
+      grid-column: 1 / -1;
+      padding: 16px;
+      font-size: 0.92rem;
+    }
+    .quot-btn-pdf:hover { background: var(--maroon-d); transform: translateY(-2px); }
+    .quot-btn-wa { background: #25D366; color: #fff; }
+    .quot-btn-wa:hover { background: #1ebe5d; transform: translateY(-2px); }
+    .quot-btn-email { background: var(--bg); color: var(--text); border: 1px solid var(--beige); }
+    .quot-btn-email:hover { background: var(--beige); transform: translateY(-2px); }
+    .quot-note {
+      text-align: center;
+      font-size: 0.72rem;
+      color: var(--gray);
+      margin-top: 18px;
+      line-height: 1.6;
+    }
   </style>
 </head>
 
@@ -822,13 +951,15 @@
         <div class="options-grid" style="background: #fff; padding: 30px; border-radius: 20px;">
           <div style="display:grid; gap: 20px;">
             <input type="text" id="custName" placeholder="Full Name"
-              style="padding: 15px; border-radius: 10px; border: 1px solid var(--beige);">
+              style="padding: 15px; border-radius: 10px; border: 1px solid var(--beige); font-family: var(--ff-sans);">
+            <input type="email" id="custEmail" placeholder="Email Address"
+              style="padding: 15px; border-radius: 10px; border: 1px solid var(--beige); font-family: var(--ff-sans);">
             <input type="tel" id="custPhone" placeholder="WhatsApp Number"
-              style="padding: 15px; border-radius: 10px; border: 1px solid var(--beige);">
+              style="padding: 15px; border-radius: 10px; border: 1px solid var(--beige); font-family: var(--ff-sans);">
             <input type="text" id="custVenue" placeholder="Venue / City"
-              style="padding: 15px; border-radius: 10px; border: 1px solid var(--beige);">
+              style="padding: 15px; border-radius: 10px; border: 1px solid var(--beige); font-family: var(--ff-sans);">
             <input type="date" id="custDate"
-              style="padding: 15px; border-radius: 10px; border: 1px solid var(--beige);">
+              style="padding: 15px; border-radius: 10px; border: 1px solid var(--beige); font-family: var(--ff-sans);">
           </div>
         </div>
       </section>
@@ -849,70 +980,105 @@
     </footer>
   </div>
 
+  <!-- QUOTATION MODAL -->
+  <div class="quot-overlay" id="quotOverlay">
+    <div class="quot-modal">
+      <button class="quot-close" id="quotClose"><i class="fa-solid fa-xmark"></i></button>
+      <div class="quot-logo"><img src="Vaibhavam Logo.jpeg" alt="Vaibhavam"></div>
+      <div class="quot-title">Wedding Quotation</div>
+      <div class="quot-subtitle">Vaibhavam Wedding Photography</div>
+      <div class="quot-client-box" id="quotClientBox"></div>
+      <table class="quot-table">
+        <thead><tr><th>Service</th><th style="text-align:right;">Price</th></tr></thead>
+        <tbody id="quotTableBody"></tbody>
+      </table>
+      <div class="quot-total-row">
+        <span>Grand Total (Estimated)</span>
+        <strong id="quotGrandTotal">₹0</strong>
+      </div>
+      <div class="quot-actions">
+        <button class="quot-btn quot-btn-pdf" id="btnDownloadPDF">
+          <i class="fa-solid fa-file-pdf"></i> Download Branded PDF
+        </button>
+        <button class="quot-btn quot-btn-wa" id="btnWAClient">
+          <i class="fa-brands fa-whatsapp"></i> Send to Me
+        </button>
+        <button class="quot-btn quot-btn-email" id="btnEmail">
+          <i class="fa-solid fa-envelope"></i> Send via Email
+        </button>
+      </div>
+      <p class="quot-note">
+        A copy of this quotation will also be shared with the Vaibhavam team.<br>
+        Final price may vary based on discussion. Valid for 15 days.
+      </p>
+    </div>
+  </div>
+
   <script>
+    // ── CONSTANTS ──
+    const ADMIN_PHONE = '918639972913';
+    const ADMIN_EMAIL = 'vaibhavamweddings@gmail.com';
+    const EVENT_LABELS = {
+      global: 'Package / Event Type',
+      engagement: 'Engagement Ceremony',
+      haldi_groom: 'Pelli Koduku & Haldi',
+      haldi_bride: 'Pelli Kuthuru & Haldi',
+      sangeet: 'Sangeet Ceremony',
+      wedding_bride: 'Wedding (Bride Side)',
+      wedding_groom: 'Wedding (Groom Side)',
+      reception: 'Reception',
+      addons: 'Add-ons & Extras'
+    };
+
     let currentStep = 1;
     const totalSteps = 11;
-    const selections = {}; // { 'engagement:Traditional Photo': 10000 }
+    const selections = {};
 
     const nextBtn = document.getElementById('nextBtn');
     const prevBtn = document.getElementById('prevBtn');
     const progressFill = document.getElementById('progressFill');
     const totalDisplay = document.getElementById('totalDisplay');
 
-    // Handle Option Clicks
+    // ── OPTION CARD CLICKS ──
     document.querySelectorAll('.option-card').forEach(card => {
       card.onclick = () => {
-        const group = card.dataset.group;
         const eventId = card.dataset.event;
         const name = card.dataset.name;
         const price = parseInt(card.dataset.price);
         const key = eventId ? `${eventId}:${name}` : card.dataset.id;
-
-        if (group === 'global') {
-          // Toggle behavior for Step 1 (Multi-select)
-          if (card.classList.contains('selected')) {
-            card.classList.remove('selected');
-            delete selections[key];
-          } else {
-            card.classList.add('selected');
-            selections[key] = price;
-          }
+        if (card.classList.contains('selected')) {
+          card.classList.remove('selected');
+          delete selections[key];
         } else {
-          // Toggle behavior for others
-          if (card.classList.contains('selected')) {
-            card.classList.remove('selected');
-            delete selections[key];
-          } else {
-            card.classList.add('selected');
-            selections[key] = price;
-          }
+          card.classList.add('selected');
+          selections[key] = { price, event: eventId || 'global', name };
         }
         updateTotal();
       };
     });
 
-    function updateTotal() {
-      let total = 0;
-      Object.values(selections).forEach(p => total += p);
-      totalDisplay.innerText = total.toLocaleString();
+    function getTotal() {
+      let t = 0;
+      Object.values(selections).forEach(v => t += v.price);
+      return t;
     }
 
+    function updateTotal() {
+      totalDisplay.innerText = getTotal().toLocaleString('en-IN');
+    }
+
+    // ── STEP NAVIGATION ──
     nextBtn.onclick = () => {
       if (currentStep < totalSteps) {
         currentStep++;
         updateStepUI();
       } else {
-        const name = document.getElementById('custName').value || 'Client';
-        const msg = `Hi Vaibhavam! I'm ${name}. I've built a custom wedding package with an estimated total of ₹${totalDisplay.innerText}. Let's discuss!`;
-        window.location.href = `https://wa.me/918639972913?text=${encodeURIComponent(msg)}`;
+        openQuotationModal();
       }
     };
 
     prevBtn.onclick = () => {
-      if (currentStep > 1) {
-        currentStep--;
-        updateStepUI();
-      }
+      if (currentStep > 1) { currentStep--; updateStepUI(); }
     };
 
     function updateStepUI() {
@@ -925,8 +1091,256 @@
       });
       progressFill.style.width = ((currentStep - 1) / (totalSteps - 1)) * 100 + '%';
       prevBtn.style.visibility = currentStep > 1 ? 'visible' : 'hidden';
-      nextBtn.innerText = currentStep === totalSteps ? 'Complete Quote' : 'Next Step';
+      nextBtn.innerText = currentStep === totalSteps ? 'Complete Quote ✓' : 'Next Step';
       window.scrollTo(0, 0);
+    }
+
+    // ── BUILD GROUPED ITEMS ──
+    function getGroupedItems() {
+      const groups = {};
+      Object.values(selections).forEach(({ event, name, price }) => {
+        if (!groups[event]) groups[event] = [];
+        groups[event].push({ name, price });
+      });
+      return groups;
+    }
+
+    // ── QUOTE TEXT (for WhatsApp / Email) ──
+    function buildQuoteText(client) {
+      const grouped = getGroupedItems();
+      let lines = [`*Vaibhavam Wedding Photography – Quotation*`];
+      lines.push(`------------------------------------------`);
+      lines.push(`*Client:* ${client.name}`);
+      lines.push(`*Phone:* ${client.phone}`);
+      lines.push(`*Venue:* ${client.venue}`);
+      lines.push(`*Date:* ${client.date}`);
+      lines.push(`------------------------------------------`);
+      Object.entries(grouped).forEach(([evt, items]) => {
+        lines.push(`\n*${EVENT_LABELS[evt] || evt}*`);
+        items.forEach(i => lines.push(`  • ${i.name} — ₹${i.price.toLocaleString('en-IN')}`));
+      });
+      lines.push(`------------------------------------------`);
+      lines.push(`*Grand Total (Estimated): ₹${getTotal().toLocaleString('en-IN')}*`);
+      lines.push(`\n_Valid for 15 days. Final price may vary._`);
+      return lines.join('\n');
+    }
+
+    // ── OPEN MODAL ──
+    function openQuotationModal() {
+      const client = {
+        name: document.getElementById('custName').value || 'N/A',
+        email: document.getElementById('custEmail').value || 'N/A',
+        phone: document.getElementById('custPhone').value || 'N/A',
+        venue: document.getElementById('custVenue').value || 'N/A',
+        date: document.getElementById('custDate').value || 'N/A'
+      };
+
+      // Populate client box
+      document.getElementById('quotClientBox').innerHTML = `
+        <div><span>Client Name</span><br><strong>${client.name}</strong></div>
+        <div><span>Wedding Date</span><br><strong>${client.date}</strong></div>
+        <div><span>WhatsApp</span><br><strong>${client.phone}</strong></div>
+        <div><span>Venue / City</span><br><strong>${client.venue}</strong></div>
+        <div><span>Email</span><br><strong>${client.email}</strong></div>
+        <div><span>Quotation ID</span><br><strong>VBW-${Date.now().toString().slice(-6)}</strong></div>
+      `;
+
+      // Populate table
+      const tbody = document.getElementById('quotTableBody');
+      tbody.innerHTML = '';
+      const grouped = getGroupedItems();
+      Object.entries(grouped).forEach(([evt, items]) => {
+        const groupRow = document.createElement('tr');
+        groupRow.className = 'group-row';
+        groupRow.innerHTML = `<td colspan="2">${EVENT_LABELS[evt] || evt}</td>`;
+        tbody.appendChild(groupRow);
+        items.forEach(({ name, price }) => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td>${name}</td><td style="text-align:right;">₹${price.toLocaleString('en-IN')}</td>`;
+          tbody.appendChild(tr);
+        });
+      });
+
+      document.getElementById('quotGrandTotal').innerText = `₹${getTotal().toLocaleString('en-IN')}`;
+
+      // Bind action buttons
+      document.getElementById('btnDownloadPDF').onclick = () => generatePDF(client);
+
+      document.getElementById('btnWAClient').onclick = () => {
+        const text = buildQuoteText(client);
+        const adminMsg = buildQuoteText(client) + `\n\n_Client Email: ${client.email}_`;
+        // Open client WA
+        window.open(`https://wa.me/${client.phone.replace(/\D/g,'')}?text=${encodeURIComponent(text)}`, '_blank');
+        // Open admin WA after short delay
+        setTimeout(() => {
+          window.open(`https://wa.me/${ADMIN_PHONE}?text=${encodeURIComponent(adminMsg)}`, '_blank');
+        }, 800);
+      };
+
+      document.getElementById('btnEmail').onclick = () => {
+        const subject = encodeURIComponent(`Wedding Quotation – ${client.name} | Vaibhavam Photography`);
+        const grouped = getGroupedItems();
+        let body = `Dear ${client.name},%0A%0APlease find your personalized wedding photography quotation below.%0A%0A`;
+        body += `Client: ${client.name}%0APhone: ${client.phone}%0AVenue: ${client.venue}%0ADate: ${client.date}%0A%0A`;
+        Object.entries(grouped).forEach(([evt, items]) => {
+          body += `${EVENT_LABELS[evt] || evt}:%0A`;
+          items.forEach(i => { body += `  • ${i.name} — Rs.${i.price.toLocaleString('en-IN')}%0A`; });
+          body += `%0A`;
+        });
+        body += `Grand Total (Estimated): Rs.${getTotal().toLocaleString('en-IN')}%0A%0AValid for 15 days.%0A%0AWarm regards,%0AVaibhavam Wedding Photography%0A📞 8639972913`;
+        // Send to client
+        if (client.email !== 'N/A') window.open(`mailto:${client.email}?subject=${subject}&body=${body}`, '_blank');
+        // Send to admin
+        setTimeout(() => {
+          window.open(`mailto:${ADMIN_EMAIL}?subject=${subject}&body=${body}`, '_blank');
+        }, 500);
+      };
+
+      document.getElementById('quotClose').onclick = () => {
+        document.getElementById('quotOverlay').classList.remove('open');
+      };
+
+      document.getElementById('quotOverlay').classList.add('open');
+    }
+
+    // ── PDF GENERATION ──
+    async function generatePDF(client) {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+      const W = doc.internal.pageSize.getWidth();
+      const H = doc.internal.pageSize.getHeight();
+      const maroon = [123, 30, 43];
+      const beige = [233, 222, 211];
+      const darkText = [45, 31, 26];
+      const gray = [107, 98, 93];
+      const quotId = `VBW-${Date.now().toString().slice(-6)}`;
+
+      // Header background
+      doc.setFillColor(...maroon);
+      doc.rect(0, 0, W, 48, 'F');
+
+      // Try to load logo
+      try {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        await new Promise((res, rej) => {
+          img.onload = res; img.onerror = rej;
+          img.src = 'Vaibhavam Logo.jpeg';
+        });
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width; canvas.height = img.height;
+        canvas.getContext('2d').drawImage(img, 0, 0);
+        const logoData = canvas.toDataURL('image/jpeg');
+        doc.addImage(logoData, 'JPEG', W/2 - 12, 6, 24, 24);
+      } catch(e) {
+        // Logo failed – just show text
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(14);
+        doc.setTextColor(255, 255, 255);
+        doc.text('VAIBHAVAM', W/2, 20, { align: 'center' });
+      }
+
+      // Company name under logo
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(11);
+      doc.setTextColor(255, 255, 255);
+      doc.text('VAIBHAVAM WEDDING PHOTOGRAPHY', W/2, 36, { align: 'center' });
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.setTextColor(233, 200, 200);
+      doc.text('📞 8639972913  |  vaibhavamweddings@gmail.com', W/2, 43, { align: 'center' });
+
+      // QUOTATION label
+      let y = 58;
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(20);
+      doc.setTextColor(...maroon);
+      doc.text('WEDDING QUOTATION', W/2, y, { align: 'center' });
+
+      // Decorative line
+      y += 4;
+      doc.setDrawColor(...maroon);
+      doc.setLineWidth(0.5);
+      doc.line(20, y, W-20, y);
+
+      // Quotation ID & Date
+      y += 8;
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.setTextColor(...gray);
+      doc.text(`Quotation ID: ${quotId}`, 20, y);
+      doc.text(`Generated: ${new Date().toLocaleDateString('en-IN', { day:'2-digit', month:'long', year:'numeric' })}`, W-20, y, { align: 'right' });
+
+      // Client details box
+      y += 6;
+      doc.setFillColor(...beige);
+      doc.roundedRect(16, y, W-32, 32, 4, 4, 'F');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.setTextColor(...maroon);
+      doc.text('CLIENT DETAILS', 22, y+7);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8.5);
+      doc.setTextColor(...darkText);
+      const col1x = 22, col2x = W/2 + 5;
+      doc.text(`Name: ${client.name}`, col1x, y+14);
+      doc.text(`Phone: ${client.phone}`, col2x, y+14);
+      doc.text(`Email: ${client.email}`, col1x, y+21);
+      doc.text(`Venue: ${client.venue}`, col2x, y+21);
+      doc.text(`Wedding Date: ${client.date}`, col1x, y+28);
+
+      // Services table
+      y += 40;
+      const grouped = getGroupedItems();
+      const tableRows = [];
+      Object.entries(grouped).forEach(([evt, items]) => {
+        tableRows.push([{ content: EVENT_LABELS[evt] || evt, colSpan: 2, styles: { fillColor: [245,235,230], textColor: maroon, fontStyle: 'bold', fontSize: 8 } }]);
+        items.forEach(({ name, price }) => {
+          tableRows.push([name, `Rs. ${price.toLocaleString('en-IN')}`]);
+        });
+      });
+
+      doc.autoTable({
+        startY: y,
+        head: [['Service / Package', 'Price']],
+        body: tableRows,
+        theme: 'grid',
+        styles: { font: 'helvetica', fontSize: 8.5, cellPadding: 4, textColor: darkText },
+        headStyles: { fillColor: maroon, textColor: [255,255,255], fontStyle: 'bold', fontSize: 9 },
+        columnStyles: { 1: { halign: 'right', cellWidth: 40 } },
+        margin: { left: 16, right: 16 }
+      });
+
+      // Grand total bar
+      const finalY = doc.lastAutoTable.finalY + 6;
+      doc.setFillColor(...maroon);
+      doc.roundedRect(16, finalY, W-32, 14, 3, 3, 'F');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(11);
+      doc.setTextColor(255,255,255);
+      doc.text('GRAND TOTAL (ESTIMATED)', 22, finalY+9);
+      doc.text(`Rs. ${getTotal().toLocaleString('en-IN')}`, W-20, finalY+9, { align: 'right' });
+
+      // Terms
+      const termsY = finalY + 22;
+      doc.setFont('helvetica', 'italic');
+      doc.setFontSize(7.5);
+      doc.setTextColor(...gray);
+      doc.text('Terms & Conditions:', 20, termsY);
+      doc.setFont('helvetica', 'normal');
+      doc.text('• This quotation is valid for 15 days from the date of issue.', 20, termsY+5);
+      doc.text('• Final pricing may vary based on travel, extra hours, and customization.', 20, termsY+10);
+      doc.text('• 50% advance payment required to confirm the booking.', 20, termsY+15);
+
+      // Footer
+      doc.setFillColor(...maroon);
+      doc.rect(0, H-14, W, 14, 'F');
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(7.5);
+      doc.setTextColor(255,255,255);
+      doc.text('Thank you for choosing Vaibhavam Wedding Photography — Capturing Love Stories Forever', W/2, H-6, { align: 'center' });
+
+      doc.save(`Vaibhavam_Quotation_${client.name.replace(/\s+/g,'_')}_${quotId}.pdf`);
     }
   </script>
 
