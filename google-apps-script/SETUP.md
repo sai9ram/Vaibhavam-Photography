@@ -1,30 +1,38 @@
-# Vaibhavam Quotation — Setup Guide
+# Vaibhavam Quotation — Setup
 
-## Email: Web3Forms (recommended)
+## Email (FormSubmit — no password needed)
 
-Follow **`WEB3FORMS-SETUP.md`** — takes about 5 minutes, no Gmail App Password needed.
+Emails are sent via **[FormSubmit.co](https://formsubmit.co)** from the browser.
+
+- **Admin inbox:** `Vaibhavambyvarun@gmail.com` (set in `quote.html` as `ADMIN_EMAIL`)
+- **Customer:** receives a copy at the email they enter on the quote form
+- **No** Gmail password, API key, or Vercel env vars required for email
+
+### First-time only (client must do once)
+
+The first time FormSubmit is used with an email address, that inbox gets an **activation link** from FormSubmit. The client must click **Activate Form** in that email. After that, all quotation emails work automatically.
 
 ---
 
 ## Google Sheet (CRM)
 
-Leads are sent automatically as form data. If columns show N/A, update your Apps Script with `Code.gs` from this folder and redeploy the web app.
+Leads are logged via your Google Apps Script URL in `quote.html`.  
+If columns show N/A, update Apps Script with `Code.gs` from this folder and redeploy the web app.
 
 ---
 
-## WhatsApp PDF (optional)
+## WhatsApp (optional)
 
-Add to Vercel environment variables:
-
-| Key | Service |
-|-----|---------|
-| `ULTRAMSG_TOKEN` + `ULTRAMSG_INSTANCE` | [ultramsg.com](https://ultramsg.com) |
-| `CALLMEBOT_API_KEY` | [callmebot.com](https://www.callmebot.com/blog/free-api-whatsapp-messages/) |
-
-Without these, WhatsApp backup buttons still open after the quote is completed.
+WhatsApp backup buttons open after each quote. For automatic WhatsApp PDF, add UltraMsg or CallMeBot keys on Vercel (see previous docs) — optional.
 
 ---
 
-## Gmail (optional, not used by default)
+## Change admin email
 
-See `GMAIL-SETUP.md` only if you switch back to Gmail SMTP on Vercel.
+Edit in `quote.html`:
+
+```javascript
+const ADMIN_EMAIL = 'Vaibhavambyvarun@gmail.com';
+```
+
+Then redeploy the site.

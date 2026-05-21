@@ -1482,9 +1482,7 @@
   <script>
     // ── CONSTANTS ──
     const ADMIN_PHONE = '918639972913';
-    const ADMIN_EMAIL = 'Vaibhavambyvarun@gmail.com';
-    // Get your free key at https://web3forms.com → paste below (safe to use in frontend)
-    const WEB3FORMS_ACCESS_KEY = 'PASTE_YOUR_WEB3FORMS_ACCESS_KEY_HERE';
+    const ADMIN_EMAIL = 'Vaibhavambyvarun@gmail.com'; // FormSubmit delivers here (no password needed)
     const GOOGLE_SHEETS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbyySJj9UPUnudyPBLr0lo8SY7vHJMdG1rghFDyswlU6gFBAmaIdzMJjCL4DeXH9X01u/exec';
     const EVENT_LABELS = {
       global: 'Package / Event Type',
@@ -1948,8 +1946,8 @@
       } catch (err) {
         console.error('Auto delivery error:', err);
         let hint = err.message ? err.message : 'Could not send email.';
-        if (/Web3Forms|WEB3FORMS|PASTE_YOUR/i.test(hint)) {
-          hint = 'Add your Web3Forms access key in quote.html (search WEB3FORMS_ACCESS_KEY) or in Vercel env vars.';
+        if (/FormSubmit|formsubmit/i.test(hint)) {
+          hint = 'Email failed via FormSubmit. Ask the client to activate FormSubmit on their inbox (first-time link from formsubmit.co).';
         }
         setSendStatus('error', hint + ' Use the buttons below to download or share.');
         try {
@@ -1992,12 +1990,6 @@
       return payload;
     }
 
-    function getDeliveryApiUrl() {
-      const origin = window.location.origin;
-      if (!origin || origin === 'null' || window.location.protocol === 'file:') return null;
-      return origin + '/api/send-quotation';
-    }
-
     function buildSheetFormData(client, pdfData) {
       const payload = buildLeadPayloadObject(client, pdfData, false);
       const formData = new URLSearchParams();
@@ -2029,45 +2021,66 @@
       return new Blob([bytes], { type: mimeType });
     }
 
-    function isWeb3FormsConfigured() {
-      const key = (WEB3FORMS_ACCESS_KEY || '').trim();
-      return key.length > 10 && !key.includes('PASTE_YOUR');
+    function buildFormSubmitData(client, pdfData) {
+      const clientEmail = (client.email || '').trim();
+      const blob = base64ToBlob(pdfData.base64, 'application/pdf');
+      const subject = `Vaibhavam Quotation — ${client.name} | ${client.quoteId || pdfData.quotId}`;
+      const message = [
+        buildQuoteText(client),
+        '',
+        'PDF quotation attached to this email.',
+      ].join('\n');
+
+      const form = new FormData();
+      form.append('name', client.name || '');
+      form.append('email', clientEmail);
+      form.append('phone', client.phone || '');
+      form.append('venue', client.venue || '');
+      form.append('date', client.date || '');
+      form.append('quoteId', client.quoteId || pdfData.quotId);
+      form.append('budget', 'Rs. ' + getTotal().toLocaleString('en-IN'));
+      form.append('message', message);
+      form.append('attachment', blob, pdfData.fileName);
+      form.append('_subject', subject);
+      form.append('_template', 'table');
+      form.append('_captcha', 'false');
+      form.append('_replyto', clientEmail);
+      form.append('_cc', clientEmail);
+      form.append(
+        '_autoresponse',
+        'Thank you for your interest in Vaibhavam Wedding Photography! Your quotation PDF is attached. We will contact you shortly.'
+      );
+      return form;
     }
 
-    async function sendViaWeb3Forms(client, pdfData) {
-      if (!isWeb3FormsConfigured()) return null;
+    async function postFormSubmit(targetEmail, formData) {
+      const url = 'https://formsubmit.co/ajax/' + encodeURIComponent(targetEmail);
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: formData
+      });
+      let json = {};
+      try {
+        json = await res.json();
+      } catch (e) {
+        if (res.ok) return true;
+      }
+      const ok = res.ok && (json.success === true || json.success === 'true' || res.status === 200);
+      if (!ok) {
+        throw new Error(json.message || 'FormSubmit could not send the email');
+      }
+      return true;
+    }
 
+    async function sendViaFormSubmit(client, pdfData) {
       const clientEmail = (client.email || '').trim();
       if (!clientEmail.includes('@')) {
         throw new Error('Customer email is invalid');
       }
 
-      const blob = base64ToBlob(pdfData.base64, 'application/pdf');
-      const message = [
-        buildQuoteText(client),
-        '',
-        'PDF quotation attached.',
-        `Phone: ${client.phone}`,
-        `Venue: ${client.venue}`,
-        `Date: ${client.date}`,
-      ].join('\n');
-
-      const form = new FormData();
-      form.append('access_key', WEB3FORMS_ACCESS_KEY.trim());
-      form.append('subject', `Vaibhavam Quotation — ${client.name} | ${client.quoteId || pdfData.quotId}`);
-      form.append('from_name', 'Vaibhavam Wedding Photography');
-      form.append('name', client.name || '');
-      form.append('email', clientEmail);
-      form.append('cc', ADMIN_EMAIL);
-      form.append('phone', client.phone || '');
-      form.append('message', message);
-      form.append('attachment', blob, pdfData.fileName);
-
-      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: form });
-      const json = await res.json();
-      if (!json.success) {
-        throw new Error(json.message || 'Web3Forms could not send the email');
-      }
+      const form = buildFormSubmitData(client, pdfData);
+      await postFormSubmit(ADMIN_EMAIL, form);
 
       return {
         success: true,
@@ -2078,44 +2091,7 @@
 
     async function deliverQuotationAutomatically(client, pdfData) {
       await submitLeadToSheetsOnly(client, pdfData);
-
-      let lastError = '';
-
-      if (isWeb3FormsConfigured()) {
-        try {
-          return await sendViaWeb3Forms(client, pdfData);
-        } catch (e) {
-          lastError = e.message || 'Web3Forms failed';
-          console.warn('Web3Forms:', e);
-        }
-      } else {
-        lastError = 'Web3Forms access key not set in quote.html';
-      }
-
-      const apiUrl = getDeliveryApiUrl();
-      if (apiUrl) {
-        try {
-          const payload = buildLeadPayloadObject(client, pdfData, true);
-          const res = await fetch(apiUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-          const result = await res.json().catch(() => ({}));
-          if (result.delivery?.email?.client && result.delivery?.email?.admin) {
-            return result;
-          }
-          lastError = result.error || `Server returned ${res.status}`;
-        } catch (e) {
-          lastError = e.message || lastError;
-        }
-      }
-
-      const err = new Error(
-        lastError + '. Paste your Web3Forms access key in quote.html (line WEB3FORMS_ACCESS_KEY) or add WEB3FORMS_ACCESS_KEY in Vercel.'
-      );
-      err.delivery = { email: { client: false, admin: false }, whatsapp: { client: false, admin: false } };
-      throw err;
+      return await sendViaFormSubmit(client, pdfData);
     }
 
     async function generatePDF(client) {
