@@ -431,66 +431,127 @@
       transform: translateY(-50%) rotate(180deg);
     }
 
-    /* ── REAL-TIME INPUT FIELDS VALIDATION ── */
+    /* ── INPUT FIELDS & FINAL STEP FORM (MOBILE FIRST) ── */
     .input-field-group {
       display: flex;
       flex-direction: column;
       gap: 6px;
       text-align: left;
     }
-    
+
     .input-field-group label {
-      font-size: 0.85rem;
-      font-weight: 600;
+      font-family: var(--ff-sans);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
       color: var(--text);
+      opacity: 0.75;
     }
-    
+
     .input-field-group label .required {
       color: var(--maroon);
+      opacity: 1;
     }
-    
+
     .input-field-group input {
-      padding: 15px;
-      border-radius: 10px;
-      border: 1px solid var(--beige);
+      padding: 15px 18px;
+      border-radius: 12px;
+      border: 1.5px solid rgba(123, 30, 43, 0.15);
       font-family: var(--ff-sans);
-      font-size: 0.95rem;
-      transition: all 0.3s ease;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text);
       background: #FAF8F6;
       width: 100%;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      -webkit-appearance: none;
+      appearance: none;
     }
-    
+
+    .input-field-group input::placeholder {
+      color: #c4a5a9;
+      font-weight: 400;
+    }
+
     .input-field-group input:focus {
       outline: none;
       border-color: var(--maroon);
       background: #fff;
-      box-shadow: 0 0 0 3px rgba(123, 30, 43, 0.1);
+      box-shadow: 0 0 0 4px rgba(123, 30, 43, 0.08);
     }
-    
+
     .input-field-group input.invalid {
       border-color: #e15c5c;
-      background: #fffbfa;
+      background: #fffbfb;
     }
-    
+
     .input-field-group input.invalid:focus {
-      box-shadow: 0 0 0 3px rgba(225, 92, 92, 0.1);
+      box-shadow: 0 0 0 4px rgba(225, 92, 92, 0.1);
     }
-    
+
     .input-field-group input.valid {
       border-color: #2da44e;
       background: #f6fcf8;
     }
-    
+
     .field-error {
-      display: none;
-      font-size: 0.75rem;
-      color: #e15c5c;
+      font-size: 0.73rem;
       font-weight: 500;
+      color: #e15c5c;
       margin-top: 2px;
+      display: none;
+      align-items: center;
+      gap: 5px;
     }
-    
+
     .input-field-group input.invalid ~ .field-error {
-      display: block;
+      display: flex;
+    }
+
+    /* ── FINAL STEP CONTAINER ── */
+    .final-form-container {
+      background: #fff;
+      padding: 28px 20px 24px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(123, 30, 43, 0.06), 0 2px 8px rgba(0,0,0,0.04);
+      border: 1px solid rgba(123, 30, 43, 0.10);
+      margin: 0 auto;
+      width: 100%;
+      max-width: 720px;
+    }
+
+    .form-inputs-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      width: 100%;
+    }
+
+    @media (min-width: 600px) {
+      .final-form-container {
+        padding: 36px 32px 32px;
+      }
+
+      .form-inputs-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 22px 18px;
+      }
+
+      .input-field-group.full-width {
+        grid-column: span 2;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .final-form-container {
+        padding: 44px 40px 40px;
+        box-shadow: 0 12px 48px rgba(123, 30, 43, 0.08), 0 4px 16px rgba(0,0,0,0.04);
+      }
+
+      .form-inputs-grid {
+        gap: 26px 22px;
+      }
     }
     
     @keyframes shake {
@@ -1188,32 +1249,32 @@
       <section class="step-content" id="step11">
         <h2>Final Step</h2>
         <p class="step-sub">We just need a few details to finalize your quote.</p>
-        <div class="options-grid" style="background: #fff; padding: 30px; border-radius: 20px;">
-          <div class="form-inputs-container" style="display:grid; gap: 20px; width: 100%;">
-            <div class="input-field-group">
+        <div class="final-form-container">
+          <div class="form-inputs-grid">
+            <div class="input-field-group full-width">
               <label for="custName">Full Name <span class="required">*</span></label>
               <input type="text" id="custName" placeholder="e.g. Rahul Sharma">
-              <span class="field-error" id="error_custName">Please enter your full name (min 2 characters)</span>
+              <span class="field-error" id="error_custName"><i class="fa-solid fa-circle-exclamation"></i> Please enter your full name (min 2 characters)</span>
             </div>
             <div class="input-field-group">
               <label for="custEmail">Email Address <span class="required">*</span></label>
               <input type="email" id="custEmail" placeholder="e.g. rahul@example.com">
-              <span class="field-error" id="error_custEmail">Please enter a valid email address</span>
+              <span class="field-error" id="error_custEmail"><i class="fa-solid fa-circle-exclamation"></i> Please enter a valid email address</span>
             </div>
             <div class="input-field-group">
               <label for="custPhone">WhatsApp Number <span class="required">*</span></label>
               <input type="tel" id="custPhone" placeholder="e.g. 9876543210">
-              <span class="field-error" id="error_custPhone">Please enter a valid phone number (min 10 digits)</span>
+              <span class="field-error" id="error_custPhone"><i class="fa-solid fa-circle-exclamation"></i> Please enter a valid phone number (min 10 digits)</span>
             </div>
             <div class="input-field-group">
               <label for="custVenue">Venue / City <span class="required">*</span></label>
               <input type="text" id="custVenue" placeholder="e.g. Taj Mahal Hotel, Mumbai">
-              <span class="field-error" id="error_custVenue">Please specify the wedding venue or city</span>
+              <span class="field-error" id="error_custVenue"><i class="fa-solid fa-circle-exclamation"></i> Please specify the wedding venue or city</span>
             </div>
             <div class="input-field-group">
               <label for="custDate">Wedding Date <span class="required">*</span></label>
               <input type="date" id="custDate">
-              <span class="field-error" id="error_custDate">Please select your wedding date</span>
+              <span class="field-error" id="error_custDate"><i class="fa-solid fa-circle-exclamation"></i> Please select your wedding date</span>
             </div>
           </div>
         </div>
