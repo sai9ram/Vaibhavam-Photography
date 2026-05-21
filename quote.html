@@ -166,7 +166,7 @@
     /* ── FORM CONTENT ── */
     .form-wrapper {
       flex: 1;
-      padding: 40px 20px 100px; /* Reduced top padding as header is sticky */
+      padding: 40px 20px 180px; /* Increased bottom padding for clear visibility gap above the fixed footer */
       max-width: 1200px;
       margin: 0 auto;
       width: 100%;
@@ -402,6 +402,246 @@
       text-decoration: underline;
     }
 
+    /* ── PRICE SUMMARY INTERACTIVITY ── */
+    .price-summary {
+      cursor: pointer;
+      position: relative;
+      padding-right: 25px;
+      transition: transform 0.2s ease;
+    }
+    
+    .price-summary:hover {
+      transform: translateY(-2px);
+    }
+
+    .price-summary::after {
+      content: "\f077"; /* FontAwesome chevron up */
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      font-size: 0.75rem;
+      color: var(--maroon);
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: transform 0.3s ease;
+    }
+
+    .price-summary.active-drawer::after {
+      transform: translateY(-50%) rotate(180deg);
+    }
+
+    /* ── REAL-TIME INPUT FIELDS VALIDATION ── */
+    .input-field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      text-align: left;
+    }
+    
+    .input-field-group label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    
+    .input-field-group label .required {
+      color: var(--maroon);
+    }
+    
+    .input-field-group input {
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid var(--beige);
+      font-family: var(--ff-sans);
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      background: #FAF8F6;
+      width: 100%;
+    }
+    
+    .input-field-group input:focus {
+      outline: none;
+      border-color: var(--maroon);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(123, 30, 43, 0.1);
+    }
+    
+    .input-field-group input.invalid {
+      border-color: #e15c5c;
+      background: #fffbfa;
+    }
+    
+    .input-field-group input.invalid:focus {
+      box-shadow: 0 0 0 3px rgba(225, 92, 92, 0.1);
+    }
+    
+    .input-field-group input.valid {
+      border-color: #2da44e;
+      background: #f6fcf8;
+    }
+    
+    .field-error {
+      display: none;
+      font-size: 0.75rem;
+      color: #e15c5c;
+      font-weight: 500;
+      margin-top: 2px;
+    }
+    
+    .input-field-group input.invalid ~ .field-error {
+      display: block;
+    }
+    
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+      20%, 40%, 60%, 80% { transform: translateX(5px); }
+    }
+    
+    .shake-animation {
+      animation: shake 0.5s ease;
+    }
+
+    /* ── REAL-TIME SUMMARY DRAWER ── */
+    .summary-drawer {
+      position: fixed;
+      bottom: -100%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 600px;
+      background: var(--white);
+      border-radius: 24px 24px 0 0;
+      box-shadow: 0 -15px 40px rgba(0,0,0,0.15);
+      z-index: 1010;
+      transition: bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: 70vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .summary-drawer.open {
+      bottom: 0;
+    }
+
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(4px);
+      z-index: 1005;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .drawer-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .drawer-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(123, 30, 43, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .drawer-header h3 {
+      font-family: var(--ff-serif);
+      color: var(--maroon);
+      font-size: 1.5rem;
+    }
+
+    .drawer-close {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      color: var(--gray);
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
+    }
+
+    .drawer-close:hover {
+      background: rgba(0,0,0,0.05);
+    }
+
+    .drawer-body {
+      padding: 20px 24px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .drawer-section {
+      margin-bottom: 20px;
+    }
+
+    .drawer-section-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--maroon);
+      font-weight: 600;
+      margin-bottom: 8px;
+      border-bottom: 1px dashed rgba(123, 30, 43, 0.1);
+      padding-bottom: 4px;
+    }
+
+    .drawer-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      font-size: 0.88rem;
+    }
+
+    .drawer-item-name {
+      color: var(--text);
+    }
+
+    .drawer-item-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .drawer-item-price {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .drawer-item-remove {
+      color: #e15c5c;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+    }
+
+    .drawer-item-remove:hover {
+      transform: scale(1.2);
+    }
+
+    .drawer-empty {
+      text-align: center;
+      color: var(--gray);
+      padding: 40px 0;
+      font-style: italic;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 600px) {
       .step-dot {
@@ -415,7 +655,7 @@
       }
 
       .form-wrapper {
-        padding-bottom: 140px;
+        padding-bottom: 220px; /* Increased bottom padding on mobile for clear visibility gap above the fixed footer */
       }
 
       .footer-inner {
@@ -949,22 +1189,47 @@
         <h2>Final Step</h2>
         <p class="step-sub">We just need a few details to finalize your quote.</p>
         <div class="options-grid" style="background: #fff; padding: 30px; border-radius: 20px;">
-          <div style="display:grid; gap: 20px;">
-            <input type="text" id="custName" placeholder="Full Name"
-              style="padding: 15px; border-radius: 10px; border: 1px solid var(--beige); font-family: var(--ff-sans);">
-            <input type="email" id="custEmail" placeholder="Email Address"
-              style="padding: 15px; border-radius: 10px; border: 1px solid var(--beige); font-family: var(--ff-sans);">
-            <input type="tel" id="custPhone" placeholder="WhatsApp Number"
-              style="padding: 15px; border-radius: 10px; border: 1px solid var(--beige); font-family: var(--ff-sans);">
-            <input type="text" id="custVenue" placeholder="Venue / City"
-              style="padding: 15px; border-radius: 10px; border: 1px solid var(--beige); font-family: var(--ff-sans);">
-            <input type="date" id="custDate"
-              style="padding: 15px; border-radius: 10px; border: 1px solid var(--beige); font-family: var(--ff-sans);">
+          <div class="form-inputs-container" style="display:grid; gap: 20px; width: 100%;">
+            <div class="input-field-group">
+              <label for="custName">Full Name <span class="required">*</span></label>
+              <input type="text" id="custName" placeholder="e.g. Rahul Sharma">
+              <span class="field-error" id="error_custName">Please enter your full name (min 2 characters)</span>
+            </div>
+            <div class="input-field-group">
+              <label for="custEmail">Email Address <span class="required">*</span></label>
+              <input type="email" id="custEmail" placeholder="e.g. rahul@example.com">
+              <span class="field-error" id="error_custEmail">Please enter a valid email address</span>
+            </div>
+            <div class="input-field-group">
+              <label for="custPhone">WhatsApp Number <span class="required">*</span></label>
+              <input type="tel" id="custPhone" placeholder="e.g. 9876543210">
+              <span class="field-error" id="error_custPhone">Please enter a valid phone number (min 10 digits)</span>
+            </div>
+            <div class="input-field-group">
+              <label for="custVenue">Venue / City <span class="required">*</span></label>
+              <input type="text" id="custVenue" placeholder="e.g. Taj Mahal Hotel, Mumbai">
+              <span class="field-error" id="error_custVenue">Please specify the wedding venue or city</span>
+            </div>
+            <div class="input-field-group">
+              <label for="custDate">Wedding Date <span class="required">*</span></label>
+              <input type="date" id="custDate">
+              <span class="field-error" id="error_custDate">Please select your wedding date</span>
+            </div>
           </div>
         </div>
       </section>
 
     </main>
+
+    <!-- REAL-TIME SUMMARY DRAWER -->
+    <div class="summary-drawer" id="summaryDrawer">
+      <div class="drawer-header">
+        <h3>Selected Services</h3>
+        <button class="drawer-close" id="closeDrawerBtn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="drawer-body" id="drawerBody"></div>
+    </div>
+    <div class="drawer-overlay" id="drawerOverlay"></div>
 
     <footer class="form-footer">
       <div class="footer-inner">
@@ -1054,6 +1319,8 @@
           card.classList.add('selected');
           selections[key] = { price, event: eventId || 'global', name };
         }
+        // Save selections in real-time
+        localStorage.setItem('vaibhavam_selections', JSON.stringify(selections));
         updateTotal();
       };
     });
@@ -1066,6 +1333,7 @@
 
     function updateTotal() {
       totalDisplay.innerText = getTotal().toLocaleString('en-IN');
+      renderDrawer();
     }
 
     // ── STEP NAVIGATION ──
@@ -1074,6 +1342,23 @@
         currentStep++;
         updateStepUI();
       } else {
+        const validity = checkFormValidity();
+        if (!validity.allValid) {
+          // Highlight errors in real-time
+          validateInputsRealTime(true);
+          
+          // Shake the form
+          const container = document.querySelector('.form-inputs-container');
+          if (container) {
+            container.classList.remove('shake-animation');
+            void container.offsetWidth; // trigger reflow
+            container.classList.add('shake-animation');
+            setTimeout(() => {
+              container.classList.remove('shake-animation');
+            }, 600);
+          }
+          return;
+        }
         openQuotationModal();
       }
     };
@@ -1093,8 +1378,224 @@
       progressFill.style.width = ((currentStep - 1) / (totalSteps - 1)) * 100 + '%';
       prevBtn.style.visibility = currentStep > 1 ? 'visible' : 'hidden';
       nextBtn.innerText = currentStep === totalSteps ? 'Complete Quote ✓' : 'Next Step';
-      window.scrollTo(0, 0);
+      
+      // Update validation visual feedback when on step 11
+      if (currentStep === totalSteps) {
+        validateInputsRealTime(false);
+      } else {
+        // Reset disabled visual styles for other steps
+        nextBtn.classList.remove('disabled');
+        nextBtn.style.opacity = '1';
+        nextBtn.style.cursor = 'pointer';
+      }
+      
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+
+    // Make Step Dots Interactive
+    document.querySelectorAll('.step-dot').forEach((dot, index) => {
+      dot.style.cursor = 'pointer';
+      dot.title = `Go to Step ${index + 1}`;
+      dot.onclick = () => {
+        currentStep = index + 1;
+        updateStepUI();
+      };
+    });
+
+    // ── REAL-TIME VALIDATION & INPUT PERSISTENCE ──
+    function checkFormValidity() {
+      const name = document.getElementById('custName').value.trim();
+      const email = document.getElementById('custEmail').value.trim();
+      const phone = document.getElementById('custPhone').value.trim();
+      const venue = document.getElementById('custVenue').value.trim();
+      const date = document.getElementById('custDate').value.trim();
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const phoneClean = phone.replace(/\D/g, '');
+
+      const isNameValid = name.length >= 2;
+      const isEmailValid = emailRegex.test(email);
+      const isPhoneValid = phoneClean.length >= 10;
+      const isVenueValid = venue.length >= 2;
+      const isDateValid = date !== '';
+
+      return {
+        isNameValid,
+        isEmailValid,
+        isPhoneValid,
+        isVenueValid,
+        isDateValid,
+        allValid: isNameValid && isEmailValid && isPhoneValid && isVenueValid && isDateValid
+      };
+    }
+
+    function validateInputsRealTime(showErrors = false) {
+      const validity = checkFormValidity();
+      
+      const fields = [
+        { id: 'custName', isValid: validity.isNameValid },
+        { id: 'custEmail', isValid: validity.isEmailValid },
+        { id: 'custPhone', isValid: validity.isPhoneValid },
+        { id: 'custVenue', isValid: validity.isVenueValid },
+        { id: 'custDate', isValid: validity.isDateValid }
+      ];
+
+      fields.forEach(f => {
+        const el = document.getElementById(f.id);
+        if (!el) return;
+        
+        const value = el.value.trim();
+        if (value.length > 0 || showErrors) {
+          if (f.isValid) {
+            el.classList.remove('invalid');
+            el.classList.add('valid');
+          } else {
+            el.classList.remove('valid');
+            el.classList.add('invalid');
+          }
+        } else {
+          el.classList.remove('valid', 'invalid');
+        }
+      });
+
+      // Update button state visually
+      if (currentStep === totalSteps) {
+        if (validity.allValid) {
+          nextBtn.classList.remove('disabled');
+          nextBtn.style.opacity = '1';
+          nextBtn.style.cursor = 'pointer';
+        } else {
+          nextBtn.classList.add('disabled');
+          nextBtn.style.opacity = '0.6';
+          nextBtn.style.cursor = 'not-allowed';
+        }
+      }
+    }
+
+    // Initialize Input listeners and load from LocalStorage
+    const inputIds = ['custName', 'custEmail', 'custPhone', 'custVenue', 'custDate'];
+    inputIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        const savedVal = localStorage.getItem(`vaibhavam_${id}`);
+        if (savedVal) el.value = savedVal;
+        
+        el.addEventListener('input', () => {
+          localStorage.setItem(`vaibhavam_${id}`, el.value);
+          validateInputsRealTime(false);
+        });
+        el.addEventListener('change', () => {
+          localStorage.setItem(`vaibhavam_${id}`, el.value);
+          validateInputsRealTime(false);
+        });
+      }
+    });
+
+    // ── SUMMARY DRAWER DYNAMICS ──
+    const summaryDrawer = document.getElementById('summaryDrawer');
+    const drawerOverlay = document.getElementById('drawerOverlay');
+    const priceSummary = document.querySelector('.price-summary');
+
+    function toggleDrawer() {
+      const isOpen = summaryDrawer.classList.toggle('open');
+      drawerOverlay.classList.toggle('open', isOpen);
+      priceSummary.classList.toggle('active-drawer', isOpen);
+      if (isOpen) {
+        renderDrawer();
+      }
+    }
+
+    priceSummary.addEventListener('click', toggleDrawer);
+    document.getElementById('closeDrawerBtn').addEventListener('click', toggleDrawer);
+    drawerOverlay.addEventListener('click', toggleDrawer);
+
+    function renderDrawer() {
+      const drawerBody = document.getElementById('drawerBody');
+      if (!drawerBody) return;
+
+      const grouped = getGroupedItems();
+      const keys = Object.keys(grouped);
+
+      if (keys.length === 0) {
+        drawerBody.innerHTML = `
+          <div class="drawer-empty">
+            <i class="fa-solid fa-cart-shopping" style="font-size: 2rem; margin-bottom: 10px; opacity: 0.3;"></i>
+            <p>No services selected yet. Browse steps to add services to your package!</p>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+      Object.entries(grouped).forEach(([evt, items]) => {
+        const eventLabel = EVENT_LABELS[evt] || evt;
+        html += `
+          <div class="drawer-section">
+            <div class="drawer-section-title">${eventLabel}</div>
+        `;
+        items.forEach(({ name, price }) => {
+          const key = evt ? `${evt}:${name}` : '';
+          html += `
+            <div class="drawer-item">
+              <span class="drawer-item-name">${name}</span>
+              <div class="drawer-item-right">
+                <span class="drawer-item-price">₹${price.toLocaleString('en-IN')}</span>
+                <button class="drawer-item-remove" onclick="removeDrawerItem('${key}')" title="Remove Service">
+                  <i class="fa-solid fa-circle-xmark"></i>
+                </button>
+              </div>
+            </div>
+          `;
+        });
+        html += `</div>`;
+      });
+      drawerBody.innerHTML = html;
+    }
+
+    window.removeDrawerItem = function(key) {
+      document.querySelectorAll('.option-card').forEach(card => {
+        const cEvent = card.dataset.event;
+        const cName = card.dataset.name;
+        const cId = card.dataset.id;
+        const cKey = cEvent ? `${cEvent}:${cName}` : cId;
+        if (cKey === key) {
+          card.classList.remove('selected');
+        }
+      });
+
+      delete selections[key];
+      localStorage.setItem('vaibhavam_selections', JSON.stringify(selections));
+      updateTotal();
+      renderDrawer();
+    };
+
+    // Load saved selections on window load
+    function loadSavedSelections() {
+      try {
+        const saved = localStorage.getItem('vaibhavam_selections');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          Object.assign(selections, parsed);
+          
+          document.querySelectorAll('.option-card').forEach(card => {
+            const eventId = card.dataset.event;
+            const name = card.dataset.name;
+            const key = eventId ? `${eventId}:${name}` : card.dataset.id;
+            if (selections[key]) {
+              card.classList.add('selected');
+            } else {
+              card.classList.remove('selected');
+            }
+          });
+          updateTotal();
+        }
+      } catch (e) {
+        console.error('Error loading saved selections:', e);
+      }
+    }
+    
+    // Call loadSavedSelections
+    window.addEventListener('DOMContentLoaded', loadSavedSelections);
 
     // ── BUILD GROUPED ITEMS ──
     function getGroupedItems() {
