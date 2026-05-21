@@ -2326,10 +2326,10 @@
 
     @media (max-width: 768px) and (orientation: portrait) {
       .splash-video {
-        width: 100vh;
-        height: 100vw;
-        object-fit: cover;
-        transform: rotate(90deg);
+        width: 100vw;
+        height: 100vh;
+        object-fit: contain;
+        transform: none;
         transform-origin: center;
       }
     }
@@ -2480,38 +2480,7 @@
       transform: scale(0.98) translateY(0);
     }
 
-    .landscape-hint {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 35px;
-      font-size: 0.75rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.4);
-      animation: pulseHint 2.5s infinite ease-in-out;
-    }
 
-    .landscape-hint i {
-      font-size: 0.85rem;
-      animation: rotateIcon 3s infinite linear;
-    }
-
-    @keyframes rotateIcon {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    @keyframes pulseHint {
-      0%, 100% { opacity: 0.3; transform: translateY(0); }
-      50% { opacity: 0.8; transform: translateY(-3px); }
-    }
-
-    @media (orientation: landscape) or (min-width: 769px) {
-      .landscape-hint {
-        display: none !important;
-      }
-    }
 
     @media (min-width: 769px) {
       .trigger-logo-container {
@@ -2979,10 +2948,7 @@
       <button class="enter-btn" onclick="beginExperience()">
         <span class="btn-text">Enter Experience</span>
       </button>
-      <div class="landscape-hint">
-        <i class="fa-solid fa-rotate"></i>
-        <span>Rotate device for cinematic view</span>
-      </div>
+
     </div>
   </div>
 
