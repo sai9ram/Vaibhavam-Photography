@@ -1018,6 +1018,7 @@
     // ── CONSTANTS ──
     const ADMIN_PHONE = '918639972913';
     const ADMIN_EMAIL = 'Vaibhavambyvarun@gmail.com';
+    const GOOGLE_SHEETS_WEBAPP_URL = 'YOUR_GOOGLE_SHEETS_WEBAPP_URL'; // Replace this with your Google Apps Script URL
     const EVENT_LABELS = {
       global: 'Package / Event Type',
       engagement: 'Engagement Ceremony',
@@ -1135,6 +1136,9 @@
         date: document.getElementById('custDate').value || 'N/A'
       };
 
+      // Auto submit lead to CRM Google Sheets in the background
+      submitLeadToSheets(client);
+
       // Populate client box
       document.getElementById('quotClientBox').innerHTML = `
         <div><span>Client Name</span><br><strong>${client.name}</strong></div>
@@ -1201,6 +1205,46 @@
       };
 
       document.getElementById('quotOverlay').classList.add('open');
+    }
+
+    // ── SUBMIT LEAD TO CRM (GOOGLE SHEETS) ──
+    function submitLeadToSheets(client) {
+      if (!GOOGLE_SHEETS_WEBAPP_URL || GOOGLE_SHEETS_WEBAPP_URL.includes('YOUR_GOOGLE_SHEETS_WEBAPP_URL')) {
+        console.log('CRM: Google Sheets Web App URL not configured.');
+        return;
+      }
+
+      const grouped = getGroupedItems();
+      let requirementsList = [];
+      Object.entries(grouped).forEach(([evt, items]) => {
+        const eventName = EVENT_LABELS[evt] || evt;
+        const serviceNames = items.map(i => i.name).join(', ');
+        requirementsList.push(`${eventName}: ${serviceNames}`);
+      });
+      const requirements = requirementsList.join(' | ') || 'None selected';
+      const budget = getTotal();
+      const quoteId = `VBW-${Date.now().toString().slice(-6)}`;
+
+      const formData = new URLSearchParams();
+      formData.append('name', client.name);
+      formData.append('email', client.email);
+      formData.append('phone', client.phone);
+      formData.append('venue', client.venue);
+      formData.append('date', client.date);
+      formData.append('requirements', requirements);
+      formData.append('budget', budget);
+      formData.append('quoteId', quoteId);
+
+      fetch(GOOGLE_SHEETS_WEBAPP_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: formData.toString()
+      })
+      .then(() => console.log('CRM: Lead details submitted successfully.'))
+      .catch(err => console.error('CRM Error:', err));
     }
 
     // ── PDF GENERATION ──
