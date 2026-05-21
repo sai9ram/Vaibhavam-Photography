@@ -18,7 +18,11 @@
 2. **App passwords** → Create → name it `Vaibhavam Website` → copy the 16-character password
 3. Paste that as `GMAIL_APP_PASSWORD` in Vercel (not your normal Gmail password)
 
-3. **Redeploy** the project after saving env vars (Deployments → Redeploy).
+3. **Redeploy** the project after saving env vars (Deployments → **Redeploy** — required, or env vars will not work).
+
+**Troubleshooting Gmail:** Use an **App Password** (16 letters), not your normal Gmail password. Remove spaces when pasting. Variable names must be exact: `GMAIL_USER`, `GMAIL_APP_PASSWORD`.
+
+**Alternative (easier):** Add `WEB3FORMS_ACCESS_KEY` from [web3forms.com](https://web3forms.com) (free) — sends PDF email without Gmail setup.
 
 ### Optional WhatsApp (PDF file or link)
 

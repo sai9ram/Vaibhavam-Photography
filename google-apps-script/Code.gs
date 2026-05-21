@@ -29,24 +29,33 @@ function doPost(e) {
 }
 
 function parseRequestParams_(e) {
+  var params = {};
+  if (e && e.parameter) {
+    params = e.parameter;
+  }
   if (e && e.postData && e.postData.contents) {
     var type = (e.postData.type || '').toLowerCase();
     if (type.indexOf('application/json') >= 0) {
-      return JSON.parse(e.postData.contents);
+      var json = JSON.parse(e.postData.contents);
+      for (var key in json) {
+        if (json.hasOwnProperty(key)) params[key] = json[key];
+      }
+      return params;
     }
     if (type.indexOf('application/x-www-form-urlencoded') >= 0) {
-      var parsed = {};
       e.postData.contents.split('&').forEach(function(pair) {
         var parts = pair.split('=');
-        if (parts.length >= 2) {
-          parsed[decodeURIComponent(parts[0].replace(/\+/g, ' '))] =
-            decodeURIComponent(parts.slice(1).join('=').replace(/\+/g, ' '));
+        if (parts.length >= 1 && parts[0]) {
+          var k = decodeURIComponent(parts[0].replace(/\+/g, ' '));
+          var v = parts.length >= 2
+            ? decodeURIComponent(parts.slice(1).join('=').replace(/\+/g, ' '))
+            : '';
+          params[k] = v;
         }
       });
-      return parsed;
     }
   }
-  return (e && e.parameter) ? e.parameter : {};
+  return params;
 }
 
 function processQuotationLead(params) {
@@ -58,7 +67,7 @@ function processQuotationLead(params) {
 
   var delivery = { email: { client: false, admin: false }, whatsapp: { client: false, admin: false } };
 
-  if (!params.pdfBase64) {
+  if (!params.pdfBase64 || String(params.pdfBase64).length < 50) {
     return { success: true, message: 'Lead saved to sheet', delivery: delivery };
   }
 

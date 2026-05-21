@@ -1945,7 +1945,8 @@
         }
       } catch (err) {
         console.error('Auto delivery error:', err);
-        setSendStatus('error', (err.message || 'Could not auto-send.') + ' Use the buttons below to download or share.');
+        const hint = err.message ? err.message + '. ' : '';
+        setSendStatus('error', hint + 'Use the buttons below to download or share. If this keeps happening, check Gmail App Password in Vercel and redeploy.');
         try {
           const pdfData = await buildQuotationPdf(client);
           currentQuotation = { client, pdfData };
@@ -1992,15 +1993,24 @@
       return origin + '/api/send-quotation';
     }
 
+    function buildSheetFormData(client, pdfData) {
+      const payload = buildLeadPayloadObject(client, pdfData, false);
+      const formData = new URLSearchParams();
+      Object.entries(payload).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) formData.append(key, String(value));
+      });
+      return formData;
+    }
+
     async function submitLeadToSheetsOnly(client, pdfData) {
       if (!GOOGLE_SHEETS_WEBAPP_URL || GOOGLE_SHEETS_WEBAPP_URL.includes('YOUR_GOOGLE_SHEETS_WEBAPP_URL')) return;
-      const payload = buildLeadPayloadObject(client, pdfData, false);
+      const formData = buildSheetFormData(client, pdfData);
       try {
         await fetch(GOOGLE_SHEETS_WEBAPP_URL, {
           method: 'POST',
           mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: formData.toString()
         });
       } catch (e) {
         console.warn('CRM sheet log failed:', e);
@@ -2009,9 +2019,11 @@
 
     async function deliverQuotationAutomatically(client, pdfData) {
       const payload = buildLeadPayloadObject(client, pdfData, true);
-      submitLeadToSheetsOnly(client, pdfData);
+      await submitLeadToSheetsOnly(client, pdfData);
 
+      let lastError = '';
       const apiUrl = getDeliveryApiUrl();
+
       if (apiUrl) {
         try {
           const res = await fetch(apiUrl, {
@@ -2019,32 +2031,37 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
           });
-          const result = await res.json();
-          if (result.error && result.error.includes('Gmail not configured')) {
-            console.warn(result.error);
-          } else {
+          const result = await res.json().catch(() => ({}));
+          if (result.delivery?.email?.client && result.delivery?.email?.admin) {
             return result;
           }
+          lastError = result.error || `Email server returned status ${res.status}`;
         } catch (e) {
-          console.warn('Vercel API delivery failed:', e);
+          lastError = e.message || 'Could not reach email server';
+        }
+      } else {
+        lastError = 'Email API not available on this host';
+      }
+
+      if (GOOGLE_SHEETS_WEBAPP_URL && !GOOGLE_SHEETS_WEBAPP_URL.includes('YOUR_GOOGLE_SHEETS_WEBAPP_URL')) {
+        try {
+          const res = await fetch(GOOGLE_SHEETS_WEBAPP_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const text = await res.text();
+          const result = JSON.parse(text);
+          if (result.delivery?.email?.client && result.delivery?.email?.admin) return result;
+          lastError = result.error || lastError;
+        } catch (e) {
+          console.warn('Apps Script email fallback failed:', e);
         }
       }
 
-      if (!GOOGLE_SHEETS_WEBAPP_URL || GOOGLE_SHEETS_WEBAPP_URL.includes('YOUR_GOOGLE_SHEETS_WEBAPP_URL')) {
-        throw new Error('Delivery API not available. Deploy on Vercel and set Gmail env vars.');
-      }
-
-      const res = await fetch(GOOGLE_SHEETS_WEBAPP_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      const text = await res.text();
-      try {
-        return JSON.parse(text);
-      } catch (e) {
-        throw new Error('Server returned invalid response. Update Google Apps Script (see SETUP.md).');
-      }
+      const err = new Error(lastError || 'Email delivery failed');
+      err.delivery = { email: { client: false, admin: false }, whatsapp: { client: false, admin: false } };
+      throw err;
     }
 
     async function generatePDF(client) {
