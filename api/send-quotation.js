@@ -213,7 +213,11 @@ module.exports = async (req, res) => {
     const gmailUser = (process.env.GMAIL_USER || '').trim();
     const gmailPass = (process.env.GMAIL_APP_PASSWORD || '').replace(/\s/g, '');
 
-    if (gmailUser && gmailPass) {
+    if (gmailPass && gmailPass.length !== 16) {
+      lastError =
+        'GMAIL_APP_PASSWORD must be exactly 16 characters (Google App Password). ' +
+        'You may have saved your normal Gmail login password by mistake. Create an App Password and update Vercel, then Redeploy.';
+    } else if (gmailUser && gmailPass) {
       const smtpConfigs = [
         { host: 'smtp.gmail.com', port: 465, secure: true },
         { host: 'smtp.gmail.com', port: 587, secure: false, requireTLS: true },
