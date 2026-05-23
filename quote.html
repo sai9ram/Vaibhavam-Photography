@@ -1138,6 +1138,13 @@
       overscroll-behavior-y: contain;
       padding: 4px 2px 12px;
       text-align: center;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .ty-complete-scroll::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
     }
     .ty-logo img {
       height: 52px;
@@ -1180,22 +1187,22 @@
       padding: 0 5px;
     }
     .ty-message {
-      font-size: 0.84rem;
-      line-height: 1.7;
+      font-size: 0.88rem;
+      line-height: 1.55;
       margin-bottom: 14px;
-      text-align: left;
+      text-align: center;
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.12);
       border-radius: 14px;
-      padding: 14px 14px;
+      padding: 16px 14px;
       color: #ffffff;
+      overflow: hidden;
     }
-    .ty-message p + p { margin-top: 12px; }
-    .ty-message em {
-      font-family: var(--ff-serif);
-      font-style: italic;
-      color: #f5ebe3;
-      font-size: 0.95rem;
+    .ty-message p {
+      margin: 0;
+    }
+    .ty-message p + p {
+      margin-top: 10px;
     }
     .ty-delivered {
       background: rgba(255,255,255,0.1);
@@ -2284,10 +2291,8 @@
 
       const messageEl = document.getElementById('tyMessage');
       messageEl.innerHTML = `
-        <p>When we read about your wedding — <em>${weddingDate}</em> at <em>${venue}</em> — we didn't just see dates on a form. We pictured your laughter during the rituals, the quiet glance before the mandap, the chaos of the sangeet that you'll miss when it's over.</p>
-        <p>That's the heart of Vaibhavam. We don't show up as vendors. We show up as people who genuinely care whether your memories feel <em>true</em> — not posed, not rushed, but <em>yours</em>.</p>
-        <p><em>Mee requirements chala clear ga unnayi. Mee vision ni personal ga follow-up chestham — mee budget ki suit ayye package tho, pressure lekunda clarity tho.</em></p>
-        <p>You're not alone in this planning. From here, our team takes over with the same care we'd want for our own family.</p>
+        <p>Thank you for trusting us with your wedding, ${firstName}. We have received your details and your quotation is on the way.</p>
+        <p>Our team will personally connect with you soon — we will take care of your requirements with the same love we would give our own family.</p>
       `;
 
       const listEl = document.getElementById('tyDeliveredList');
@@ -2327,6 +2332,7 @@
       const overlay = document.getElementById('thankYouOverlay');
       overlay.classList.remove('open', 'complete');
       overlay.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('ty-page-open');
       document.body.style.overflow = '';
     }
 
