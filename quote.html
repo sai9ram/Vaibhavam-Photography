@@ -1039,6 +1039,12 @@
       flex-direction: column;
       text-align: center;
       color: #ffffff;
+      background: transparent;
+    }
+    .ty-processing {
+      animation: tyFadeUp 0.55s ease 0.1s both;
+    }
+    .ty-overlay.complete .ty-complete {
       animation: tyFadeUp 0.55s ease 0.1s both;
     }
     @keyframes tyFadeUp {
@@ -1131,6 +1137,13 @@
     .ty-overlay.complete .ty-processing { display: none; }
     .ty-overlay.complete .ty-complete {
       display: flex;
+      animation: tyFadeUp 0.55s ease 0.1s both;
+    }
+    .ty-panel,
+    .ty-complete-scroll,
+    .ty-actions {
+      position: relative;
+      z-index: 6;
     }
     .ty-complete-scroll {
       flex: 1;
@@ -1290,72 +1303,90 @@
       border: 1px solid rgba(255,255,255,0.3);
       min-height: 48px;
     }
-    /* Falling 3D love blessings */
+    /* Falling 3D love blessings (on top, behind text readability) */
     .ty-hearts-blessing {
-      position: absolute;
+      position: fixed;
       inset: 0;
-      z-index: 1;
+      z-index: 5;
       pointer-events: none;
       overflow: hidden;
     }
     .ty-fall-heart {
       position: absolute;
-      top: -12%;
+      top: -5rem;
       left: var(--x, 50%);
-      font-size: var(--size, 1rem);
-      color: var(--heart-color, #ffc8d4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--size, 1.25rem);
+      line-height: 1;
+      color: var(--heart-color, #ffb3c8);
       opacity: 0;
+      transform: translateX(-50%) translateZ(0);
       transform-style: preserve-3d;
-      will-change: transform, opacity;
-      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35))
-              drop-shadow(0 0 14px rgba(255, 180, 200, 0.45));
+      text-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.45),
+        0 0 20px rgba(255, 150, 180, 0.65);
+      filter: drop-shadow(0 8px 16px rgba(255, 100, 140, 0.35));
       animation: tyBlessFall var(--dur, 9s) linear var(--delay, 0s) infinite;
     }
-    .ty-fall-heart.ty-heart-outline {
-      -webkit-text-stroke: 1px rgba(255, 255, 255, 0.35);
-      color: transparent;
+    .ty-fall-heart i {
+      display: block;
+      font-size: inherit;
+      color: inherit;
+    }
+    .ty-fall-heart.ty-heart-soft {
+      opacity: 0.55;
+      color: #ffffff;
+      -webkit-text-stroke: 0;
     }
     @keyframes tyBlessFall {
       0% {
-        transform: translate3d(0, -8vh, 0) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(0.5);
+        transform: translateX(-50%) translateY(-8vh) rotateY(0deg) rotateX(0deg) rotateZ(0deg) scale(0.45);
         opacity: 0;
       }
-      6% {
-        opacity: var(--peak, 0.85);
-      }
-      25% {
-        transform: translate3d(var(--sway1, 12px), 22vh, 40px) rotateX(120deg) rotateY(80deg) rotateZ(25deg) scale(0.85);
+      5% {
+        opacity: 0.95;
       }
       50% {
-        transform: translate3d(var(--sway2, -10px), 48vh, 20px) rotateX(220deg) rotateY(160deg) rotateZ(-15deg) scale(1);
-      }
-      75% {
-        transform: translate3d(var(--sway3, 8px), 74vh, 50px) rotateX(300deg) rotateY(240deg) rotateZ(30deg) scale(0.9);
+        transform: translateX(calc(-50% + var(--drift, 0px))) translateY(52vh) rotateY(180deg) rotateX(25deg) rotateZ(20deg) scale(1);
+        opacity: 0.85;
       }
       100% {
-        transform: translate3d(var(--sway4, -6px), 108vh, 0) rotateX(360deg) rotateY(360deg) rotateZ(45deg) scale(0.65);
+        transform: translateX(calc(-50% + var(--drift2, 0px))) translateY(112vh) rotateY(360deg) rotateX(45deg) rotateZ(-25deg) scale(0.7);
         opacity: 0;
       }
     }
-    .ty-fall-heart:nth-child(1)  { --x: 8%;  --size: 0.85rem; --dur: 11s; --delay: 0s;   --peak: 0.7;  --heart-color: #ffd4e0; --sway1: 14px; --sway2: -8px;  --sway3: 10px; --sway4: -12px; }
-    .ty-fall-heart:nth-child(2)  { --x: 22%; --size: 1.2rem;  --dur: 9s;  --delay: 1.2s; --peak: 0.9;  --heart-color: #fff;     --sway1: -12px; --sway2: 16px; --sway3: -6px; --sway4: 8px; }
-    .ty-fall-heart:nth-child(3)  { --x: 38%; --size: 0.75rem; --dur: 13s; --delay: 2.5s; --peak: 0.65; --heart-color: #ffb8c9; --sway1: 10px; --sway2: 12px; --sway3: -14px; --sway4: 6px; }
-    .ty-fall-heart:nth-child(4)  { --x: 52%; --size: 1.45rem; --dur: 10s; --delay: 0.6s; --peak: 0.95; --heart-color: #ffe8ee; --sway1: -16px; --sway2: -10px; --sway3: 12px; --sway4: -8px; }
-    .ty-fall-heart:nth-child(5)  { --x: 68%; --size: 0.9rem;  --dur: 12s; --delay: 3.8s; --peak: 0.75; --heart-color: #ffc0d0; --sway1: 8px;  --sway2: -14px; --sway3: 6px;  --sway4: 14px; }
-    .ty-fall-heart:nth-child(6)  { --x: 82%; --size: 1.1rem;  --dur: 8.5s;--delay: 1.8s; --peak: 0.85; --heart-color: #fff;     --sway1: -10px; --sway2: 8px;  --sway3: -12px; --sway4: 10px; }
-    .ty-fall-heart:nth-child(7)  { --x: 92%; --size: 0.7rem;  --dur: 14s; --delay: 4.5s; --peak: 0.6;  --heart-color: #ffaac0; --sway1: 12px; --sway2: 10px; --sway3: -8px; --sway4: -14px; }
-    .ty-fall-heart:nth-child(8)  { --x: 15%; --size: 1.35rem; --dur: 10.5s;--delay: 5s;   --peak: 0.88; --heart-color: #ffdce5; --sway1: -14px; --sway2: 12px; --sway3: 14px; --sway4: -6px; }
-    .ty-fall-heart:nth-child(9)  { --x: 45%; --size: 0.8rem;  --dur: 11.5s;--delay: 2s;   --peak: 0.72; --heart-color: #fff;     --sway1: 6px;  --sway2: -12px; --sway3: 8px;  --sway4: 12px; }
-    .ty-fall-heart:nth-child(10) { --x: 58%; --size: 1.05rem; --dur: 9.5s; --delay: 3.2s; --peak: 0.8;  --heart-color: #ffb3c6; --sway1: -8px;  --sway2: 14px; --sway3: -10px; --sway4: 8px; }
-    .ty-fall-heart:nth-child(11) { --x: 28%; --size: 0.95rem; --dur: 12.5s;--delay: 6s;   --peak: 0.78; --heart-color: #ffe0e8; --sway1: 16px; --sway2: -6px;  --sway3: -12px; --sway4: 10px; }
-    .ty-fall-heart:nth-child(12) { --x: 75%; --size: 1.25rem; --dur: 8s;   --delay: 4s;   --peak: 0.92; --heart-color: #fff;     --sway1: -12px; --sway2: -16px; --sway3: 10px; --sway4: -10px; }
-    .ty-fall-heart:nth-child(13) { --x: 5%;  --size: 1rem;   --dur: 13.5s;--delay: 7s;   --peak: 0.7;  --heart-color: #ffc8d8; --sway1: 10px; --sway2: 8px;  --sway3: 14px; --sway4: -12px; }
-    .ty-fall-heart:nth-child(14) { --x: 88%; --size: 0.88rem; --dur: 10s;  --delay: 5.5s; --peak: 0.82; --heart-color: #ffd0dc; --sway1: -14px; --sway2: 10px; --sway3: -6px; --sway4: 16px; }
-    .ty-fall-heart:nth-child(15) { --x: 35%; --size: 1.5rem;  --dur: 11s;  --delay: 1s;   --peak: 1;    --heart-color: #fff;     --sway1: 8px;  --sway2: -10px; --sway3: 12px; --sway4: -8px; }
-    .ty-fall-heart:nth-child(16) { --x: 62%; --size: 0.72rem; --dur: 14.5s;--delay: 8s;   --peak: 0.65; --heart-color: #ffbfd0; --sway1: -6px;  --sway2: 12px; --sway3: -14px; --sway4: 6px; }
-    .ty-fall-heart:nth-child(3n) { animation-duration: calc(var(--dur, 9s) * 1.08); }
+    .ty-fall-heart:nth-child(1)  { --x: 6%;  --size: 1.4rem;  --dur: 9s;  --delay: 0s;   --drift: 18px;  --drift2: -12px; --heart-color: #ff8fab; }
+    .ty-fall-heart:nth-child(2)  { --x: 18%; --size: 1.9rem;  --dur: 7s;  --delay: 0.8s; --drift: -14px; --drift2: 20px;  --heart-color: #ffffff; }
+    .ty-fall-heart:nth-child(3)  { --x: 32%; --size: 1.1rem;  --dur: 11s; --delay: 2s;   --drift: 12px;  --drift2: 8px;   --heart-color: #ffb3c6; }
+    .ty-fall-heart:nth-child(4)  { --x: 48%; --size: 2.2rem;  --dur: 8s;  --delay: 0.4s; --drift: -20px; --drift2: -16px; --heart-color: #ffe0ea; }
+    .ty-fall-heart:nth-child(5)  { --x: 62%; --size: 1.3rem;  --dur: 10s; --delay: 3s;   --drift: 16px;  --drift2: 14px;  --heart-color: #ff9eb8; }
+    .ty-fall-heart:nth-child(6)  { --x: 76%; --size: 1.7rem;  --dur: 6.5s;--delay: 1.2s; --drift: -10px; --drift2: -22px; --heart-color: #ffffff; }
+    .ty-fall-heart:nth-child(7)  { --x: 90%; --size: 1rem;   --dur: 12s; --delay: 4s;   --drift: 22px;  --drift2: 10px;  --heart-color: #ff7a9e; }
+    .ty-fall-heart:nth-child(8)  { --x: 12%; --size: 2rem;   --dur: 9.5s;--delay: 5s;   --drift: -18px; --drift2: 18px;  --heart-color: #ffd4e2; }
+    .ty-fall-heart:nth-child(9)  { --x: 42%; --size: 1.25rem; --dur: 8.5s;--delay: 1.6s; --drift: 8px;   --drift2: -14px; --heart-color: #ffffff; }
+    .ty-fall-heart:nth-child(10) { --x: 55%; --size: 1.55rem; --dur: 7.5s;--delay: 2.8s; --drift: -12px; --drift2: 12px;  --heart-color: #ff8fab; }
+    .ty-fall-heart:nth-child(11) { --x: 26%; --size: 1.35rem; --dur: 10s; --delay: 6s;   --drift: 20px;  --drift2: -8px;  --heart-color: #ffc2d4; }
+    .ty-fall-heart:nth-child(12) { --x: 72%; --size: 1.85rem; --dur: 6s;  --delay: 3.5s; --drift: -16px; --drift2: -18px; --heart-color: #ffffff; }
+    .ty-fall-heart:nth-child(13) { --x: 4%;  --size: 1.5rem;  --dur: 11s; --delay: 7s;   --drift: 14px;  --drift2: 16px;  --heart-color: #ff9eb8; }
+    .ty-fall-heart:nth-child(14) { --x: 84%; --size: 1.2rem;  --dur: 9s;  --delay: 4.8s; --drift: -22px; --drift2: 6px;   --heart-color: #ffe8f0; }
+    .ty-fall-heart:nth-child(15) { --x: 36%; --size: 2.4rem;  --dur: 8s;  --delay: 0.2s; --drift: 10px;  --drift2: -20px; --heart-color: #ffffff; }
+    .ty-fall-heart:nth-child(16) { --x: 66%; --size: 1.05rem; --dur: 13s; --delay: 5.5s; --drift: -8px;  --drift2: 22px;  --heart-color: #ff7a9e; }
+    .ty-fall-heart:nth-child(17) { --x: 22%; --size: 1.6rem;  --dur: 7s;  --delay: 2.2s; --drift: 16px;  --drift2: -10px; --heart-color: #ffb8c9; }
+    .ty-fall-heart:nth-child(18) { --x: 58%; --size: 1.75rem; --dur: 9s;  --delay: 1s;   --drift: -14px; --drift2: 14px;  --heart-color: #ffffff; }
+    .ty-fall-heart:nth-child(19) { --x: 94%; --size: 1.45rem; --dur: 10s; --delay: 3.8s; --drift: 18px;  --drift2: -16px; --heart-color: #ff8fab; }
+    .ty-fall-heart:nth-child(20) { --x: 38%; --size: 1.3rem;  --dur: 6.5s;--delay: 6.5s; --drift: -10px; --drift2: 8px;   --heart-color: #ffdce8; }
+    .ty-overlay:not(.open) .ty-fall-heart {
+      animation-play-state: paused;
+      opacity: 0;
+    }
     @media (prefers-reduced-motion: reduce) {
-      .ty-fall-heart { animation: none; opacity: 0.25; top: 20%; }
+      .ty-fall-heart {
+        animation: none;
+        opacity: 0.4;
+        top: 15%;
+      }
     }
     /* Tablet+ — centered card layout */
     @media (min-width: 600px) {
@@ -1865,24 +1896,6 @@
 
   <!-- THANK YOU (after quotation & PDF delivery) -->
   <div class="ty-overlay" id="thankYouOverlay" aria-hidden="true">
-    <div class="ty-hearts-blessing" aria-hidden="true">
-      <i class="ty-fall-heart fa-solid fa-heart"></i>
-      <i class="ty-fall-heart fa-solid fa-heart"></i>
-      <i class="ty-fall-heart fa-regular fa-heart"></i>
-      <i class="ty-fall-heart fa-solid fa-heart"></i>
-      <i class="ty-fall-heart fa-solid fa-heart ty-heart-outline"></i>
-      <i class="ty-fall-heart fa-solid fa-heart"></i>
-      <i class="ty-fall-heart fa-regular fa-heart"></i>
-      <i class="ty-fall-heart fa-solid fa-heart"></i>
-      <i class="ty-fall-heart fa-solid fa-heart ty-heart-outline"></i>
-      <i class="ty-fall-heart fa-solid fa-heart"></i>
-      <i class="ty-fall-heart fa-regular fa-heart"></i>
-      <i class="ty-fall-heart fa-solid fa-heart"></i>
-      <i class="ty-fall-heart fa-solid fa-heart"></i>
-      <i class="ty-fall-heart fa-regular fa-heart"></i>
-      <i class="ty-fall-heart fa-solid fa-heart ty-heart-outline"></i>
-      <i class="ty-fall-heart fa-solid fa-heart"></i>
-    </div>
     <div class="ty-panel">
       <div class="ty-processing" id="tyProcessing">
         <div class="ty-logo ty-processing-logo"><img src="Vaibhavam Logo.jpeg" alt="Vaibhavam"></div>
@@ -1918,6 +1931,29 @@
           </a>
         </div>
       </div>
+    </div>
+    <div class="ty-hearts-blessing" aria-hidden="true">
+      <span class="ty-fall-heart"><i class="fa-solid fa-heart" aria-hidden="true"></i></span>
+      <span class="ty-fall-heart"><i class="fa-solid fa-heart" aria-hidden="true"></i></span>
+      <span class="ty-fall-heart ty-heart-soft"><i class="fa-solid fa-heart" aria-hidden="true"></i></span>
+      <span class="ty-fall-heart"><i class="fa-solid fa-heart" aria-hidden="true"></i></span>
+      <span class="ty-fall-heart"><i class="fa-solid fa-heart" aria-hidden="true"></i></span>
+      <span class="ty-fall-heart ty-heart-soft"><i class="fa-solid fa-heart" aria-hidden="true"></i></span>
+      <span class="ty-fall-heart"><i class="fa-solid fa-heart" aria-hidden="true"></i></span>
+      <span class="ty-fall-heart"><i class="fa-solid fa-heart" aria-hidden="true"></i></span>
+      <span class="ty-fall-heart ty-heart-soft"><i class="fa-solid fa-heart" aria-hidden="true"></i></span>
+      <span class="ty-fall-heart"><i class="fa-solid fa-heart" aria-hidden="true"></i></span>
+      <span class="ty-fall-heart"><i class="fa-solid fa-heart" aria-hidden="true"></i></span>
+      <span class="ty-fall-heart"><i class="fa-solid fa-heart" aria-hidden="true"></i></span>
+      <span class="ty-fall-heart ty-heart-soft"><i class="fa-solid fa-heart" aria-hidden="true"></i></span>
+      <span class="ty-fall-heart"><i class="fa-solid fa-heart" aria-hidden="true"></i></span>
+      <span class="ty-fall-heart"><i class="fa-solid fa-heart" aria-hidden="true"></i></span>
+      <span class="ty-fall-heart"><i class="fa-solid fa-heart" aria-hidden="true"></i></span>
+      <span class="ty-fall-heart ty-heart-soft"><i class="fa-solid fa-heart" aria-hidden="true"></i></span>
+      <span class="ty-fall-heart"><i class="fa-solid fa-heart" aria-hidden="true"></i></span>
+      <span class="ty-fall-heart"><i class="fa-solid fa-heart" aria-hidden="true"></i></span>
+      <span class="ty-fall-heart"><i class="fa-solid fa-heart" aria-hidden="true"></i></span>
+      <span class="ty-fall-heart ty-heart-soft"><i class="fa-solid fa-heart" aria-hidden="true"></i></span>
     </div>
   </div>
 
