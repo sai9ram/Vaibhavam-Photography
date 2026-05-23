@@ -995,6 +995,219 @@
       border: 1px solid rgba(220, 53, 69, 0.2);
     }
 
+    /* ── THANK YOU EXPERIENCE ── */
+    .ty-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1100;
+      background: linear-gradient(165deg, #2D1F1A 0%, #5A1220 42%, #7B1E2B 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 18px;
+      padding-bottom: max(24px, env(safe-area-inset-bottom));
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.55s ease;
+      overflow-y: auto;
+    }
+    .ty-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .ty-panel {
+      width: 100%;
+      max-width: 520px;
+      text-align: center;
+      color: #fff;
+      animation: tyFadeUp 0.7s ease 0.15s both;
+    }
+    @keyframes tyFadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .ty-processing {
+      padding: 48px 20px;
+    }
+    .ty-processing-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 24px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: #fff;
+    }
+    .ty-processing h2 {
+      font-family: var(--ff-serif);
+      font-size: 1.75rem;
+      font-weight: 400;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    .ty-processing p {
+      font-size: 0.9rem;
+      opacity: 0.85;
+      line-height: 1.7;
+      max-width: 340px;
+      margin: 0 auto;
+    }
+    .ty-complete { display: none; }
+    .ty-overlay.complete .ty-processing { display: none; }
+    .ty-overlay.complete .ty-complete { display: block; }
+    .ty-logo img {
+      height: 64px;
+      margin-bottom: 8px;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.25));
+    }
+    .ty-script {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2rem;
+      color: var(--beige);
+      margin-bottom: 4px;
+      opacity: 0.95;
+    }
+    .ty-greeting {
+      font-family: var(--ff-serif);
+      font-size: clamp(1.85rem, 5vw, 2.35rem);
+      font-weight: 400;
+      line-height: 1.25;
+      margin-bottom: 18px;
+    }
+    .ty-greeting span { color: var(--beige); font-style: italic; }
+    .ty-heartline {
+      width: 48px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(233,222,211,0.8), transparent);
+      margin: 0 auto 20px;
+      position: relative;
+    }
+    .ty-heartline i {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 0.65rem;
+      color: var(--beige);
+      background: #6b2430;
+      padding: 0 6px;
+    }
+    .ty-message {
+      font-size: 0.92rem;
+      line-height: 1.85;
+      opacity: 0.92;
+      margin-bottom: 22px;
+      text-align: left;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 20px 18px;
+    }
+    .ty-message p + p { margin-top: 14px; }
+    .ty-message em {
+      font-family: var(--ff-serif);
+      font-style: italic;
+      color: var(--beige);
+      font-size: 1.02rem;
+    }
+    .ty-delivered {
+      background: rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin-bottom: 22px;
+      text-align: left;
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+    .ty-delivered li {
+      list-style: none;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .ty-delivered li:last-child { margin-bottom: 0; }
+    .ty-delivered i {
+      color: #9ee6b8;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .ty-delivered.warn i,
+    .ty-delivered li.warn i { color: #ffd89b; }
+    .ty-sign {
+      font-family: var(--ff-serif);
+      font-size: 1.15rem;
+      font-style: italic;
+      margin-bottom: 26px;
+      opacity: 0.9;
+    }
+    .ty-quote-id {
+      font-size: 0.72rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      opacity: 0.65;
+      margin-bottom: 22px;
+    }
+    .ty-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .ty-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-family: var(--ff-sans);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .ty-btn:hover { transform: translateY(-2px); }
+    .ty-btn-primary {
+      background: #fff;
+      color: var(--maroon);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+    }
+    .ty-btn-wa { background: #25D366; color: #fff; }
+    .ty-btn-ghost {
+      background: transparent;
+      color: rgba(255,255,255,0.85);
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+    .ty-sparkles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+    .ty-sparkles span {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(255,255,255,0.35);
+      border-radius: 50%;
+      animation: tySparkle 4s ease-in-out infinite;
+    }
+    .ty-sparkles span:nth-child(1) { left: 12%; top: 18%; animation-delay: 0s; }
+    .ty-sparkles span:nth-child(2) { left: 78%; top: 22%; animation-delay: 0.8s; }
+    .ty-sparkles span:nth-child(3) { left: 88%; top: 65%; animation-delay: 1.6s; }
+    .ty-sparkles span:nth-child(4) { left: 8%; top: 72%; animation-delay: 2.2s; }
+    .ty-sparkles span:nth-child(5) { left: 45%; top: 8%; animation-delay: 1s; }
+    @keyframes tySparkle {
+      0%, 100% { opacity: 0.2; transform: scale(1); }
+      50% { opacity: 0.9; transform: scale(1.4); }
+    }
+
     /* Floating contact buttons removed from quote page */
   </style>
 </head>
@@ -1444,8 +1657,43 @@
     </footer>
   </div>
 
-  <!-- QUOTATION MODAL -->
-  <div class="quot-overlay" id="quotOverlay">
+  <!-- THANK YOU (after quotation & PDF delivery) -->
+  <div class="ty-overlay" id="thankYouOverlay" aria-hidden="true">
+    <div class="ty-sparkles" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="ty-panel">
+      <div class="ty-processing" id="tyProcessing">
+        <div class="ty-processing-icon"><i class="fa-solid fa-heart fa-beat-fade"></i></div>
+        <h2>Crafting your quotation with care…</h2>
+        <p>We're preparing your personalized PDF and sending it to you and our team. Just a moment.</p>
+      </div>
+      <div class="ty-complete" id="tyComplete">
+        <div class="ty-logo"><img src="Vaibhavam Logo.jpeg" alt="Vaibhavam"></div>
+        <p class="ty-script">From our hearts to yours</p>
+        <h1 class="ty-greeting">Dear <span id="tyClientName">Friend</span>,</h1>
+        <div class="ty-heartline"><i class="fa-solid fa-heart"></i></div>
+        <div class="ty-message" id="tyMessage"></div>
+        <ul class="ty-delivered" id="tyDeliveredList"></ul>
+        <p class="ty-sign">— With warmth, Varun &amp; the Vaibhavam Family</p>
+        <p class="ty-quote-id" id="tyQuoteId"></p>
+        <div class="ty-actions">
+          <button type="button" class="ty-btn ty-btn-primary" id="tyBtnDownload">
+            <i class="fa-solid fa-file-pdf"></i> Download Your Quotation PDF
+          </button>
+          <a href="#" class="ty-btn ty-btn-wa" id="tyBtnWhatsApp" target="_blank" rel="noopener">
+            <i class="fa-brands fa-whatsapp"></i> Chat With Us on WhatsApp
+          </a>
+          <a href="index.html" class="ty-btn ty-btn-ghost">
+            <i class="fa-solid fa-house"></i> Back to Home
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUOTATION MODAL (legacy / backup) -->
+  <div class="quot-overlay" id="quotOverlay" style="display:none;">
     <div class="quot-modal">
       <button class="quot-close" id="quotClose"><i class="fa-solid fa-xmark"></i></button>
       <div class="quot-logo"><img src="Vaibhavam Logo.jpeg" alt="Vaibhavam"></div>
@@ -1846,7 +2094,81 @@
       window.open(`https://wa.me/${normalizeWaPhone(phone)}?text=${encodeURIComponent(text)}`, '_blank');
     }
 
-    // ── OPEN MODAL & AUTO-DELIVER PDF ──
+    function formatWeddingDate(dateStr) {
+      if (!dateStr || dateStr === 'N/A') return 'your special day';
+      try {
+        const d = new Date(dateStr + 'T12:00:00');
+        return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+      } catch (e) {
+        return dateStr;
+      }
+    }
+
+    function showThankYouProcessing() {
+      const overlay = document.getElementById('thankYouOverlay');
+      overlay.classList.remove('complete');
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function showThankYouPage(client, pdfData, status) {
+      const overlay = document.getElementById('thankYouOverlay');
+      const firstName = (client.name || 'Friend').split(' ')[0];
+      const weddingDate = formatWeddingDate(client.date);
+      const venue = client.venue && client.venue !== 'N/A' ? client.venue : 'your chosen venue';
+
+      document.getElementById('tyClientName').textContent = firstName;
+
+      const messageEl = document.getElementById('tyMessage');
+      messageEl.innerHTML = `
+        <p>When we read about your wedding — <em>${weddingDate}</em> at <em>${venue}</em> — we didn't just see dates on a form. We pictured your laughter during the rituals, the quiet glance before the mandap, the chaos of the sangeet that you'll miss when it's over.</p>
+        <p>That's the heart of Vaibhavam. We don't show up as vendors. We show up as people who genuinely care whether your memories feel <em>true</em> — not posed, not rushed, but <em>yours</em>.</p>
+        <p><em>Mee requirements chala clear ga unnayi. Mee vision ni personal ga follow-up chestham — mee budget ki suit ayye package tho, pressure lekunda clarity tho.</em></p>
+        <p>You're not alone in this planning. From here, our team takes over with the same care we'd want for our own family.</p>
+      `;
+
+      const listEl = document.getElementById('tyDeliveredList');
+      const emailOk = status.emailOk;
+      if (emailOk) {
+        listEl.innerHTML = `
+          <li><i class="fa-solid fa-circle-check"></i><span>Your <strong>branded PDF quotation</strong> has been sent to <strong>${client.email}</strong></span></li>
+          <li><i class="fa-solid fa-circle-check"></i><span>The <strong>Vaibhavam team</strong> has received your details and quotation too</span></li>
+          <li><i class="fa-solid fa-circle-check"></i><span>We'll <strong>personally reach out within 24–48 hours</strong> to understand your vision and fine-tune everything</span></li>
+        `;
+      } else {
+        listEl.classList.add('warn');
+        listEl.innerHTML = `
+          <li class="warn"><i class="fa-solid fa-circle-exclamation"></i><span>Your PDF is ready below — if email didn't arrive yet, check spam or use Download PDF</span></li>
+          <li><i class="fa-solid fa-circle-check"></i><span>Our team still received your requirements on our side</span></li>
+          <li><i class="fa-solid fa-circle-check"></i><span>Message us on WhatsApp anytime — we're here for you</span></li>
+        `;
+      }
+
+      document.getElementById('tyQuoteId').textContent = 'Quotation ID: ' + (client.quoteId || pdfData.quotId);
+
+      document.getElementById('tyBtnDownload').onclick = () => {
+        if (pdfData?.doc) pdfData.doc.save(pdfData.fileName);
+      };
+
+      const waText = encodeURIComponent(
+        `Hi Vaibhavam! I'm ${client.name}. I just completed my wedding quotation (${client.quoteId}). Would love to discuss further!`
+      );
+      document.getElementById('tyBtnWhatsApp').href =
+        `https://wa.me/${ADMIN_PHONE}?text=${waText}`;
+
+      overlay.classList.add('complete');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function closeThankYouPage() {
+      const overlay = document.getElementById('thankYouOverlay');
+      overlay.classList.remove('open', 'complete');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    // ── COMPLETE QUOTE → DELIVER PDF → THANK YOU ──
     async function openQuotationModal() {
       const quoteId = `VBW-${Date.now().toString().slice(-6)}`;
       const client = {
@@ -1858,113 +2180,29 @@
         quoteId
       };
 
-      document.getElementById('quotClientBox').innerHTML = `
-        <div><span>Client Name</span><br><strong>${client.name}</strong></div>
-        <div><span>Wedding Date</span><br><strong>${client.date}</strong></div>
-        <div><span>WhatsApp</span><br><strong>${client.phone}</strong></div>
-        <div><span>Venue / City</span><br><strong>${client.venue}</strong></div>
-        <div><span>Email</span><br><strong>${client.email}</strong></div>
-        <div><span>Quotation ID</span><br><strong>${quoteId}</strong></div>
-      `;
+      showThankYouProcessing();
 
-      const tbody = document.getElementById('quotTableBody');
-      tbody.innerHTML = '';
-      const grouped = getGroupedItems();
-      Object.entries(grouped).forEach(([evt, items]) => {
-        const groupRow = document.createElement('tr');
-        groupRow.className = 'group-row';
-        groupRow.innerHTML = `<td colspan="2">${EVENT_LABELS[evt] || evt}</td>`;
-        tbody.appendChild(groupRow);
-        items.forEach(({ name, price }) => {
-          const tr = document.createElement('tr');
-          tr.innerHTML = `<td>${name}</td><td style="text-align:right;">₹${price.toLocaleString('en-IN')}</td>`;
-          tbody.appendChild(tr);
-        });
-      });
-
-      document.getElementById('quotGrandTotal').innerText = `₹${getTotal().toLocaleString('en-IN')}`;
-
-      document.getElementById('btnDownloadPDF').onclick = () => {
-        if (currentQuotation?.pdfData) {
-          currentQuotation.pdfData.doc.save(currentQuotation.pdfData.fileName);
-        } else {
-          generatePDF(client);
-        }
-      };
-
-      document.getElementById('btnWAClient').onclick = () => {
-        openWhatsAppWithPdfNotice(client.phone, client, currentQuotation?.driveUrl);
-        setTimeout(() => {
-          const adminMsg = buildQuoteText(client) + `\n\n_Client Email: ${client.email}_`;
-          window.open(`https://wa.me/${ADMIN_PHONE}?text=${encodeURIComponent(adminMsg)}`, '_blank');
-        }, 800);
-      };
-
-      document.getElementById('btnEmail').onclick = () => {
-        const subject = encodeURIComponent(`Wedding Quotation – ${client.name} | Vaibhavam Photography`);
-        let body = `Dear ${client.name},%0A%0AYour PDF quotation was sent automatically. Summary:%0A%0A`;
-        body += `Client: ${client.name}%0APhone: ${client.phone}%0AVenue: ${client.venue}%0ADate: ${client.date}%0A%0A`;
-        Object.entries(grouped).forEach(([evt, items]) => {
-          body += `${EVENT_LABELS[evt] || evt}:%0A`;
-          items.forEach(i => { body += `  • ${i.name} — Rs.${i.price.toLocaleString('en-IN')}%0A`; });
-          body += `%0A`;
-        });
-        body += `Grand Total (Estimated): Rs.${getTotal().toLocaleString('en-IN')}%0A%0AValid for 15 days.%0A%0AVaibhavam Wedding Photography`;
-        if (client.email !== 'N/A') window.open(`mailto:${client.email}?subject=${subject}&body=${body}`, '_blank');
-        setTimeout(() => window.open(`mailto:${ADMIN_EMAIL}?subject=${subject}&body=${body}`, '_blank'), 500);
-      };
-
-      document.getElementById('quotClose').onclick = () => {
-        document.getElementById('quotOverlay').classList.remove('open');
-      };
-
-      document.getElementById('quotOverlay').classList.add('open');
-      setSendStatus('sending', 'Generating PDF and sending to your email & WhatsApp…');
+      let pdfData = null;
+      let emailOk = false;
 
       try {
-        const pdfData = await buildQuotationPdf(client);
+        pdfData = await buildQuotationPdf(client);
         currentQuotation = { client, pdfData, driveUrl: null };
         const result = await deliverQuotationAutomatically(client, pdfData);
         currentQuotation.driveUrl = result.driveUrl || null;
-
-        const emailOk = result.delivery?.email?.client && result.delivery?.email?.admin;
-        const waOk = result.delivery?.whatsapp?.client && result.delivery?.whatsapp?.admin;
-
-        if (emailOk && waOk) {
-          setSendStatus('success', 'Quotation PDF sent to your email and WhatsApp, and to the Vaibhavam team.');
-        } else if (emailOk) {
-          setSendStatus('success', 'Quotation PDF sent to your email and the Vaibhavam team. Open WhatsApp below to share on chat.');
-          if (!waOk) triggerWhatsAppFallback(client, result.driveUrl);
-        } else if (waOk) {
-          setSendStatus('partial', 'WhatsApp sent. Email could not be delivered — use Download PDF or contact us.');
-          triggerWhatsAppFallback(client, result.driveUrl);
-        } else {
-          const errHint = result.error ? ` ${result.error}` : '';
-          setSendStatus('error', 'Could not send PDF automatically.' + errHint + ' Use the buttons below.');
-          triggerWhatsAppFallback(client, result.driveUrl);
-        }
+        emailOk = !!(result.delivery?.email?.client && result.delivery?.email?.admin);
       } catch (err) {
         console.error('Auto delivery error:', err);
-        let hint = err.message ? err.message : 'Could not send email.';
-        if (/FormSubmit|formsubmit/i.test(hint)) {
-          hint = 'Email failed via FormSubmit. Ask the client to activate FormSubmit on their inbox (first-time link from formsubmit.co).';
+        if (!pdfData) {
+          try {
+            pdfData = await buildQuotationPdf(client);
+            currentQuotation = { client, pdfData };
+          } catch (e) { /* ignore */ }
         }
-        setSendStatus('error', hint + ' Use the buttons below to download or share.');
-        try {
-          const pdfData = await buildQuotationPdf(client);
-          currentQuotation = { client, pdfData };
-          triggerWhatsAppFallback(client, null);
-        } catch (e) { /* ignore */ }
+        emailOk = false;
       }
-    }
 
-    function triggerWhatsAppFallback(client, driveUrl) {
-      setTimeout(() => openWhatsAppWithPdfNotice(client.phone, client, driveUrl), 400);
-      setTimeout(() => {
-        const adminMsg = buildQuoteText(client) + `\n\n_Client Email: ${client.email}_` +
-          (driveUrl ? '\nPDF: ' + driveUrl : '');
-        window.open(`https://wa.me/${ADMIN_PHONE}?text=${encodeURIComponent(adminMsg)}`, '_blank');
-      }, 1200);
+      showThankYouPage(client, pdfData, { emailOk });
     }
 
     function buildLeadPayloadObject(client, pdfData, includePdf) {
