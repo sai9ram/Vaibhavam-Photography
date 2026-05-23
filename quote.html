@@ -995,21 +995,26 @@
       border: 1px solid rgba(220, 53, 69, 0.2);
     }
 
-    /* ── THANK YOU EXPERIENCE ── */
+    /* ── THANK YOU (mobile-first) ── */
     .ty-overlay {
       position: fixed;
       inset: 0;
       z-index: 1100;
       background: linear-gradient(165deg, #2D1F1A 0%, #5A1220 42%, #7B1E2B 100%);
       display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px 18px;
-      padding-bottom: max(24px, env(safe-area-inset-bottom));
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      padding:
+        max(10px, env(safe-area-inset-top))
+        max(14px, env(safe-area-inset-right))
+        max(10px, env(safe-area-inset-bottom))
+        max(14px, env(safe-area-inset-left));
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.55s ease;
-      overflow-y: auto;
+      transition: opacity 0.45s ease;
+      overflow: hidden;
+      -webkit-overflow-scrolling: touch;
     }
     .ty-overlay.open {
       opacity: 1;
@@ -1018,122 +1023,150 @@
     .ty-overlay,
     .ty-overlay .ty-panel,
     .ty-overlay .ty-processing,
-    .ty-overlay .ty-complete {
+    .ty-overlay .ty-complete,
+    .ty-overlay .ty-complete-scroll {
       color: #ffffff;
     }
     .ty-panel {
       width: 100%;
-      max-width: 520px;
+      flex: 1;
+      min-height: 0;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
       text-align: center;
       color: #ffffff;
-      animation: tyFadeUp 0.7s ease 0.15s both;
+      animation: tyFadeUp 0.55s ease 0.1s both;
+    }
+    @keyframes tyFadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     .ty-brand {
       font-family: var(--ff-sans);
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 2.5px;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 2px;
       text-transform: uppercase;
       color: #ffffff;
-      margin-bottom: 10px;
-      opacity: 0.95;
+      margin-bottom: 6px;
+      line-height: 1.4;
+      padding: 0 4px;
     }
     .ty-thankyou-title {
       font-family: var(--ff-serif);
-      font-size: clamp(2.2rem, 8vw, 3rem);
+      font-size: 2rem;
       font-weight: 400;
       color: #ffffff;
-      margin-bottom: 8px;
-      line-height: 1.15;
+      margin-bottom: 4px;
+      line-height: 1.12;
+      padding: 0 4px;
     }
     .ty-thankyou-sub {
       font-family: 'Great Vibes', cursive;
-      font-size: 1.65rem;
+      font-size: 1.35rem;
       color: #ffffff;
-      margin-bottom: 28px;
-      opacity: 0.95;
+      margin-bottom: 20px;
+      line-height: 1.3;
     }
-    @keyframes tyFadeUp {
-      from { opacity: 0; transform: translateY(28px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    /* Processing — centered on mobile */
     .ty-processing {
-      padding: 48px 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 8px 24px;
       color: #ffffff;
+      min-height: 0;
     }
     .ty-processing-logo img {
-      height: 56px;
-      margin-bottom: 16px;
-      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.3));
+      height: 48px;
+      width: auto;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 6px 16px rgba(0,0,0,0.35));
     }
     .ty-processing-icon {
-      width: 72px;
-      height: 72px;
-      margin: 0 auto 24px;
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 16px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.14);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.8rem;
-      color: #fff;
+      font-size: 1.5rem;
+      color: #ffffff;
     }
     .ty-processing h2 {
       font-family: var(--ff-serif);
-      font-size: 1.75rem;
+      font-size: 1.28rem;
       font-weight: 400;
-      margin-bottom: 12px;
-      line-height: 1.3;
+      margin-bottom: 10px;
+      line-height: 1.35;
       color: #ffffff;
+      padding: 0 8px;
+      max-width: 20rem;
     }
     .ty-processing p {
-      font-size: 0.9rem;
+      font-size: 0.84rem;
       color: #ffffff;
-      opacity: 0.92;
-      line-height: 1.7;
-      max-width: 340px;
+      line-height: 1.65;
+      max-width: 18rem;
       margin: 0 auto;
+      padding: 0 12px;
+      opacity: 1;
     }
+    /* Complete — scroll body + sticky thumb actions */
     .ty-complete {
       display: none;
-      color: #ffffff;
-    }
-    .ty-complete .ty-greeting,
-    .ty-complete .ty-sign,
-    .ty-complete .ty-quote-id,
-    .ty-complete .ty-delivered,
-    .ty-complete .ty-delivered li,
-    .ty-complete .ty-delivered span {
+      flex: 1;
+      flex-direction: column;
+      min-height: 0;
       color: #ffffff;
     }
     .ty-overlay.complete .ty-processing { display: none; }
-    .ty-overlay.complete .ty-complete { display: block; }
+    .ty-overlay.complete .ty-complete {
+      display: flex;
+    }
+    .ty-complete-scroll {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: contain;
+      padding: 4px 2px 12px;
+      text-align: center;
+    }
     .ty-logo img {
-      height: 64px;
-      margin-bottom: 8px;
-      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.25));
+      height: 52px;
+      width: auto;
+      margin-bottom: 6px;
+      filter: drop-shadow(0 6px 16px rgba(0,0,0,0.3));
     }
     .ty-script {
       font-family: 'Great Vibes', cursive;
-      font-size: 2rem;
+      font-size: 1.5rem;
       color: #ffffff;
-      margin-bottom: 4px;
-      opacity: 0.95;
+      margin-bottom: 2px;
+      line-height: 1.3;
     }
     .ty-greeting {
       font-family: var(--ff-serif);
-      font-size: clamp(1.85rem, 5vw, 2.35rem);
+      font-size: 1.5rem;
       font-weight: 400;
-      line-height: 1.25;
-      margin-bottom: 18px;
+      line-height: 1.2;
+      margin-bottom: 12px;
       color: #ffffff;
+      padding: 0 4px;
     }
     .ty-greeting span { color: #f5ebe3; font-style: italic; }
     .ty-heartline {
-      width: 48px;
+      width: 40px;
       height: 1px;
       background: linear-gradient(90deg, transparent, rgba(233,222,211,0.8), transparent);
-      margin: 0 auto 20px;
+      margin: 0 auto 14px;
       position: relative;
     }
     .ty-heartline i {
@@ -1141,98 +1174,111 @@
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-      font-size: 0.65rem;
-      color: var(--beige);
+      font-size: 0.6rem;
+      color: #f5ebe3;
       background: #6b2430;
-      padding: 0 6px;
+      padding: 0 5px;
     }
     .ty-message {
-      font-size: 0.92rem;
-      line-height: 1.85;
-      opacity: 0.92;
-      margin-bottom: 22px;
+      font-size: 0.84rem;
+      line-height: 1.7;
+      margin-bottom: 14px;
       text-align: left;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 16px;
-      padding: 20px 18px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 14px 14px;
+      color: #ffffff;
     }
-    .ty-message p + p { margin-top: 14px; }
+    .ty-message p + p { margin-top: 12px; }
     .ty-message em {
       font-family: var(--ff-serif);
       font-style: italic;
-      color: var(--beige);
-      font-size: 1.02rem;
+      color: #f5ebe3;
+      font-size: 0.95rem;
     }
     .ty-delivered {
       background: rgba(255,255,255,0.1);
-      border-radius: 14px;
-      padding: 16px 18px;
-      margin-bottom: 22px;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
       text-align: left;
-      font-size: 0.82rem;
-      line-height: 1.6;
+      font-size: 0.78rem;
+      line-height: 1.55;
+      color: #ffffff;
     }
     .ty-delivered li {
       list-style: none;
       display: flex;
       align-items: flex-start;
-      gap: 10px;
-      margin-bottom: 10px;
+      gap: 8px;
+      margin-bottom: 8px;
     }
     .ty-delivered li:last-child { margin-bottom: 0; }
     .ty-delivered i {
       color: #9ee6b8;
-      margin-top: 2px;
+      margin-top: 3px;
       flex-shrink: 0;
+      font-size: 0.85rem;
     }
-    .ty-delivered.warn i,
     .ty-delivered li.warn i { color: #ffd89b; }
     .ty-sign {
       font-family: var(--ff-serif);
-      font-size: 1.15rem;
+      font-size: 1rem;
       font-style: italic;
-      margin-bottom: 26px;
-      opacity: 0.9;
+      margin-bottom: 10px;
+      color: #ffffff;
+      padding: 0 8px;
+      line-height: 1.45;
     }
     .ty-quote-id {
-      font-size: 0.72rem;
-      letter-spacing: 1.5px;
+      font-size: 0.65rem;
+      letter-spacing: 1.2px;
       text-transform: uppercase;
-      opacity: 0.65;
-      margin-bottom: 22px;
+      color: #ffffff;
+      opacity: 0.7;
+      margin-bottom: 8px;
     }
     .ty-actions {
+      flex-shrink: 0;
       display: flex;
       flex-direction: column;
       gap: 10px;
+      width: 100%;
+      padding: 12px 0 max(6px, env(safe-area-inset-bottom));
+      background: linear-gradient(180deg, transparent 0%, rgba(45, 31, 26, 0.92) 18%, rgba(45, 31, 26, 0.98) 100%);
     }
     .ty-btn {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      padding: 14px 20px;
-      border-radius: 12px;
+      width: 100%;
+      min-height: 52px;
+      padding: 14px 16px;
+      border-radius: 14px;
       font-family: var(--ff-sans);
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 600;
       text-decoration: none;
       border: none;
       cursor: pointer;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .ty-btn:hover { transform: translateY(-2px); }
+    .ty-btn:active { transform: scale(0.98); }
     .ty-btn-primary {
       background: #fff;
       color: var(--maroon);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.22);
     }
     .ty-btn-wa { background: #25D366; color: #fff; }
     .ty-btn-ghost {
-      background: transparent;
-      color: rgba(255,255,255,0.85);
-      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.08);
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.3);
+      min-height: 48px;
     }
     .ty-sparkles {
       position: fixed;
@@ -1243,20 +1289,76 @@
     }
     .ty-sparkles span {
       position: absolute;
-      width: 4px;
-      height: 4px;
+      width: 3px;
+      height: 3px;
       background: rgba(255,255,255,0.35);
       border-radius: 50%;
       animation: tySparkle 4s ease-in-out infinite;
     }
-    .ty-sparkles span:nth-child(1) { left: 12%; top: 18%; animation-delay: 0s; }
-    .ty-sparkles span:nth-child(2) { left: 78%; top: 22%; animation-delay: 0.8s; }
-    .ty-sparkles span:nth-child(3) { left: 88%; top: 65%; animation-delay: 1.6s; }
-    .ty-sparkles span:nth-child(4) { left: 8%; top: 72%; animation-delay: 2.2s; }
-    .ty-sparkles span:nth-child(5) { left: 45%; top: 8%; animation-delay: 1s; }
+    .ty-sparkles span:nth-child(1) { left: 10%; top: 15%; animation-delay: 0s; }
+    .ty-sparkles span:nth-child(2) { left: 85%; top: 20%; animation-delay: 0.8s; }
+    .ty-sparkles span:nth-child(3) { left: 90%; top: 70%; animation-delay: 1.6s; }
+    .ty-sparkles span:nth-child(4) { left: 6%; top: 75%; animation-delay: 2.2s; }
+    .ty-sparkles span:nth-child(5) { left: 50%; top: 6%; animation-delay: 1s; }
     @keyframes tySparkle {
       0%, 100% { opacity: 0.2; transform: scale(1); }
-      50% { opacity: 0.9; transform: scale(1.4); }
+      50% { opacity: 0.85; transform: scale(1.35); }
+    }
+    /* Tablet+ — centered card layout */
+    @media (min-width: 600px) {
+      .ty-overlay {
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+      .ty-panel {
+        flex: 0 1 auto;
+        max-width: 520px;
+        max-height: 92vh;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 32px 64px rgba(0,0,0,0.35);
+      }
+      .ty-overlay.complete .ty-complete {
+        max-height: 92vh;
+      }
+      .ty-brand { font-size: 0.72rem; letter-spacing: 2.5px; margin-bottom: 10px; }
+      .ty-thankyou-title { font-size: 2.75rem; margin-bottom: 8px; }
+      .ty-thankyou-sub { font-size: 1.65rem; margin-bottom: 28px; }
+      .ty-processing { padding: 40px 24px; }
+      .ty-processing-logo img { height: 64px; }
+      .ty-processing-icon { width: 72px; height: 72px; font-size: 1.8rem; }
+      .ty-processing h2 { font-size: 1.65rem; max-width: none; }
+      .ty-processing p { font-size: 0.92rem; max-width: 22rem; }
+      .ty-logo img { height: 64px; }
+      .ty-script { font-size: 2rem; }
+      .ty-greeting { font-size: 2rem; margin-bottom: 18px; }
+      .ty-message { font-size: 0.92rem; padding: 20px 18px; margin-bottom: 22px; }
+      .ty-delivered { font-size: 0.82rem; padding: 16px 18px; margin-bottom: 22px; }
+      .ty-sign { font-size: 1.15rem; margin-bottom: 20px; }
+      .ty-quote-id { font-size: 0.72rem; }
+      .ty-actions {
+        padding: 16px 20px max(16px, env(safe-area-inset-bottom));
+        background: rgba(0,0,0,0.15);
+      }
+      .ty-btn:hover { transform: translateY(-2px); }
+      .ty-btn:active { transform: translateY(0); }
+    }
+    body.ty-page-open .floating-contact-actions {
+      display: none !important;
+    }
+    body.ty-page-open .quote-page {
+      visibility: hidden;
+    }
+    @media (max-height: 640px) {
+      .ty-thankyou-title { font-size: 1.65rem; }
+      .ty-thankyou-sub { font-size: 1.15rem; margin-bottom: 12px; }
+      .ty-processing-logo img,
+      .ty-logo img { height: 42px; }
+      .ty-message { padding: 12px; margin-bottom: 10px; }
+      .ty-delivered { padding: 10px 12px; margin-bottom: 10px; }
+      .ty-sign { font-size: 0.9rem; margin-bottom: 6px; }
+      .ty-btn { min-height: 48px; padding: 12px 14px; font-size: 0.82rem; }
     }
 
     /* Floating contact buttons removed from quote page */
@@ -1724,22 +1826,24 @@
         <p>We're preparing your personalized PDF and sending it to you and our team. Just a moment.</p>
       </div>
       <div class="ty-complete" id="tyComplete">
-        <div class="ty-logo"><img src="Vaibhavam Logo.jpeg" alt="Vaibhavam"></div>
-        <p class="ty-brand">Vaibhavam Photography By Varun</p>
-        <h1 class="ty-thankyou-title">Thank You</h1>
-        <p class="ty-script">From our hearts to yours</p>
-        <h1 class="ty-greeting">Dear <span id="tyClientName">Friend</span>,</h1>
-        <div class="ty-heartline"><i class="fa-solid fa-heart"></i></div>
-        <div class="ty-message" id="tyMessage"></div>
-        <ul class="ty-delivered" id="tyDeliveredList"></ul>
-        <p class="ty-sign">— With warmth, Varun &amp; the Vaibhavam Family</p>
-        <p class="ty-quote-id" id="tyQuoteId"></p>
+        <div class="ty-complete-scroll">
+          <div class="ty-logo"><img src="Vaibhavam Logo.jpeg" alt="Vaibhavam"></div>
+          <p class="ty-brand">Vaibhavam Photography By Varun</p>
+          <h1 class="ty-thankyou-title">Thank You</h1>
+          <p class="ty-script">From our hearts to yours</p>
+          <h2 class="ty-greeting">Dear <span id="tyClientName">Friend</span>,</h2>
+          <div class="ty-heartline"><i class="fa-solid fa-heart"></i></div>
+          <div class="ty-message" id="tyMessage"></div>
+          <ul class="ty-delivered" id="tyDeliveredList"></ul>
+          <p class="ty-sign">— With warmth, Varun &amp; the Vaibhavam Family</p>
+          <p class="ty-quote-id" id="tyQuoteId"></p>
+        </div>
         <div class="ty-actions">
           <button type="button" class="ty-btn ty-btn-primary" id="tyBtnDownload">
-            <i class="fa-solid fa-file-pdf"></i> Download Your Quotation PDF
+            <i class="fa-solid fa-file-pdf"></i> Download PDF
           </button>
           <a href="#" class="ty-btn ty-btn-wa" id="tyBtnWhatsApp" target="_blank" rel="noopener">
-            <i class="fa-brands fa-whatsapp"></i> Chat With Us on WhatsApp
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp Us
           </a>
           <a href="index.html" class="ty-btn ty-btn-ghost">
             <i class="fa-solid fa-house"></i> Back to Home
@@ -2166,6 +2270,7 @@
       overlay.classList.remove('complete');
       overlay.classList.add('open');
       overlay.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('ty-page-open');
       document.body.style.overflow = 'hidden';
     }
 
