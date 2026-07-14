@@ -109,7 +109,9 @@ function appendLeadToSheet(params) {
       params.date || '',
       params.requirements || '',
       params.budget || '',
-      params.quoteId || ''
+      params.quoteId || '',
+      params.ipAddress || 'Unknown',
+      params.userAgent || 'Unknown'
     ]);
   } catch (e) {
     Logger.log('Sheet append failed (lead still processed): ' + e);

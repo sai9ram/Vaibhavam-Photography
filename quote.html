@@ -2449,13 +2449,24 @@
     // ── COMPLETE QUOTE → DELIVER PDF → THANK YOU ──
     async function openQuotationModal() {
       const quoteId = `VBW-${Date.now().toString().slice(-6)}`;
+      
+      let ipAddress = 'Unknown';
+      try {
+        const res = await fetch('https://api.ipify.org?format=json').then(r => r.json());
+        ipAddress = res.ip || 'Unknown';
+      } catch (e) {
+        console.warn('IP fetch failed:', e);
+      }
+
       const client = {
         name: document.getElementById('custName').value || 'N/A',
         email: document.getElementById('custEmail').value || 'N/A',
         phone: document.getElementById('custPhone').value || 'N/A',
         venue: document.getElementById('custVenue').value || 'N/A',
         date: document.getElementById('custDate').value || 'N/A',
-        quoteId
+        quoteId,
+        ipAddress,
+        userAgent: navigator.userAgent || 'Unknown'
       };
 
       showThankYouProcessing();
@@ -2500,7 +2511,9 @@
         requirements: requirementsList.join(' | ') || 'None selected',
         budget: String(getTotal()),
         quoteId: client.quoteId || pdfData.quotId,
-        pdfFileName: pdfData.fileName
+        pdfFileName: pdfData.fileName,
+        ipAddress: client.ipAddress || 'Unknown',
+        userAgent: client.userAgent || 'Unknown'
       };
       if (includePdf) payload.pdfBase64 = pdfData.base64;
       return payload;
@@ -2696,6 +2709,13 @@
       doc.setLineWidth(0.25);
       doc.line(16, 48, W-16, 48);
 
+      // Draw background security watermarks
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(22);
+      doc.setTextColor(247, 242, 239);
+      doc.text('OFFICIAL VAIBHAVAM QUOTATION', W/2, H/2 - 20, { align: 'center', angle: 30 });
+      doc.text('VERIFIABLE DIGITAL DOCUMENT', W/2, H/2 + 20, { align: 'center', angle: 30 });
+
       // QUOTATION label
       let y = 58;
       doc.setFont('helvetica', 'bold');
@@ -2778,6 +2798,23 @@
       doc.text('• This quotation is valid for 15 days from the date of issue.', 20, termsY+5);
       doc.text('• Final pricing may vary based on travel, extra hours, and customization.', 20, termsY+10);
       doc.text('• 50% advance payment required to confirm the booking.', 20, termsY+15);
+
+      // Security verification box
+      const secY = termsY + 20;
+      doc.setFillColor(254, 244, 244); // soft warning background
+      doc.setDrawColor(220, 53, 69); // warning red border
+      doc.setLineWidth(0.3);
+      doc.roundedRect(16, secY, W-32, 14, 2, 2, 'FD');
+      
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(7.5);
+      doc.setTextColor(190, 30, 30);
+      doc.text('⚠️ VAIBHAVAM ANTI-FRAUD VERIFICATION:', 20, secY + 5.5);
+      
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(6.8);
+      doc.setTextColor(...darkText);
+      doc.text(`Verification ID: ${quotId} | Logged IP: ${client.ipAddress || 'Internal'}. Contact only +91 8639972913 for validation.`, 20, secY + 10);
 
       // Footer
       doc.setFillColor(...maroon);
