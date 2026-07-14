@@ -102,14 +102,14 @@ function appendLeadToSheet(params) {
     }
     sheet.appendRow([
       new Date(),
-      params.quoteId || '',
       params.name || '',
       params.email || '',
       params.phone || '',
       params.venue || '',
       params.date || '',
       params.requirements || '',
-      params.budget || ''
+      params.budget || '',
+      params.quoteId || ''
     ]);
   } catch (e) {
     Logger.log('Sheet append failed (lead still processed): ' + e);
