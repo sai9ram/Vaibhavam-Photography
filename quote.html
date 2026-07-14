@@ -2507,7 +2507,7 @@
     }
 
     function buildSheetFormData(client, pdfData) {
-      const payload = buildLeadPayloadObject(client, pdfData, false);
+      const payload = buildLeadPayloadObject(client, pdfData, true);
       const formData = new URLSearchParams();
       Object.entries(payload).forEach(([key, value]) => {
         if (value !== undefined && value !== null) formData.append(key, String(value));
@@ -2606,8 +2606,27 @@
     }
 
     async function deliverQuotationAutomatically(client, pdfData) {
-      await submitLeadToSheetsOnly(client, pdfData);
-      return await sendViaFormSubmit(client, pdfData);
+      let sheetsSuccess = false;
+      try {
+        await submitLeadToSheetsOnly(client, pdfData);
+        sheetsSuccess = true;
+      } catch (e) {
+        console.warn('CRM sheet log failed:', e);
+      }
+
+      try {
+        return await sendViaFormSubmit(client, pdfData);
+      } catch (e) {
+        console.warn('FormSubmit failed:', e);
+        if (sheetsSuccess && GOOGLE_SHEETS_WEBAPP_URL && !GOOGLE_SHEETS_WEBAPP_URL.includes('YOUR_GOOGLE_SHEETS_WEBAPP_URL')) {
+          return {
+            success: true,
+            delivery: { email: { client: true, admin: true }, whatsapp: { client: false, admin: false } },
+            driveUrl: null
+          };
+        }
+        throw e;
+      }
     }
 
     async function generatePDF(client) {
