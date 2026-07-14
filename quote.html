@@ -2606,27 +2606,26 @@
     }
 
     async function deliverQuotationAutomatically(client, pdfData) {
-      let sheetsSuccess = false;
-      try {
-        await submitLeadToSheetsOnly(client, pdfData);
-        sheetsSuccess = true;
-      } catch (e) {
-        console.warn('CRM sheet log failed:', e);
+      if (!GOOGLE_SHEETS_WEBAPP_URL || GOOGLE_SHEETS_WEBAPP_URL.includes('YOUR_GOOGLE_SHEETS_WEBAPP_URL')) {
+        throw new Error('Google Sheets CRM URL is not configured.');
       }
 
-      try {
-        return await sendViaFormSubmit(client, pdfData);
-      } catch (e) {
-        console.warn('FormSubmit failed:', e);
-        if (sheetsSuccess && GOOGLE_SHEETS_WEBAPP_URL && !GOOGLE_SHEETS_WEBAPP_URL.includes('YOUR_GOOGLE_SHEETS_WEBAPP_URL')) {
-          return {
-            success: true,
-            delivery: { email: { client: true, admin: true }, whatsapp: { client: false, admin: false } },
-            driveUrl: null
-          };
-        }
-        throw e;
+      const formData = buildSheetFormData(client, pdfData);
+      const res = await fetch(GOOGLE_SHEETS_WEBAPP_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: formData.toString()
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to connect to Google CRM Web App');
       }
+
+      const json = await res.json();
+      if (!json.success) {
+        throw new Error(json.error || 'Google Apps Script failed to process quotation');
+      }
+      return json;
     }
 
     async function generatePDF(client) {
