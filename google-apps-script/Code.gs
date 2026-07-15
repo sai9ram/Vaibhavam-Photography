@@ -122,12 +122,18 @@ function sendQuotationEmails_(params, pdfBlob, fileName, adminEmail) {
   var sent = { client: false, admin: false };
   var clientEmail = (params.email || '').trim();
   var subject = 'Your Vaibhavam Wedding Photography Quotation — ' + (params.quoteId || '');
+  
   var body = buildEmailBody_(params);
-  var options = { attachments: [pdfBlob.copyBlob().setName(fileName)] };
+  var htmlBody = buildHtmlEmailBody_(params);
+  
+  var clientOptions = { 
+    attachments: [pdfBlob.copyBlob().setName(fileName)],
+    htmlBody: htmlBody
+  };
 
   if (clientEmail && clientEmail.indexOf('@') > 0) {
     try {
-      GmailApp.sendEmail(clientEmail, subject, body, options);
+      GmailApp.sendEmail(clientEmail, subject, body, clientOptions);
       sent.client = true;
     } catch (e) {
       Logger.log('Client email failed: ' + e);
@@ -136,14 +142,81 @@ function sendQuotationEmails_(params, pdfBlob, fileName, adminEmail) {
 
   try {
     var adminSubject = 'New Quotation Lead — ' + (params.name || 'Client') + ' | ' + (params.quoteId || '');
-    var adminBody = body + '\n\n---\nThis copy was sent automatically from the Vaibhavam quote builder.';
-    GmailApp.sendEmail(adminEmail, adminSubject, adminBody, options);
+    var adminOptions = {
+      attachments: [pdfBlob.copyBlob().setName(fileName)],
+      htmlBody: htmlBody
+    };
+    GmailApp.sendEmail(adminEmail, adminSubject, body, adminOptions);
     sent.admin = true;
   } catch (e) {
     Logger.log('Admin email failed: ' + e);
   }
 
   return sent;
+}
+
+function buildHtmlEmailBody_(params) {
+  var message = params.message || '';
+  
+  // Format message text: convert *text* to <strong>text</strong>, _text_ to <em>text</em>, and newlines to <br>
+  var formattedMessage = message
+    .replace(/\*(.*?)\*/g, '<strong>$1</strong>')
+    .replace(/_(.*?)_/g, '<em>$1</em>')
+    .replace(/\n/g, '<br>');
+
+  var budgetVal = params.budget || '0';
+  if (!budgetVal.toString().startsWith('Rs.')) {
+    budgetVal = 'Rs. ' + Number(budgetVal.replace(/[^\d]/g, '')).toLocaleString('en-IN');
+  }
+
+  var html = [
+    '<p style="font-family: sans-serif; font-size: 14px; color: #333333;">Someone just submitted your form on <a href="https://www.vaibhavambyvarun.in/" style="color: #3b5998; text-decoration: none;">https://www.vaibhavambyvarun.in/</a>.</p>',
+    '<p style="font-family: sans-serif; font-size: 14px; color: #333333;">Here\'s what they had to say:</p>',
+    '<table style="width: 100%; max-width: 600px; border-collapse: collapse; font-family: sans-serif; font-size: 13px; color: #333333; margin-top: 15px; border: 1px solid #e0e0e0;">',
+    '  <thead>',
+    '    <tr style="background-color: #3E579A; color: white; text-align: left;">',
+    '      <th style="padding: 10px; border: 1px solid #e0e0e0; width: 25%; font-weight: bold;">Name</th>',
+    '      <th style="padding: 10px; border: 1px solid #e0e0e0; width: 75%; font-weight: bold;">Value</th>',
+    '    </tr>',
+    '  </thead>',
+    '  <tbody>',
+    '    <tr style="background-color: #ffffff;">',
+    '      <td style="padding: 10px; border: 1px solid #e0e0e0; font-weight: bold;">name</td>',
+    '      <td style="padding: 10px; border: 1px solid #e0e0e0;">' + (params.name || '') + '</td>',
+    '    </tr>',
+    '    <tr style="background-color: #f9f9f9;">',
+    '      <td style="padding: 10px; border: 1px solid #e0e0e0; font-weight: bold;">email</td>',
+    '      <td style="padding: 10px; border: 1px solid #e0e0e0;"><a href="mailto:' + (params.email || '') + '" style="color: #3E579A;">' + (params.email || '') + '</a></td>',
+    '    </tr>',
+    '    <tr style="background-color: #ffffff;">',
+    '      <td style="padding: 10px; border: 1px solid #e0e0e0; font-weight: bold;">phone</td>',
+    '      <td style="padding: 10px; border: 1px solid #e0e0e0;">' + (params.phone || '') + '</td>',
+    '    </tr>',
+    '    <tr style="background-color: #f9f9f9;">',
+    '      <td style="padding: 10px; border: 1px solid #e0e0e0; font-weight: bold;">venue</td>',
+    '      <td style="padding: 10px; border: 1px solid #e0e0e0;">' + (params.venue || '') + '</td>',
+    '    </tr>',
+    '    <tr style="background-color: #ffffff;">',
+    '      <td style="padding: 10px; border: 1px solid #e0e0e0; font-weight: bold;">date</td>',
+    '      <td style="padding: 10px; border: 1px solid #e0e0e0;">' + (params.date || '') + '</td>',
+    '    </tr>',
+    '    <tr style="background-color: #f9f9f9;">',
+    '      <td style="padding: 10px; border: 1px solid #e0e0e0; font-weight: bold;">quoteId</td>',
+    '      <td style="padding: 10px; border: 1px solid #e0e0e0;">' + (params.quoteId || '') + '</td>',
+    '    </tr>',
+    '    <tr style="background-color: #ffffff;">',
+    '      <td style="padding: 10px; border: 1px solid #e0e0e0; font-weight: bold;">budget</td>',
+    '      <td style="padding: 10px; border: 1px solid #e0e0e0;">' + budgetVal + '</td>',
+    '    </tr>',
+    '    <tr style="background-color: #f9f9f9;">',
+    '      <td style="padding: 10px; border: 1px solid #e0e0e0; font-weight: bold; vertical-align: top;">message</td>',
+    '      <td style="padding: 10px; border: 1px solid #e0e0e0; line-height: 1.5; font-family: sans-serif;">' + formattedMessage + '</td>',
+    '    </tr>',
+    '  </tbody>',
+    '</table>'
+  ].join('\n');
+
+  return html;
 }
 
 function buildEmailBody_(params) {

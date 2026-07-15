@@ -2502,6 +2502,12 @@
         const serviceNames = items.map(i => i.name).join(', ');
         requirementsList.push(`${eventName}: ${serviceNames}`);
       });
+      const messageText = [
+        buildQuoteText(client),
+        '',
+        'PDF quotation attached to this email.'
+      ].join('\n');
+      
       const payload = {
         name: client.name,
         email: client.email,
@@ -2513,7 +2519,8 @@
         quoteId: client.quoteId || pdfData.quotId,
         pdfFileName: pdfData.fileName,
         ipAddress: client.ipAddress || 'Unknown',
-        userAgent: client.userAgent || 'Unknown'
+        userAgent: client.userAgent || 'Unknown',
+        message: messageText
       };
       if (includePdf) payload.pdfBase64 = pdfData.base64;
       return payload;
