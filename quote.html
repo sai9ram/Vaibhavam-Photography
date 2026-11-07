@@ -422,6 +422,70 @@
       opacity: 1;
     }
 
+    /* ── PRE-WEDDING DAYS SELECTOR ── */
+    .prewedding-days-selector {
+      max-width: 560px;
+      margin: 0 auto 22px;
+      background: var(--white);
+      border: 1px solid rgba(123, 30, 43, 0.12);
+      border-radius: 16px;
+      padding: 14px 16px;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(123, 30, 43, 0.04);
+    }
+
+    .prewedding-days-label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--maroon);
+      margin-bottom: 10px;
+    }
+
+    .prewedding-days-pills {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .day-pill {
+      padding: 9px 6px;
+      border-radius: 10px;
+      border: 1.5px solid var(--beige);
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--ff-sans);
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .day-pill:hover {
+      border-color: var(--maroon);
+      color: var(--maroon);
+    }
+
+    .day-pill.active {
+      background: var(--maroon);
+      border-color: var(--maroon);
+      color: var(--white);
+      box-shadow: 0 4px 12px rgba(123, 30, 43, 0.25);
+    }
+
+    @media (min-width: 768px) {
+      .prewedding-days-selector {
+        padding: 18px 24px;
+        margin-bottom: 28px;
+      }
+      .day-pill {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+      }
+    }
+
     .option-info h3 {
       font-size: 0.75rem; /* Reduced font size */
       font-weight: 600;
@@ -1490,6 +1554,7 @@
         <div class="step-dot" data-step="9">9</div>
         <div class="step-dot" data-step="10">10</div>
         <div class="step-dot" data-step="11">11</div>
+        <div class="step-dot" data-step="12">12</div>
       </div>
     </header>
 
@@ -1647,8 +1712,32 @@
         </div>
       </section>
 
-      <!-- STEP 5: RECEPTION -->
+      <!-- STEP 5: MEHANDI -->
       <section class="step-content" id="step5">
+        <h2>Mehandi</h2>
+        <p class="step-sub">Vibrant colors and beautiful henna moments.</p>
+        <div class="options-grid">
+          <div class="option-card" data-event="mehandi" data-name="Candid Photo" data-price="15000">
+            <div class="card-img-wrapper"><img src="images/Candid%20Camera.webp" alt="Candid Photo"></div>
+            <div class="option-info">
+              <h3>Candid Photo</h3>
+              <p>₹15,000</p>
+            </div>
+            <div class="check-circle"></div>
+          </div>
+          <div class="option-card" data-event="mehandi" data-name="Candid Video" data-price="15000">
+            <div class="card-img-wrapper"><img src="images/Candid%20Video.avif" alt="Candid Video"></div>
+            <div class="option-info">
+              <h3>Candid Video</h3>
+              <p>₹15,000</p>
+            </div>
+            <div class="check-circle"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 6: RECEPTION -->
+      <section class="step-content" id="step6">
         <h2>Reception</h2>
         <p class="step-sub">Choose coverage for your reception evening.</p>
         <div class="options-grid">
@@ -1687,8 +1776,8 @@
         </div>
       </section>
 
-      <!-- STEP 6: WEDDING -->
-      <section class="step-content" id="step6">
+      <!-- STEP 7: WEDDING -->
+      <section class="step-content" id="step7">
         <h2>Grand Wedding</h2>
         <p class="step-sub">Capture your big day in all its glory.</p>
         <div class="options-grid">
@@ -1735,8 +1824,8 @@
         </div>
       </section>
 
-      <!-- STEP 7: VRATHAM -->
-      <section class="step-content" id="step7">
+      <!-- STEP 8: VRATHAM -->
+      <section class="step-content" id="step8">
         <h2>Vratham</h2>
         <p class="step-sub">Traditional coverage for your ritual.</p>
         <div class="options-grid">
@@ -1759,8 +1848,8 @@
         </div>
       </section>
 
-      <!-- STEP 8: SANGEETH -->
-      <section class="step-content" id="step8">
+      <!-- STEP 9: SANGEETH -->
+      <section class="step-content" id="step9">
         <h2>Sangeeth</h2>
         <p class="step-sub">Capture the dance and celebration.</p>
         <div class="options-grid">
@@ -1791,24 +1880,34 @@
         </div>
       </section>
 
-      <!-- STEP 9: PRE-WEDDING -->
-      <section class="step-content" id="step9">
+      <!-- STEP 10: PRE-WEDDING -->
+      <section class="step-content" id="step10">
         <h2>Pre-wedding</h2>
         <p class="step-sub">Your cinematic love story before the wedding.</p>
+        <div class="prewedding-days-selector" aria-label="Select Pre-wedding Shoot Duration">
+          <span class="prewedding-days-label"><i class="fa-regular fa-calendar-days"></i> Select Number of Days</span>
+          <div class="prewedding-days-pills" id="preweddingDaysPills">
+            <button type="button" class="day-pill active" data-days="1">1 Day</button>
+            <button type="button" class="day-pill" data-days="2">2 Days</button>
+            <button type="button" class="day-pill" data-days="3">3 Days</button>
+            <button type="button" class="day-pill" data-days="4">4 Days</button>
+            <button type="button" class="day-pill" data-days="5">5 Days</button>
+          </div>
+        </div>
         <div class="options-grid">
-          <div class="option-card" data-event="prewedding" data-name="Candid Photo" data-price="15000">
+          <div class="option-card" data-event="prewedding" data-name="Candid Photo" data-price="20000">
             <div class="card-img-wrapper"><img src="images/Candid%20Camera.webp" alt="Candid Photo"></div>
             <div class="option-info">
               <h3>Candid Photo</h3>
-              <p>₹15,000</p>
+              <p>₹20,000 / 1 Day</p>
             </div>
             <div class="check-circle"></div>
           </div>
-          <div class="option-card" data-event="prewedding" data-name="Candid Video" data-price="15000">
+          <div class="option-card" data-event="prewedding" data-name="Candid Video" data-price="20000">
             <div class="card-img-wrapper"><img src="images/Candid%20Video.avif" alt="Candid Video"></div>
             <div class="option-info">
               <h3>Candid Video</h3>
-              <p>₹15,000</p>
+              <p>₹20,000 / 1 Day</p>
             </div>
             <div class="check-circle"></div>
           </div>
@@ -1816,23 +1915,23 @@
             <div class="card-img-wrapper"><img src="images/Drone%20camera.webp" alt="Drone"></div>
             <div class="option-info">
               <h3>Drone Coverage</h3>
-              <p>₹12,000</p>
+              <p>₹12,000 / 1 Day</p>
             </div>
             <div class="check-circle"></div>
           </div>
         </div>
       </section>
 
-      <!-- STEP 10: ADD-ONS -->
-      <section class="step-content" id="step10">
+      <!-- STEP 11: ADD-ONS -->
+      <section class="step-content" id="step11">
         <h2>Luxury Add-ons</h2>
         <p class="step-sub">Optional enhancements for your package.</p>
         <div class="options-grid">
-          <div class="option-card" data-event="addons" data-name="LED Wall" data-price="10000">
+          <div class="option-card" data-event="addons" data-name="LED Wall" data-price="15000">
             <div class="card-img-wrapper"><img src="images/LED%20wall.webp" alt="LED Wall"></div>
             <div class="option-info">
               <h3>LED Wall (Optional)</h3>
-              <p>₹10,000</p>
+              <p>₹15,000</p>
             </div>
             <div class="check-circle"></div>
           </div>
@@ -1850,8 +1949,8 @@
         </p>
       </section>
 
-      <!-- STEP 11: FINAL -->
-      <section class="step-content" id="step11">
+      <!-- STEP 12: FINAL -->
+      <section class="step-content" id="step12">
         <h2>Final Step</h2>
         <p class="step-sub">We just need a few details to finalize your quote.</p>
         <div class="final-form-container">
@@ -2019,21 +2118,74 @@
       engagement: 'Engagement Ceremony',
       haldi_groom: 'Pelli Koduku & Haldi',
       haldi_bride: 'Pelli Kuthuru & Haldi',
-      sangeet: 'Sangeet Ceremony',
+      mehandi: 'Mehandi Ceremony',
+      sangeeth: 'Sangeeth Ceremony',
+      sangeet: 'Sangeeth Ceremony',
+      wedding: 'Grand Wedding',
       wedding_bride: 'Wedding (Bride Side)',
       wedding_groom: 'Wedding (Groom Side)',
       reception: 'Reception',
-      addons: 'Add-ons & Extras'
+      vratham: 'Vratham',
+      prewedding: 'Pre-wedding Shoot',
+      addons: 'Luxury Add-ons'
     };
 
     let currentStep = 1;
-    const totalSteps = 11;
+    const totalSteps = 12;
     const selections = {};
+    let preweddingDays = 1;
 
     const nextBtn = document.getElementById('nextBtn');
     const prevBtn = document.getElementById('prevBtn');
     const progressFill = document.getElementById('progressFill');
     const totalDisplay = document.getElementById('totalDisplay');
+
+    function getPreweddingPrice(serviceName, days) {
+      if (serviceName === 'Candid Photo' || serviceName === 'Candid Video') {
+        if (days === 1) return 20000;
+        if (days === 2) return 30000;
+        return 20000 * days;
+      }
+      if (serviceName === 'Drone') {
+        return 12000 * days;
+      }
+      return 20000 * days;
+    }
+
+    function setPreweddingDays(days) {
+      const validDays = Math.min(5, Math.max(1, parseInt(days, 10) || 1));
+      preweddingDays = validDays;
+      localStorage.setItem('vaibhavam_prewedding_days', String(validDays));
+
+      document.querySelectorAll('#preweddingDaysPills .day-pill').forEach(pill => {
+        pill.classList.toggle('active', parseInt(pill.dataset.days, 10) === validDays);
+      });
+
+      const dayText = validDays === 1 ? '1 Day' : `${validDays} Days`;
+      document.querySelectorAll('.option-card[data-event="prewedding"]').forEach(card => {
+        const serviceName = card.dataset.name;
+        const newPrice = getPreweddingPrice(serviceName, validDays);
+        card.dataset.price = String(newPrice);
+        const priceEl = card.querySelector('.option-info p');
+        if (priceEl) {
+          priceEl.textContent = `₹${newPrice.toLocaleString('en-IN')} / ${dayText}`;
+        }
+        const key = `prewedding:${serviceName}`;
+        if (selections[key]) {
+          selections[key].price = newPrice;
+          selections[key].days = validDays;
+        }
+      });
+
+      localStorage.setItem('vaibhavam_selections', JSON.stringify(selections));
+      updateTotal();
+    }
+
+    document.querySelectorAll('#preweddingDaysPills .day-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        setPreweddingDays(parseInt(pill.dataset.days, 10));
+      });
+    });
 
     // ── OPTION CARD CLICKS ──
     document.querySelectorAll('.option-card').forEach(card => {
@@ -2047,7 +2199,11 @@
           delete selections[key];
         } else {
           card.classList.add('selected');
-          selections[key] = { price, event: eventId || 'global', name };
+          const entry = { price, event: eventId || 'global', name };
+          if (eventId === 'prewedding') {
+            entry.days = preweddingDays;
+          }
+          selections[key] = entry;
         }
         // Save selections in real-time
         localStorage.setItem('vaibhavam_selections', JSON.stringify(selections));
@@ -2102,7 +2258,7 @@
       // Keep total price in sync on every navigation change
       updateTotal();
       
-      // Update validation visual feedback when on step 11
+      // Update validation visual feedback when on final step (step 12)
       if (currentStep === totalSteps) {
         validateInputsRealTime(false);
       } else {
@@ -2256,8 +2412,8 @@
           <div class="drawer-section">
             <div class="drawer-section-title">${eventLabel}</div>
         `;
-        items.forEach(({ name, price }) => {
-          const key = evt ? `${evt}:${name}` : '';
+        items.forEach(({ name, rawName, price }) => {
+          const key = evt ? `${evt}:${rawName || name}` : '';
           html += `
             <div class="drawer-item">
               <span class="drawer-item-name">${name}</span>
@@ -2295,21 +2451,35 @@
     // Load saved selections on window load
     function loadSavedSelections() {
       try {
+        const savedDays = localStorage.getItem('vaibhavam_prewedding_days');
+        if (savedDays) {
+          setPreweddingDays(parseInt(savedDays, 10));
+        }
+
         const saved = localStorage.getItem('vaibhavam_selections');
         if (saved) {
           const parsed = JSON.parse(saved);
-          Object.assign(selections, parsed);
-          
+          const validKeys = new Set();
+
           document.querySelectorAll('.option-card').forEach(card => {
             const eventId = card.dataset.event;
             const name = card.dataset.name;
             const key = eventId ? `${eventId}:${name}` : card.dataset.id;
-            if (selections[key]) {
+            validKeys.add(key);
+            if (parsed[key]) {
               card.classList.add('selected');
+              const currentPrice = parseInt(card.dataset.price, 10);
+              selections[key] = {
+                ...parsed[key],
+                price: isNaN(currentPrice) ? parsed[key].price : currentPrice,
+                ...(eventId === 'prewedding' ? { days: preweddingDays } : {})
+              };
             } else {
               card.classList.remove('selected');
             }
           });
+
+          localStorage.setItem('vaibhavam_selections', JSON.stringify(selections));
           updateTotal();
         }
       } catch (e) {
@@ -2323,9 +2493,13 @@
     // ── BUILD GROUPED ITEMS ──
     function getGroupedItems() {
       const groups = {};
-      Object.values(selections).forEach(({ event, name, price }) => {
+      Object.values(selections).forEach(({ event, name, price, days }) => {
         if (!groups[event]) groups[event] = [];
-        groups[event].push({ name, price });
+        const d = days || preweddingDays;
+        const displayName = event === 'prewedding'
+          ? `${name} (${d} ${d === 1 ? 'Day' : 'Days'})`
+          : name;
+        groups[event].push({ name: displayName, rawName: name, price });
       });
       return groups;
     }
